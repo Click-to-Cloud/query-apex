@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OoQPq = function (_Component) {
-  _inherits(OoQPq, _Component);
+var blbVU = function (_Component) {
+  _inherits(blbVU, _Component);
 
-  function OoQPq() {
-    _classCallCheck(this, OoQPq);
+  function blbVU() {
+    _classCallCheck(this, blbVU);
 
-    return _possibleConstructorReturn(this, (OoQPq.__proto__ || Object.getPrototypeOf(OoQPq)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (blbVU.__proto__ || Object.getPrototypeOf(blbVU)).apply(this, arguments));
   }
 
-  return OoQPq;
+  return blbVU;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(OoQPq, _step_3Soy2.default);
+_metalSoy2.default.register(blbVU, _step_3Soy2.default);
 
-exports.default = OoQPq;
+exports.default = blbVU;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = OoQPq;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.OoQPq = undefined;
+exports.templates = exports.blbVU = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace OoQPq.
+   * @fileoverview Templates in namespace blbVU.
    * @public
    */
 
-  goog.module('OoQPq.incrementaldom');
+  goog.module('blbVU.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,10 +153,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param657 = function param657() {
+    var param362 = function param362() {
       ie_open('h2');
-      var dyn34 = opt_data.page.title;
-      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
+      var dyn29 = opt_data.page.title;
+      if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
       ie_close('h2');
       ie_open('p');
       itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
@@ -198,11 +198,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param657 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param362 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'OoQPq.render';
+    $render.soyTemplateName = 'blbVU.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -211,20 +211,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var OoQPq = function (_Component) {
-  _inherits(OoQPq, _Component);
+var blbVU = function (_Component) {
+  _inherits(blbVU, _Component);
 
-  function OoQPq() {
-    _classCallCheck(this, OoQPq);
+  function blbVU() {
+    _classCallCheck(this, blbVU);
 
-    return _possibleConstructorReturn(this, (OoQPq.__proto__ || Object.getPrototypeOf(OoQPq)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (blbVU.__proto__ || Object.getPrototypeOf(blbVU)).apply(this, arguments));
   }
 
-  return OoQPq;
+  return blbVU;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(OoQPq, templates);
-exports.OoQPq = OoQPq;
+_metalSoy2.default.register(blbVU, templates);
+exports.blbVU = blbVU;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

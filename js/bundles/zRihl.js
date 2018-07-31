@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([14],{
+webpackJsonppageComponent([5],{
 
-/***/ 274:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _indexSoy = __webpack_require__(275);
+var _step_4Soy = __webpack_require__(287);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var KwpGk = function (_Component) {
-  _inherits(KwpGk, _Component);
+var zRihl = function (_Component) {
+  _inherits(zRihl, _Component);
 
-  function KwpGk() {
-    _classCallCheck(this, KwpGk);
+  function zRihl() {
+    _classCallCheck(this, zRihl);
 
-    return _possibleConstructorReturn(this, (KwpGk.__proto__ || Object.getPrototypeOf(KwpGk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (zRihl.__proto__ || Object.getPrototypeOf(zRihl)).apply(this, arguments));
   }
 
-  return KwpGk;
+  return zRihl;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(KwpGk, _indexSoy2.default);
+_metalSoy2.default.register(zRihl, _step_4Soy2.default);
 
-exports.default = KwpGk;
+exports.default = zRihl;
 
 /***/ }),
 
-/***/ 275:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = KwpGk;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.KwpGk = undefined;
+exports.templates = exports.zRihl = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from index.soy.
+  // This file was automatically generated from step_4.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace KwpGk.
+   * @fileoverview Templates in namespace zRihl.
    * @public
    */
 
-  goog.module('KwpGk.incrementaldom');
+  goog.module('zRihl.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,12 +137,15 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
+  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?)
+   *    site: (?),
+   *    elementClasses: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -150,32 +153,44 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param553 = function param553() {
-      ie_open('h6');
-      var dyn30 = opt_data.page.description;
-      if (typeof dyn30 == 'function') dyn30();else if (dyn30 != null) itext(dyn30);
-      ie_close('h6');
-      ie_open('article', null, null, 'id', '1');
+    var param413 = function param413() {
       ie_open('h2');
-      itext('Query Reference');
+      var dyn30 = opt_data.page.title;
+      if (typeof dyn30 == 'function') dyn30();else if (dyn30 != null) itext(dyn30);
       ie_close('h2');
       ie_open('p');
-      itext('Here is the reference of the public methods in Query.');
+      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
       ie_close('p');
       ie_open('p');
-      itext('Every public method in Query class that returns a Query type is mutable and chainable.');
+      itext('The statement is equivalent to:');
       ie_close('p');
-      ie_close('article');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Meanwhile, multiple layer parent relationship is supported:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param553 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param413 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'KwpGk.render';
+    $render.soyTemplateName = 'zRihl.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -184,24 +199,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var KwpGk = function (_Component) {
-  _inherits(KwpGk, _Component);
+var zRihl = function (_Component) {
+  _inherits(zRihl, _Component);
 
-  function KwpGk() {
-    _classCallCheck(this, KwpGk);
+  function zRihl() {
+    _classCallCheck(this, zRihl);
 
-    return _possibleConstructorReturn(this, (KwpGk.__proto__ || Object.getPrototypeOf(KwpGk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (zRihl.__proto__ || Object.getPrototypeOf(zRihl)).apply(this, arguments));
   }
 
-  return KwpGk;
+  return zRihl;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(KwpGk, templates);
-exports.KwpGk = KwpGk;
+_metalSoy2.default.register(zRihl, templates);
+exports.zRihl = zRihl;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[274]);
+},[286]);

@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([8],{
+webpackJsonppageComponent([3],{
 
-/***/ 280:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_1Soy = __webpack_require__(281);
+var _step_6Soy = __webpack_require__(291);
 
-var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
+var _step_6Soy2 = _interopRequireDefault(_step_6Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LcFkh = function (_Component) {
-  _inherits(LcFkh, _Component);
+var cBqdF = function (_Component) {
+  _inherits(cBqdF, _Component);
 
-  function LcFkh() {
-    _classCallCheck(this, LcFkh);
+  function cBqdF() {
+    _classCallCheck(this, cBqdF);
 
-    return _possibleConstructorReturn(this, (LcFkh.__proto__ || Object.getPrototypeOf(LcFkh)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (cBqdF.__proto__ || Object.getPrototypeOf(cBqdF)).apply(this, arguments));
   }
 
-  return LcFkh;
+  return cBqdF;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(LcFkh, _step_1Soy2.default);
+_metalSoy2.default.register(cBqdF, _step_6Soy2.default);
 
-exports.default = LcFkh;
+exports.default = cBqdF;
 
 /***/ }),
 
-/***/ 281:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = LcFkh;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.LcFkh = undefined;
+exports.templates = exports.cBqdF = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_1.soy.
+  // This file was automatically generated from step_6.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace LcFkh.
+   * @fileoverview Templates in namespace cBqdF.
    * @public
    */
 
-  goog.module('LcFkh.incrementaldom');
+  goog.module('cBqdF.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,6 +137,8 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -151,32 +153,40 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param615 = function param615() {
+    var param490 = function param490() {
       ie_open('h2');
       var dyn32 = opt_data.page.title;
       if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
       ie_close('h2');
       ie_open('p');
-      itext('Include ');
-      ie_open('strong');
-      itext('Query.cls');
-      ie_close('strong');
-      itext(' and ');
-      ie_open('strong');
-      itext('QueryTest.cls');
-      ie_close('strong');
-      itext('(optional) into your Org, and you are ready to go.');
+      itext('In the previous section, we have learned to add a single condition to the query. In many cases, however, that is far from enough. So Query.apex allows calling \'addConditionXX\' multiple times, resulting in combining all the conditions with boolean \'and\' operation.');
       ie_close('p');
+      ie_open('p');
+      itext('Example:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      AND NumberOfEmployees > 0\n      AND Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Meanwhile, Query.apex provides a method \'switchToDisjunction\' to change the boolean \'and\' operator to the boolean \'or\' operator. Appending an extra \'switchToDisjunction\' method to the same example above:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    switchToDisjunction().\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      OR NumberOfEmployees > 0\n      OR Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param615 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param490 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'LcFkh.render';
+    $render.soyTemplateName = 'cBqdF.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -185,24 +195,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var LcFkh = function (_Component) {
-  _inherits(LcFkh, _Component);
+var cBqdF = function (_Component) {
+  _inherits(cBqdF, _Component);
 
-  function LcFkh() {
-    _classCallCheck(this, LcFkh);
+  function cBqdF() {
+    _classCallCheck(this, cBqdF);
 
-    return _possibleConstructorReturn(this, (LcFkh.__proto__ || Object.getPrototypeOf(LcFkh)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (cBqdF.__proto__ || Object.getPrototypeOf(cBqdF)).apply(this, arguments));
   }
 
-  return LcFkh;
+  return cBqdF;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(LcFkh, templates);
-exports.LcFkh = LcFkh;
+_metalSoy2.default.register(cBqdF, templates);
+exports.cBqdF = cBqdF;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[280]);
+},[290]);

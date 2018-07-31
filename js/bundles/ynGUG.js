@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([7],{
+webpackJsonppageComponent([4],{
 
-/***/ 282:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_2Soy = __webpack_require__(283);
+var _step_5Soy = __webpack_require__(289);
 
-var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
+var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var piSMZ = function (_Component) {
-  _inherits(piSMZ, _Component);
+var ynGUG = function (_Component) {
+  _inherits(ynGUG, _Component);
 
-  function piSMZ() {
-    _classCallCheck(this, piSMZ);
+  function ynGUG() {
+    _classCallCheck(this, ynGUG);
 
-    return _possibleConstructorReturn(this, (piSMZ.__proto__ || Object.getPrototypeOf(piSMZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ynGUG.__proto__ || Object.getPrototypeOf(ynGUG)).apply(this, arguments));
   }
 
-  return piSMZ;
+  return ynGUG;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(piSMZ, _step_2Soy2.default);
+_metalSoy2.default.register(ynGUG, _step_5Soy2.default);
 
-exports.default = piSMZ;
+exports.default = ynGUG;
 
 /***/ }),
 
-/***/ 283:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = piSMZ;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.piSMZ = undefined;
+exports.templates = exports.ynGUG = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_2.soy.
+  // This file was automatically generated from step_5.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace piSMZ.
+   * @fileoverview Templates in namespace ynGUG.
    * @public
    */
 
-  goog.module('piSMZ.incrementaldom');
+  goog.module('ynGUG.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,49 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param626 = function param626() {
+    var param449 = function param449() {
       ie_open('h2');
-      var dyn33 = opt_data.page.title;
-      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
+      var dyn31 = opt_data.page.title;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
       ie_close('h2');
       ie_open('p');
-      itext('Lets start with a simplest query: querying all Account records:');
+      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
+      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
       ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
+      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
       ie_close('p');
       $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('The \'byId\' method limits the result with a specific Id.');
+      itext('Now let\'s try querying the accounts owned by the current user:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
       ie_close('p');
       ie_open('p');
-      itext('The \'fetch\' method executes the query and returns the first record in the result.');
+      itext('Examples are:');
       ie_close('p');
-      ie_open('p');
-      itext('The statement is equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
-      ie_close('p');
+      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param626 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param449 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'piSMZ.render';
+    $render.soyTemplateName = 'ynGUG.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -204,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var piSMZ = function (_Component) {
-  _inherits(piSMZ, _Component);
+var ynGUG = function (_Component) {
+  _inherits(ynGUG, _Component);
 
-  function piSMZ() {
-    _classCallCheck(this, piSMZ);
+  function ynGUG() {
+    _classCallCheck(this, ynGUG);
 
-    return _possibleConstructorReturn(this, (piSMZ.__proto__ || Object.getPrototypeOf(piSMZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (ynGUG.__proto__ || Object.getPrototypeOf(ynGUG)).apply(this, arguments));
   }
 
-  return piSMZ;
+  return ynGUG;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(piSMZ, templates);
-exports.piSMZ = piSMZ;
+_metalSoy2.default.register(ynGUG, templates);
+exports.ynGUG = ynGUG;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[282]);
+},[288]);

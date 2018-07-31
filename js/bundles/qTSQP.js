@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([4],{
+webpackJsonppageComponent([1],{
 
-/***/ 288:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_5Soy = __webpack_require__(289);
+var _step_8Soy = __webpack_require__(295);
 
-var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
+var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var dVAYS = function (_Component) {
-  _inherits(dVAYS, _Component);
+var qTSQP = function (_Component) {
+  _inherits(qTSQP, _Component);
 
-  function dVAYS() {
-    _classCallCheck(this, dVAYS);
+  function qTSQP() {
+    _classCallCheck(this, qTSQP);
 
-    return _possibleConstructorReturn(this, (dVAYS.__proto__ || Object.getPrototypeOf(dVAYS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qTSQP.__proto__ || Object.getPrototypeOf(qTSQP)).apply(this, arguments));
   }
 
-  return dVAYS;
+  return qTSQP;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(dVAYS, _step_5Soy2.default);
+_metalSoy2.default.register(qTSQP, _step_8Soy2.default);
 
-exports.default = dVAYS;
+exports.default = qTSQP;
 
 /***/ }),
 
-/***/ 289:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = dVAYS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.dVAYS = undefined;
+exports.templates = exports.qTSQP = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_5.soy.
+  // This file was automatically generated from step_8.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace dVAYS.
+   * @fileoverview Templates in namespace qTSQP.
    * @public
    */
 
-  goog.module('dVAYS.incrementaldom');
+  goog.module('qTSQP.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,48 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param744 = function param744() {
+    var param587 = function param587() {
       ie_open('h2');
-      var dyn36 = opt_data.page.title;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
+      var dyn34 = opt_data.page.title;
+      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
       ie_close('h2');
       ie_open('p');
-      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Now let\'s try querying the accounts owned by the current user:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
+      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
       ie_close('p');
       ie_open('p');
-      itext('Examples are:');
+      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
       ie_close('p');
-      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Here is an example of such a query in SOQL:');
+      ie_close('p');
+      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
+      ie_open('p');
+      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
+      ie_close('p');
+      ie_open('p');
+      itext('Let\'s see how to construct such a query using Query.apex:');
+      ie_close('p');
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
+      ie_close('p');
+      ie_open('p');
+      itext('Here is another example of a subquery with conditions and limits:');
+      ie_close('p');
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param744 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param587 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'dVAYS.render';
+    $render.soyTemplateName = 'qTSQP.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var dVAYS = function (_Component) {
-  _inherits(dVAYS, _Component);
+var qTSQP = function (_Component) {
+  _inherits(qTSQP, _Component);
 
-  function dVAYS() {
-    _classCallCheck(this, dVAYS);
+  function qTSQP() {
+    _classCallCheck(this, qTSQP);
 
-    return _possibleConstructorReturn(this, (dVAYS.__proto__ || Object.getPrototypeOf(dVAYS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qTSQP.__proto__ || Object.getPrototypeOf(qTSQP)).apply(this, arguments));
   }
 
-  return dVAYS;
+  return qTSQP;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(dVAYS, templates);
-exports.dVAYS = dVAYS;
+_metalSoy2.default.register(qTSQP, templates);
+exports.qTSQP = qTSQP;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[288]);
+},[294]);

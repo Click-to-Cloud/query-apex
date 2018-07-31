@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var yeASU = function (_Component) {
-  _inherits(yeASU, _Component);
+var oxXyn = function (_Component) {
+  _inherits(oxXyn, _Component);
 
-  function yeASU() {
-    _classCallCheck(this, yeASU);
+  function oxXyn() {
+    _classCallCheck(this, oxXyn);
 
-    return _possibleConstructorReturn(this, (yeASU.__proto__ || Object.getPrototypeOf(yeASU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (oxXyn.__proto__ || Object.getPrototypeOf(oxXyn)).apply(this, arguments));
   }
 
-  return yeASU;
+  return oxXyn;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(yeASU, _conditionSoy2.default);
+_metalSoy2.default.register(oxXyn, _conditionSoy2.default);
 
-exports.default = yeASU;
+exports.default = oxXyn;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = yeASU;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.yeASU = undefined;
+exports.templates = exports.oxXyn = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace yeASU.
+   * @fileoverview Templates in namespace oxXyn.
    * @public
    */
 
-  goog.module('yeASU.incrementaldom');
+  goog.module('oxXyn.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,10 +152,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param315 = function param315() {
+    var param613 = function param613() {
       ie_open('h6');
-      var dyn27 = opt_data.page.description;
-      if (typeof dyn27 == 'function') dyn27();else if (dyn27 != null) itext(dyn27);
+      var dyn35 = opt_data.page.description;
+      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
@@ -847,11 +847,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param315 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param613 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'yeASU.render';
+    $render.soyTemplateName = 'oxXyn.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -860,20 +860,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var yeASU = function (_Component) {
-  _inherits(yeASU, _Component);
+var oxXyn = function (_Component) {
+  _inherits(oxXyn, _Component);
 
-  function yeASU() {
-    _classCallCheck(this, yeASU);
+  function oxXyn() {
+    _classCallCheck(this, oxXyn);
 
-    return _possibleConstructorReturn(this, (yeASU.__proto__ || Object.getPrototypeOf(yeASU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (oxXyn.__proto__ || Object.getPrototypeOf(oxXyn)).apply(this, arguments));
   }
 
-  return yeASU;
+  return oxXyn;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(yeASU, templates);
-exports.yeASU = yeASU;
+_metalSoy2.default.register(oxXyn, templates);
+exports.oxXyn = oxXyn;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

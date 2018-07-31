@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var jemJy = function (_Component) {
-  _inherits(jemJy, _Component);
+var dFjyR = function (_Component) {
+  _inherits(dFjyR, _Component);
 
-  function jemJy() {
-    _classCallCheck(this, jemJy);
+  function dFjyR() {
+    _classCallCheck(this, dFjyR);
 
-    return _possibleConstructorReturn(this, (jemJy.__proto__ || Object.getPrototypeOf(jemJy)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dFjyR.__proto__ || Object.getPrototypeOf(dFjyR)).apply(this, arguments));
   }
 
-  return jemJy;
+  return dFjyR;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(jemJy, _step_7Soy2.default);
+_metalSoy2.default.register(dFjyR, _step_7Soy2.default);
 
-exports.default = jemJy;
+exports.default = dFjyR;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = jemJy;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.jemJy = undefined;
+exports.templates = exports.dFjyR = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace jemJy.
+   * @fileoverview Templates in namespace dFjyR.
    * @public
    */
 
-  goog.module('jemJy.incrementaldom');
+  goog.module('dFjyR.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,10 +153,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param816 = function param816() {
+    var param521 = function param521() {
       ie_open('h2');
-      var dyn38 = opt_data.page.title;
-      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
+      var dyn33 = opt_data.page.title;
+      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
       ie_close('h2');
       ie_open('p');
       itext('We have learned to add multiple conditions in the previous section, but those conditions were very limited. What if we want to construct a condition with a combination of both boolean operators?');
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param816 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param521 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'jemJy.render';
+    $render.soyTemplateName = 'dFjyR.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,20 +235,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var jemJy = function (_Component) {
-  _inherits(jemJy, _Component);
+var dFjyR = function (_Component) {
+  _inherits(dFjyR, _Component);
 
-  function jemJy() {
-    _classCallCheck(this, jemJy);
+  function dFjyR() {
+    _classCallCheck(this, dFjyR);
 
-    return _possibleConstructorReturn(this, (jemJy.__proto__ || Object.getPrototypeOf(jemJy)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (dFjyR.__proto__ || Object.getPrototypeOf(dFjyR)).apply(this, arguments));
   }
 
-  return jemJy;
+  return dFjyR;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(jemJy, templates);
-exports.jemJy = jemJy;
+_metalSoy2.default.register(dFjyR, templates);
+exports.dFjyR = dFjyR;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

@@ -192,11 +192,11 @@ goog.loadModule(function (exports) {
     ie_open('a', null, null, 'href', '/query-apex/tutorials/getting_started/step_1.html', 'class', 'btn btn-accent btn-sm');
     itext('Get Started');
     ie_close('a');
-    ie_open('a', null, null, 'href', 'https://github.com/Click-to-Cloud/Query.apex/', 'class', 'btn btn-success btn-sm');
-    itext('GitHub');
+    ie_open('a', null, null, 'href', '/query-apex/docs/', 'class', 'btn btn-success btn-sm');
+    itext('Documentation');
     ie_close('a');
-    ie_open('a', null, null, 'href', '/', 'onclick', 'location.assign(\'/\')', 'class', 'btn btn-default btn-sm');
-    itext('Not Interested');
+    ie_open('a', null, null, 'href', 'https://github.com/Click-to-Cloud/Query.apex/', 'class', 'btn btn-default btn-sm');
+    itext('GitHub');
     ie_close('a');
     ie_close('div');
     ie_close('div');
@@ -223,7 +223,7 @@ goog.loadModule(function (exports) {
     itext('Why Query.apex?');
     ie_close('h3');
     ie_open('p', null, null, 'class', 'about-description');
-    itext(' Although Salesforce provides Database.query method to dynamically execute a query from a string, it is far from easy to construct such a string in a structural and flexible way. Query.apex is made to improve the flexibility of the code and consequently enhance the productivity of the development. ');
+    itext(' Although Salesforce provides Database.query method to dynamically execute a query from a string, it is far from easy to construct such a string in a structural and flexible way. Query.apex is designed to improve the flexibility of the code and consequently enhance the productivity of the development. ');
     ie_close('p');
     ie_close('div');
     ie_close('div');

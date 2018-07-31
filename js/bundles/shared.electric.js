@@ -5378,9 +5378,9 @@ goog.loadModule(function (exports) {
         ie_close('link');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/icon-12/icon-12.css');
         ie_close('link');
-        ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/senna/senna.css');
-        ie_close('link');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/icon-16/icon-16.css');
+        ie_close('link');
+        ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/senna/senna.css');
         ie_close('link');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/codemirror/lib/codemirror.css');
         ie_close('link');

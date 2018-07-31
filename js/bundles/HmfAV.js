@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([1],{
+webpackJsonppageComponent([7],{
 
-/***/ 294:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_8Soy = __webpack_require__(295);
+var _step_2Soy = __webpack_require__(283);
 
-var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
+var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AaXOj = function (_Component) {
-  _inherits(AaXOj, _Component);
+var HmfAV = function (_Component) {
+  _inherits(HmfAV, _Component);
 
-  function AaXOj() {
-    _classCallCheck(this, AaXOj);
+  function HmfAV() {
+    _classCallCheck(this, HmfAV);
 
-    return _possibleConstructorReturn(this, (AaXOj.__proto__ || Object.getPrototypeOf(AaXOj)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HmfAV.__proto__ || Object.getPrototypeOf(HmfAV)).apply(this, arguments));
   }
 
-  return AaXOj;
+  return HmfAV;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(AaXOj, _step_8Soy2.default);
+_metalSoy2.default.register(HmfAV, _step_2Soy2.default);
 
-exports.default = AaXOj;
+exports.default = HmfAV;
 
 /***/ }),
 
-/***/ 295:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = AaXOj;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.AaXOj = undefined;
+exports.templates = exports.HmfAV = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_8.soy.
+  // This file was automatically generated from step_2.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace AaXOj.
+   * @fileoverview Templates in namespace HmfAV.
    * @public
    */
 
-  goog.module('AaXOj.incrementaldom');
+  goog.module('HmfAV.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,48 +153,49 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param882 = function param882() {
+    var param331 = function param331() {
       ie_open('h2');
-      var dyn39 = opt_data.page.title;
-      if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
+      var dyn28 = opt_data.page.title;
+      if (typeof dyn28 == 'function') dyn28();else if (dyn28 != null) itext(dyn28);
       ie_close('h2');
       ie_open('p');
-      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
+      itext('Lets start with a simplest query: querying all Account records:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
       ie_close('p');
       ie_open('p');
-      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
+      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
+      ie_open('p');
+      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'byId\' method limits the result with a specific Id.');
       ie_close('p');
       ie_open('p');
-      itext('Here is an example of such a query in SOQL:');
-      ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
-      ie_open('p');
-      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
+      itext('The \'fetch\' method executes the query and returns the first record in the result.');
       ie_close('p');
       ie_open('p');
-      itext('Let\'s see how to construct such a query using Query.apex:');
+      itext('The statement is equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
       ie_open('p');
-      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is another example of a subquery with conditions and limits:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param882 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param331 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'AaXOj.render';
+    $render.soyTemplateName = 'HmfAV.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +204,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var AaXOj = function (_Component) {
-  _inherits(AaXOj, _Component);
+var HmfAV = function (_Component) {
+  _inherits(HmfAV, _Component);
 
-  function AaXOj() {
-    _classCallCheck(this, AaXOj);
+  function HmfAV() {
+    _classCallCheck(this, HmfAV);
 
-    return _possibleConstructorReturn(this, (AaXOj.__proto__ || Object.getPrototypeOf(AaXOj)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HmfAV.__proto__ || Object.getPrototypeOf(HmfAV)).apply(this, arguments));
   }
 
-  return AaXOj;
+  return HmfAV;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(AaXOj, templates);
-exports.AaXOj = AaXOj;
+_metalSoy2.default.register(HmfAV, templates);
+exports.HmfAV = HmfAV;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[294]);
+},[282]);
