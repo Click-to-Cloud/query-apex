@@ -1,7 +1,7 @@
 var pageComponent =
 webpackJsonppageComponent([11],{
 
-/***/ 264:
+/***/ 266:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _searchSoy = __webpack_require__(265);
+var _searchSoy = __webpack_require__(267);
 
 var _searchSoy2 = _interopRequireDefault(_searchSoy);
 
@@ -75,7 +75,7 @@ exports.default = pageDocsSearch;
 
 /***/ }),
 
-/***/ 265:
+/***/ 267:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -154,7 +154,7 @@ goog.loadModule(function (exports) {
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
     var $$temp;
-    var param299 = function param299() {
+    var param294 = function param294() {
       $templateAlias2({ section: opt_data.site.index.children['docs'], site: opt_data.site }, null, opt_ijData);
       ie_open('div', null, null, 'class', 'sidebar-offset');
       ie_open('div', null, null, 'class', 'container-hybrid docs-home-top');
@@ -182,7 +182,7 @@ goog.loadModule(function (exports) {
       ie_close('div');
       ie_close('div');
     };
-    $templateAlias1(soy.$$assignDefaults({ elementClasses: 'docs', content: param299 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ elementClasses: 'docs', content: param294 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
@@ -215,4 +215,4 @@ exports.default = templates;
 
 /***/ })
 
-},[264]);
+},[266]);

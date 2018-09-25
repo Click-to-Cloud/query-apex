@@ -5786,7 +5786,7 @@ goog.loadModule(function (exports) {
     ie_open('div', null, null, 'class', 'contribute-text');
     ie_open('p');
     itext('Contribute on Github! ');
-    ie_open('a', null, null, 'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/' + opt_data.page.srcFilePath, 'class', 'contribute-link', 'target', '_blank');
+    ie_open('a', null, null, 'href', 'https://github.com/' + opt_data.site.githubRepo + '/tree/master/doc/query-apex/' + opt_data.page.srcFilePath, 'class', 'contribute-link', 'target', '_blank');
     itext('Edit this section');
     ie_close('a');
     itext('.');

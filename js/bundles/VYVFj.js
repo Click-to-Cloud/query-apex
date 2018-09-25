@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([14],{
+webpackJsonppageComponent([16],{
 
-/***/ 274:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _indexSoy = __webpack_require__(275);
+var _constructorsSoy = __webpack_require__(289);
 
-var _indexSoy2 = _interopRequireDefault(_indexSoy);
+var _constructorsSoy2 = _interopRequireDefault(_constructorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var lhpCY = function (_Component) {
-  _inherits(lhpCY, _Component);
+var VYVFj = function (_Component) {
+  _inherits(VYVFj, _Component);
 
-  function lhpCY() {
-    _classCallCheck(this, lhpCY);
+  function VYVFj() {
+    _classCallCheck(this, VYVFj);
 
-    return _possibleConstructorReturn(this, (lhpCY.__proto__ || Object.getPrototypeOf(lhpCY)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (VYVFj.__proto__ || Object.getPrototypeOf(VYVFj)).apply(this, arguments));
   }
 
-  return lhpCY;
+  return VYVFj;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(lhpCY, _indexSoy2.default);
+_metalSoy2.default.register(VYVFj, _constructorsSoy2.default);
 
-exports.default = lhpCY;
+exports.default = VYVFj;
 
 /***/ }),
 
-/***/ 275:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = lhpCY;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.lhpCY = undefined;
+exports.templates = exports.VYVFj = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from index.soy.
+  // This file was automatically generated from constructors.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace lhpCY.
+   * @fileoverview Templates in namespace VYVFj.
    * @public
    */
 
-  goog.module('lhpCY.incrementaldom');
+  goog.module('VYVFj.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,6 +137,8 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
   var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
@@ -150,32 +152,36 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param851 = function param851() {
+    var param501 = function param501() {
       ie_open('h6');
-      var dyn38 = opt_data.page.description;
-      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
+      var dyn28 = opt_data.page.description;
+      if (typeof dyn28 == 'function') dyn28();else if (dyn28 != null) itext(dyn28);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('Query Reference');
+      itext('Constructors');
       ie_close('h2');
       ie_open('p');
-      itext('Here is the reference of the public methods in Query.');
+      itext('Creates a new Query instance.');
       ie_close('p');
+      ie_open('h4');
+      itext('public Query(String objectName)');
+      ie_close('h4');
       ie_open('p');
-      itext('Every public method in Query class that returns a Query type is mutable and chainable.');
+      itext('objectName: Name of the expected object.');
       ie_close('p');
+      $templateAlias2({ code: '\nQuery query = new Query(\'Account\');', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param851 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param501 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'lhpCY.render';
+    $render.soyTemplateName = 'VYVFj.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -184,24 +190,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var lhpCY = function (_Component) {
-  _inherits(lhpCY, _Component);
+var VYVFj = function (_Component) {
+  _inherits(VYVFj, _Component);
 
-  function lhpCY() {
-    _classCallCheck(this, lhpCY);
+  function VYVFj() {
+    _classCallCheck(this, VYVFj);
 
-    return _possibleConstructorReturn(this, (lhpCY.__proto__ || Object.getPrototypeOf(lhpCY)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (VYVFj.__proto__ || Object.getPrototypeOf(VYVFj)).apply(this, arguments));
   }
 
-  return lhpCY;
+  return VYVFj;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(lhpCY, templates);
-exports.lhpCY = lhpCY;
+_metalSoy2.default.register(VYVFj, templates);
+exports.VYVFj = VYVFj;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[274]);
+},[288]);

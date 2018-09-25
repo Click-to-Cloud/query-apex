@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([6],{
+webpackJsonppageComponent([15],{
 
-/***/ 284:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_3Soy = __webpack_require__(285);
+var _fieldSoy = __webpack_require__(291);
 
-var _step_3Soy2 = _interopRequireDefault(_step_3Soy);
+var _fieldSoy2 = _interopRequireDefault(_fieldSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var blbVU = function (_Component) {
-  _inherits(blbVU, _Component);
+var DpVOB = function (_Component) {
+  _inherits(DpVOB, _Component);
 
-  function blbVU() {
-    _classCallCheck(this, blbVU);
+  function DpVOB() {
+    _classCallCheck(this, DpVOB);
 
-    return _possibleConstructorReturn(this, (blbVU.__proto__ || Object.getPrototypeOf(blbVU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DpVOB.__proto__ || Object.getPrototypeOf(DpVOB)).apply(this, arguments));
   }
 
-  return blbVU;
+  return DpVOB;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(blbVU, _step_3Soy2.default);
+_metalSoy2.default.register(DpVOB, _fieldSoy2.default);
 
-exports.default = blbVU;
+exports.default = DpVOB;
 
 /***/ }),
 
-/***/ 285:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = blbVU;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.blbVU = undefined;
+exports.templates = exports.DpVOB = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_3.soy.
+  // This file was automatically generated from field.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace blbVU.
+   * @fileoverview Templates in namespace DpVOB.
    * @public
    */
 
-  goog.module('blbVU.incrementaldom');
+  goog.module('DpVOB.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,13 +139,12 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,56 +152,67 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param362 = function param362() {
-      ie_open('h2');
-      var dyn29 = opt_data.page.title;
+    var param517 = function param517() {
+      ie_open('h6');
+      var dyn29 = opt_data.page.description;
       if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
+      ie_open('h2');
+      itext('selectFields');
       ie_close('h2');
       ie_open('p');
-      itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
+      itext('Select specific fields.');
       ie_close('p');
+      ie_open('h4');
+      itext('public Query selectFields(String field)');
+      ie_close('h4');
       ie_open('p');
-      itext('For example, this query will only select only the Name field from the Account object.');
+      itext('field: Name of one field, or multiple field names separated by \',\'.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').selectFields(\'Name\').run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'OwnerId, CreatedById\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectFields(List<String> fieldList)');
+      ie_close('h4');
       ie_open('p');
-      itext('This is equivalent to:');
+      itext('fieldList: A list of field names.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new List<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectFields(Set<String> fieldSet)');
+      ie_close('h4');
       ie_open('p');
-      itext('We can also call \'selectFields\' method multiple times, the result is additive:');
+      itext('fieldSet: A Set of field names.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'Phone\').\n    selectFields(\'Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new Set<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('h2');
+      itext('selectAllFields');
+      ie_close('h2');
+      ie_open('h4');
+      itext('public Query selectAllFields()');
+      ie_close('h4');
       ie_open('p');
-      itext('That\'s equivalent to:');
+      itext('Select all accessible fields in the current object');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name, Phone, Website, Description FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectAllFields(String parentField)');
+      ie_close('h4');
       ie_open('p');
-      itext('Alternatively, we can put all the fields in one \'selectFields\' method, still preserving the additivity:');
+      itext('Select all accessible fields in the parent field');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name, Phone, Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Compare with:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<String> fields = new List<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('or:');
-      ie_close('p');
-      $templateAlias2({ code: 'Set<String> fields = new Set<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('To make user convenient, Query.apex provides the \'selectAllFields\' method to select all user accessible fields:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields().\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\');', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param362 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param517 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'blbVU.render';
+    $render.soyTemplateName = 'DpVOB.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -211,24 +221,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var blbVU = function (_Component) {
-  _inherits(blbVU, _Component);
+var DpVOB = function (_Component) {
+  _inherits(DpVOB, _Component);
 
-  function blbVU() {
-    _classCallCheck(this, blbVU);
+  function DpVOB() {
+    _classCallCheck(this, DpVOB);
 
-    return _possibleConstructorReturn(this, (blbVU.__proto__ || Object.getPrototypeOf(blbVU)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (DpVOB.__proto__ || Object.getPrototypeOf(DpVOB)).apply(this, arguments));
   }
 
-  return blbVU;
+  return DpVOB;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(blbVU, templates);
-exports.blbVU = blbVU;
+_metalSoy2.default.register(DpVOB, templates);
+exports.DpVOB = DpVOB;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[284]);
+},[290]);

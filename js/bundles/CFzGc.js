@@ -1,7 +1,7 @@
 var pageComponent =
 webpackJsonppageComponent([17],{
 
-/***/ 268:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _conditionSoy = __webpack_require__(269);
+var _conditionSoy = __webpack_require__(287);
 
 var _conditionSoy2 = _interopRequireDefault(_conditionSoy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var oxXyn = function (_Component) {
-  _inherits(oxXyn, _Component);
+var CFzGc = function (_Component) {
+  _inherits(CFzGc, _Component);
 
-  function oxXyn() {
-    _classCallCheck(this, oxXyn);
+  function CFzGc() {
+    _classCallCheck(this, CFzGc);
 
-    return _possibleConstructorReturn(this, (oxXyn.__proto__ || Object.getPrototypeOf(oxXyn)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CFzGc.__proto__ || Object.getPrototypeOf(CFzGc)).apply(this, arguments));
   }
 
-  return oxXyn;
+  return CFzGc;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(oxXyn, _conditionSoy2.default);
+_metalSoy2.default.register(CFzGc, _conditionSoy2.default);
 
-exports.default = oxXyn;
+exports.default = CFzGc;
 
 /***/ }),
 
-/***/ 269:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = oxXyn;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.oxXyn = undefined;
+exports.templates = exports.CFzGc = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace oxXyn.
+   * @fileoverview Templates in namespace CFzGc.
    * @public
    */
 
-  goog.module('oxXyn.incrementaldom');
+  goog.module('CFzGc.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,10 +152,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param613 = function param613() {
+    var param315 = function param315() {
       ie_open('h6');
-      var dyn35 = opt_data.page.description;
-      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
+      var dyn27 = opt_data.page.description;
+      if (typeof dyn27 == 'function') dyn27();else if (dyn27 != null) itext(dyn27);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
@@ -847,11 +847,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param613 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param315 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'oxXyn.render';
+    $render.soyTemplateName = 'CFzGc.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -860,24 +860,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var oxXyn = function (_Component) {
-  _inherits(oxXyn, _Component);
+var CFzGc = function (_Component) {
+  _inherits(CFzGc, _Component);
 
-  function oxXyn() {
-    _classCallCheck(this, oxXyn);
+  function CFzGc() {
+    _classCallCheck(this, CFzGc);
 
-    return _possibleConstructorReturn(this, (oxXyn.__proto__ || Object.getPrototypeOf(oxXyn)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CFzGc.__proto__ || Object.getPrototypeOf(CFzGc)).apply(this, arguments));
   }
 
-  return oxXyn;
+  return CFzGc;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(oxXyn, templates);
-exports.oxXyn = oxXyn;
+_metalSoy2.default.register(CFzGc, templates);
+exports.CFzGc = CFzGc;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[268]);
+},[286]);

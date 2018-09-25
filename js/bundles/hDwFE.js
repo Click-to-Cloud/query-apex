@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([16],{
+webpackJsonppageComponent([5],{
 
-/***/ 270:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _constructorsSoy = __webpack_require__(271);
+var _step_4Soy = __webpack_require__(277);
 
-var _constructorsSoy2 = _interopRequireDefault(_constructorsSoy);
+var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var dZSwk = function (_Component) {
-  _inherits(dZSwk, _Component);
+var hDwFE = function (_Component) {
+  _inherits(hDwFE, _Component);
 
-  function dZSwk() {
-    _classCallCheck(this, dZSwk);
+  function hDwFE() {
+    _classCallCheck(this, hDwFE);
 
-    return _possibleConstructorReturn(this, (dZSwk.__proto__ || Object.getPrototypeOf(dZSwk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hDwFE.__proto__ || Object.getPrototypeOf(hDwFE)).apply(this, arguments));
   }
 
-  return dZSwk;
+  return hDwFE;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(dZSwk, _constructorsSoy2.default);
+_metalSoy2.default.register(hDwFE, _step_4Soy2.default);
 
-exports.default = dZSwk;
+exports.default = hDwFE;
 
 /***/ }),
 
-/***/ 271:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = dZSwk;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.dZSwk = undefined;
+exports.templates = exports.hDwFE = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from constructors.soy.
+  // This file was automatically generated from step_4.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace dZSwk.
+   * @fileoverview Templates in namespace hDwFE.
    * @public
    */
 
-  goog.module('dZSwk.incrementaldom');
+  goog.module('hDwFE.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,12 +139,13 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?)
+   *    site: (?),
+   *    elementClasses: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -152,36 +153,44 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param799 = function param799() {
-      ie_open('h6');
-      var dyn36 = opt_data.page.description;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
-      ie_close('h6');
-      ie_open('article', null, null, 'id', '1');
+    var param708 = function param708() {
       ie_open('h2');
-      itext('Constructors');
+      var dyn35 = opt_data.page.title;
+      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
       ie_close('h2');
       ie_open('p');
-      itext('Creates a new Query instance.');
+      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
       ie_close('p');
-      ie_open('h4');
-      itext('public Query(String objectName)');
-      ie_close('h4');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('objectName: Name of the expected object.');
+      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query = new Query(\'Account\');', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
+      ie_open('p');
+      itext('The statement is equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Meanwhile, multiple layer parent relationship is supported:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param799 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param708 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'dZSwk.render';
+    $render.soyTemplateName = 'hDwFE.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -190,24 +199,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var dZSwk = function (_Component) {
-  _inherits(dZSwk, _Component);
+var hDwFE = function (_Component) {
+  _inherits(hDwFE, _Component);
 
-  function dZSwk() {
-    _classCallCheck(this, dZSwk);
+  function hDwFE() {
+    _classCallCheck(this, hDwFE);
 
-    return _possibleConstructorReturn(this, (dZSwk.__proto__ || Object.getPrototypeOf(dZSwk)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hDwFE.__proto__ || Object.getPrototypeOf(hDwFE)).apply(this, arguments));
   }
 
-  return dZSwk;
+  return hDwFE;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(dZSwk, templates);
-exports.dZSwk = dZSwk;
+_metalSoy2.default.register(hDwFE, templates);
+exports.hDwFE = hDwFE;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[270]);
+},[276]);
