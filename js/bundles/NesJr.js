@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([1],{
+webpackJsonppageComponent([8],{
 
-/***/ 284:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_8Soy = __webpack_require__(285);
+var _step_1Soy = __webpack_require__(281);
 
-var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
+var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CCzTs = function (_Component) {
-  _inherits(CCzTs, _Component);
+var NesJr = function (_Component) {
+  _inherits(NesJr, _Component);
 
-  function CCzTs() {
-    _classCallCheck(this, CCzTs);
+  function NesJr() {
+    _classCallCheck(this, NesJr);
 
-    return _possibleConstructorReturn(this, (CCzTs.__proto__ || Object.getPrototypeOf(CCzTs)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NesJr.__proto__ || Object.getPrototypeOf(NesJr)).apply(this, arguments));
   }
 
-  return CCzTs;
+  return NesJr;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(CCzTs, _step_8Soy2.default);
+_metalSoy2.default.register(NesJr, _step_1Soy2.default);
 
-exports.default = CCzTs;
+exports.default = NesJr;
 
 /***/ }),
 
-/***/ 285:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = CCzTs;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.CCzTs = undefined;
+exports.templates = exports.NesJr = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_8.soy.
+  // This file was automatically generated from step_1.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace CCzTs.
+   * @fileoverview Templates in namespace NesJr.
    * @public
    */
 
-  goog.module('CCzTs.incrementaldom');
+  goog.module('NesJr.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,8 +137,6 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -153,48 +151,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param882 = function param882() {
+    var param620 = function param620() {
       ie_open('h2');
-      var dyn39 = opt_data.page.title;
-      if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
+      var dyn32 = opt_data.page.title;
+      if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
       ie_close('h2');
       ie_open('p');
-      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
-      ie_close('p');
-      ie_open('p');
-      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is an example of such a query in SOQL:');
-      ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
-      ie_open('p');
-      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
-      ie_close('p');
-      ie_open('p');
-      itext('Let\'s see how to construct such a query using Query.apex:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is another example of a subquery with conditions and limits:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      itext('Include ');
+      ie_open('strong');
+      itext('Query.cls');
+      ie_close('strong');
+      itext(' and ');
+      ie_open('strong');
+      itext('QueryTest.cls');
+      ie_close('strong');
+      itext(' (optional) into your Org, and you are ready to go.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param882 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param620 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'CCzTs.render';
+    $render.soyTemplateName = 'NesJr.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +185,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var CCzTs = function (_Component) {
-  _inherits(CCzTs, _Component);
+var NesJr = function (_Component) {
+  _inherits(NesJr, _Component);
 
-  function CCzTs() {
-    _classCallCheck(this, CCzTs);
+  function NesJr() {
+    _classCallCheck(this, NesJr);
 
-    return _possibleConstructorReturn(this, (CCzTs.__proto__ || Object.getPrototypeOf(CCzTs)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NesJr.__proto__ || Object.getPrototypeOf(NesJr)).apply(this, arguments));
   }
 
-  return CCzTs;
+  return NesJr;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(CCzTs, templates);
-exports.CCzTs = CCzTs;
+_metalSoy2.default.register(NesJr, templates);
+exports.NesJr = NesJr;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[284]);
+},[280]);

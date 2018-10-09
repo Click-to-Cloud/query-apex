@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([13],{
+webpackJsonppageComponent([4],{
 
-/***/ 294:
+/***/ 288:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _subquerySoy = __webpack_require__(295);
+var _step_5Soy = __webpack_require__(289);
 
-var _subquerySoy2 = _interopRequireDefault(_subquerySoy);
+var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var dZLhx = function (_Component) {
-  _inherits(dZLhx, _Component);
+var CkSBL = function (_Component) {
+  _inherits(CkSBL, _Component);
 
-  function dZLhx() {
-    _classCallCheck(this, dZLhx);
+  function CkSBL() {
+    _classCallCheck(this, CkSBL);
 
-    return _possibleConstructorReturn(this, (dZLhx.__proto__ || Object.getPrototypeOf(dZLhx)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CkSBL.__proto__ || Object.getPrototypeOf(CkSBL)).apply(this, arguments));
   }
 
-  return dZLhx;
+  return CkSBL;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(dZLhx, _subquerySoy2.default);
+_metalSoy2.default.register(CkSBL, _step_5Soy2.default);
 
-exports.default = dZLhx;
+exports.default = CkSBL;
 
 /***/ }),
 
-/***/ 295:
+/***/ 289:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = dZLhx;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.dZLhx = undefined;
+exports.templates = exports.CkSBL = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from subquery.soy.
+  // This file was automatically generated from step_5.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace dZLhx.
+   * @fileoverview Templates in namespace CkSBL.
    * @public
    */
 
-  goog.module('dZLhx.incrementaldom');
+  goog.module('CkSBL.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,12 +139,13 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?)
+   *    site: (?),
+   *    elementClasses: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -152,102 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param564 = function param564() {
-      ie_open('h6');
-      var dyn31 = opt_data.page.description;
-      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
-      ie_close('h6');
-      ie_open('article', null, null, 'id', '1');
+    var param749 = function param749() {
       ie_open('h2');
-      itext('addSubquery');
+      var dyn36 = opt_data.page.title;
+      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
       ie_close('h2');
       ie_open('p');
-      itext('Add a subquery to the query, selecting an SObject list from a specific child relationship.');
+      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Now let\'s try querying the accounts owned by the current user:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
       ie_close('p');
       ie_open('p');
-      itext('For example, in this query, the expression enclosed in parentheses is a subquery:');
+      itext('Examples are:');
       ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT LastName FROM Contacts) FROM Account', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\');', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, String fields)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fields: One or more field names in the child relationship that will be selected. If there are more than one field, they will be separated by a comma \',\'.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', \'FirstName, LastName\').\n    addSubquery(\'Notes\', \'Title\');', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, Set<String> fieldSet)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fieldSet: A set of field names in the child relationship that will be selected');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new Set<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, List<String> fieldList)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fieldList: A list of field names in the child relationship that will be selected');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new List<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(Query subquery)');
-      ie_close('h4');
-      ie_open('p');
-      itext('subquery: A subquery instance constructed by the static method');
-      ie_open('code');
-      itext('Query.subquery');
-      ie_close('code');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '1');
-      ie_open('h2');
-      itext('subquery');
-      ie_close('h2');
-      ie_open('p');
-      itext('Creates a subquery instance.');
-      ie_close('p');
-      ie_open('p');
-      itext('The instance can be linked to the main query using the ');
-      ie_open('code');
-      itext('addSubquery');
-      ie_close('code');
-      itext(' method afterwards.');
-      ie_close('p');
-      ie_open('h4');
-      itext('public static Query subquery(String relationshipName)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
+      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param564 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param749 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'dZLhx.render';
+    $render.soyTemplateName = 'CkSBL.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -256,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var dZLhx = function (_Component) {
-  _inherits(dZLhx, _Component);
+var CkSBL = function (_Component) {
+  _inherits(CkSBL, _Component);
 
-  function dZLhx() {
-    _classCallCheck(this, dZLhx);
+  function CkSBL() {
+    _classCallCheck(this, CkSBL);
 
-    return _possibleConstructorReturn(this, (dZLhx.__proto__ || Object.getPrototypeOf(dZLhx)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CkSBL.__proto__ || Object.getPrototypeOf(CkSBL)).apply(this, arguments));
   }
 
-  return dZLhx;
+  return CkSBL;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(dZLhx, templates);
-exports.dZLhx = dZLhx;
+_metalSoy2.default.register(CkSBL, templates);
+exports.CkSBL = CkSBL;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[294]);
+},[288]);

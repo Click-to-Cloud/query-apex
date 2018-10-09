@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([3],{
+webpackJsonppageComponent([16],{
 
-/***/ 280:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_6Soy = __webpack_require__(281);
+var _constructorsSoy = __webpack_require__(271);
 
-var _step_6Soy2 = _interopRequireDefault(_step_6Soy);
+var _constructorsSoy2 = _interopRequireDefault(_constructorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BxRhY = function (_Component) {
-  _inherits(BxRhY, _Component);
+var QDBKh = function (_Component) {
+  _inherits(QDBKh, _Component);
 
-  function BxRhY() {
-    _classCallCheck(this, BxRhY);
+  function QDBKh() {
+    _classCallCheck(this, QDBKh);
 
-    return _possibleConstructorReturn(this, (BxRhY.__proto__ || Object.getPrototypeOf(BxRhY)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (QDBKh.__proto__ || Object.getPrototypeOf(QDBKh)).apply(this, arguments));
   }
 
-  return BxRhY;
+  return QDBKh;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(BxRhY, _step_6Soy2.default);
+_metalSoy2.default.register(QDBKh, _constructorsSoy2.default);
 
-exports.default = BxRhY;
+exports.default = QDBKh;
 
 /***/ }),
 
-/***/ 281:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = BxRhY;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.BxRhY = undefined;
+exports.templates = exports.QDBKh = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_6.soy.
+  // This file was automatically generated from constructors.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace BxRhY.
+   * @fileoverview Templates in namespace QDBKh.
    * @public
    */
 
-  goog.module('BxRhY.incrementaldom');
+  goog.module('QDBKh.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,13 +139,12 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,40 +152,36 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param785 = function param785() {
+    var param501 = function param501() {
+      ie_open('h6');
+      var dyn28 = opt_data.page.description;
+      if (typeof dyn28 == 'function') dyn28();else if (dyn28 != null) itext(dyn28);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn37 = opt_data.page.title;
-      if (typeof dyn37 == 'function') dyn37();else if (dyn37 != null) itext(dyn37);
+      itext('Constructors');
       ie_close('h2');
       ie_open('p');
-      itext('In the previous section, we have learned to add a single condition to the query. In many cases, however, that is far from enough. So Query.apex allows calling \'addConditionXX\' multiple times, resulting in combining all the conditions with boolean \'and\' operation.');
+      itext('Creates a new Query instance.');
       ie_close('p');
+      ie_open('h4');
+      itext('public Query(String objectName)');
+      ie_close('h4');
       ie_open('p');
-      itext('Example:');
+      itext('objectName: Name of the expected object.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      AND NumberOfEmployees > 0\n      AND Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Meanwhile, Query.apex provides a method \'switchToDisjunction\' to change the boolean \'and\' operator to the boolean \'or\' operator. Appending an extra \'switchToDisjunction\' method to the same example above:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    switchToDisjunction().\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      OR NumberOfEmployees > 0\n      OR Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery query = new Query(\'Account\');', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param785 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param501 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'BxRhY.render';
+    $render.soyTemplateName = 'QDBKh.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -195,24 +190,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var BxRhY = function (_Component) {
-  _inherits(BxRhY, _Component);
+var QDBKh = function (_Component) {
+  _inherits(QDBKh, _Component);
 
-  function BxRhY() {
-    _classCallCheck(this, BxRhY);
+  function QDBKh() {
+    _classCallCheck(this, QDBKh);
 
-    return _possibleConstructorReturn(this, (BxRhY.__proto__ || Object.getPrototypeOf(BxRhY)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (QDBKh.__proto__ || Object.getPrototypeOf(QDBKh)).apply(this, arguments));
   }
 
-  return BxRhY;
+  return QDBKh;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(BxRhY, templates);
-exports.BxRhY = BxRhY;
+_metalSoy2.default.register(QDBKh, templates);
+exports.QDBKh = QDBKh;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[280]);
+},[270]);

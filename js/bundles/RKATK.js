@@ -1,5 +1,5 @@
 var pageComponent =
-webpackJsonppageComponent([5],{
+webpackJsonppageComponent([13],{
 
 /***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
@@ -43,9 +43,9 @@ __webpack_require__(15);
 
 __webpack_require__(16);
 
-var _step_4Soy = __webpack_require__(277);
+var _subquerySoy = __webpack_require__(277);
 
-var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
+var _subquerySoy2 = _interopRequireDefault(_subquerySoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hDwFE = function (_Component) {
-  _inherits(hDwFE, _Component);
+var RKATK = function (_Component) {
+  _inherits(RKATK, _Component);
 
-  function hDwFE() {
-    _classCallCheck(this, hDwFE);
+  function RKATK() {
+    _classCallCheck(this, RKATK);
 
-    return _possibleConstructorReturn(this, (hDwFE.__proto__ || Object.getPrototypeOf(hDwFE)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RKATK.__proto__ || Object.getPrototypeOf(RKATK)).apply(this, arguments));
   }
 
-  return hDwFE;
+  return RKATK;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hDwFE, _step_4Soy2.default);
+_metalSoy2.default.register(RKATK, _subquerySoy2.default);
 
-exports.default = hDwFE;
+exports.default = RKATK;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = hDwFE;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.hDwFE = undefined;
+exports.templates = exports.RKATK = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_4.soy.
+  // This file was automatically generated from subquery.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace hDwFE.
+   * @fileoverview Templates in namespace RKATK.
    * @public
    */
 
-  goog.module('hDwFE.incrementaldom');
+  goog.module('RKATK.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,13 +139,12 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,44 +152,102 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param708 = function param708() {
+    var param569 = function param569() {
+      ie_open('h6');
+      var dyn31 = opt_data.page.description;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn35 = opt_data.page.title;
-      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
+      itext('addSubquery');
       ie_close('h2');
       ie_open('p');
-      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
+      itext('Add a subquery to the query, selecting an SObject list from a specific child relationship.');
       ie_close('p');
       ie_open('p');
-      itext('The statement is equivalent to:');
+      itext('For example, in this query, the expression enclosed in parentheses is a subquery:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nSELECT Name, (SELECT LastName FROM Contacts) FROM Account', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(String relationshipName)');
+      ie_close('h4');
       ie_open('p');
-      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(String relationshipName, String fields)');
+      ie_close('h4');
       ie_open('p');
-      itext('equivalent to:');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Meanwhile, multiple layer parent relationship is supported:');
+      itext('fields: One or more field names in the child relationship that will be selected. If there are more than one field, they will be separated by a comma \',\'.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', \'FirstName, LastName\').\n    addSubquery(\'Notes\', \'Title\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(String relationshipName, Set<String> fieldSet)');
+      ie_close('h4');
+      ie_open('p');
+      itext('relationshipName: Name of the child relationship');
+      ie_close('p');
+      ie_open('p');
+      itext('fieldSet: A set of field names in the child relationship that will be selected');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new Set<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(String relationshipName, List<String> fieldList)');
+      ie_close('h4');
+      ie_open('p');
+      itext('relationshipName: Name of the child relationship');
+      ie_close('p');
+      ie_open('p');
+      itext('fieldList: A list of field names in the child relationship that will be selected');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new List<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(Query subquery)');
+      ie_close('h4');
+      ie_open('p');
+      itext('subquery: A subquery instance constructed by the static method');
+      ie_open('code');
+      itext('Query.subquery');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '1');
+      ie_open('h2');
+      itext('subquery');
+      ie_close('h2');
+      ie_open('p');
+      itext('Creates a subquery instance.');
+      ie_close('p');
+      ie_open('p');
+      itext('The instance can be linked to the main query using the ');
+      ie_open('code');
+      itext('addSubquery');
+      ie_close('code');
+      itext(' method afterwards.');
+      ie_close('p');
+      ie_open('h4');
+      itext('public static Query subquery(String relationshipName)');
+      ie_close('h4');
+      ie_open('p');
+      itext('relationshipName: Name of the child relationship');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param708 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param569 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'hDwFE.render';
+    $render.soyTemplateName = 'RKATK.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -199,20 +256,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var hDwFE = function (_Component) {
-  _inherits(hDwFE, _Component);
+var RKATK = function (_Component) {
+  _inherits(RKATK, _Component);
 
-  function hDwFE() {
-    _classCallCheck(this, hDwFE);
+  function RKATK() {
+    _classCallCheck(this, RKATK);
 
-    return _possibleConstructorReturn(this, (hDwFE.__proto__ || Object.getPrototypeOf(hDwFE)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (RKATK.__proto__ || Object.getPrototypeOf(RKATK)).apply(this, arguments));
   }
 
-  return hDwFE;
+  return RKATK;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(hDwFE, templates);
-exports.hDwFE = hDwFE;
+_metalSoy2.default.register(RKATK, templates);
+exports.RKATK = RKATK;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
