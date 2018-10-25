@@ -1,7 +1,7 @@
 var pageComponent =
 webpackJsonppageComponent([2],{
 
-/***/ 292:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,6 +18,8 @@ var _metalComponent2 = _interopRequireDefault(_metalComponent);
 var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
+
+__webpack_require__(4);
 
 __webpack_require__(5);
 
@@ -41,9 +43,7 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-__webpack_require__(16);
-
-var _step_7Soy = __webpack_require__(293);
+var _step_7Soy = __webpack_require__(295);
 
 var _step_7Soy2 = _interopRequireDefault(_step_7Soy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var mZybN = function (_Component) {
-  _inherits(mZybN, _Component);
+var PdLug = function (_Component) {
+  _inherits(PdLug, _Component);
 
-  function mZybN() {
-    _classCallCheck(this, mZybN);
+  function PdLug() {
+    _classCallCheck(this, PdLug);
 
-    return _possibleConstructorReturn(this, (mZybN.__proto__ || Object.getPrototypeOf(mZybN)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PdLug.__proto__ || Object.getPrototypeOf(PdLug)).apply(this, arguments));
   }
 
-  return mZybN;
+  return PdLug;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(mZybN, _step_7Soy2.default);
+_metalSoy2.default.register(PdLug, _step_7Soy2.default);
 
-exports.default = mZybN;
+exports.default = PdLug;
 
 /***/ }),
 
-/***/ 293:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = mZybN;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.mZybN = undefined;
+exports.templates = exports.PdLug = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace mZybN.
+   * @fileoverview Templates in namespace PdLug.
    * @public
    */
 
-  goog.module('mZybN.incrementaldom');
+  goog.module('PdLug.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,10 +153,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param821 = function param821() {
+    var param842 = function param842() {
       ie_open('h2');
-      var dyn38 = opt_data.page.title;
-      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
+      var dyn39 = opt_data.page.title;
+      if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
       ie_close('h2');
       ie_open('p');
       itext('We have learned to add multiple conditions in the previous section, but those conditions were very limited. What if we want to construct a condition with a combination of both boolean operators?');
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param821 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param842 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'mZybN.render';
+    $render.soyTemplateName = 'PdLug.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,24 +235,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var mZybN = function (_Component) {
-  _inherits(mZybN, _Component);
+var PdLug = function (_Component) {
+  _inherits(PdLug, _Component);
 
-  function mZybN() {
-    _classCallCheck(this, mZybN);
+  function PdLug() {
+    _classCallCheck(this, PdLug);
 
-    return _possibleConstructorReturn(this, (mZybN.__proto__ || Object.getPrototypeOf(mZybN)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PdLug.__proto__ || Object.getPrototypeOf(PdLug)).apply(this, arguments));
   }
 
-  return mZybN;
+  return PdLug;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(mZybN, templates);
-exports.mZybN = mZybN;
+_metalSoy2.default.register(PdLug, templates);
+exports.PdLug = PdLug;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[292]);
+},[294]);

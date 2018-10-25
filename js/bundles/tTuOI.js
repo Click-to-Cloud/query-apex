@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([8],{
+webpackJsonppageComponent([7],{
 
-/***/ 280:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,6 +18,8 @@ var _metalComponent2 = _interopRequireDefault(_metalComponent);
 var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
+
+__webpack_require__(4);
 
 __webpack_require__(5);
 
@@ -41,11 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-__webpack_require__(16);
+var _step_2Soy = __webpack_require__(285);
 
-var _step_1Soy = __webpack_require__(281);
-
-var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
+var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var NesJr = function (_Component) {
-  _inherits(NesJr, _Component);
+var tTuOI = function (_Component) {
+  _inherits(tTuOI, _Component);
 
-  function NesJr() {
-    _classCallCheck(this, NesJr);
+  function tTuOI() {
+    _classCallCheck(this, tTuOI);
 
-    return _possibleConstructorReturn(this, (NesJr.__proto__ || Object.getPrototypeOf(NesJr)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (tTuOI.__proto__ || Object.getPrototypeOf(tTuOI)).apply(this, arguments));
   }
 
-  return NesJr;
+  return tTuOI;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(NesJr, _step_1Soy2.default);
+_metalSoy2.default.register(tTuOI, _step_2Soy2.default);
 
-exports.default = NesJr;
+exports.default = tTuOI;
 
 /***/ }),
 
-/***/ 281:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = NesJr;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.NesJr = undefined;
+exports.templates = exports.tTuOI = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_1.soy.
+  // This file was automatically generated from step_2.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace NesJr.
+   * @fileoverview Templates in namespace tTuOI.
    * @public
    */
 
-  goog.module('NesJr.incrementaldom');
+  goog.module('tTuOI.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,6 +137,8 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -151,32 +153,49 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param620 = function param620() {
+    var param652 = function param652() {
       ie_open('h2');
-      var dyn32 = opt_data.page.title;
-      if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
+      var dyn34 = opt_data.page.title;
+      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
       ie_close('h2');
       ie_open('p');
-      itext('Include ');
-      ie_open('strong');
-      itext('Query.cls');
-      ie_close('strong');
-      itext(' and ');
-      ie_open('strong');
-      itext('QueryTest.cls');
-      ie_close('strong');
-      itext(' (optional) into your Org, and you are ready to go.');
+      itext('Lets start with a simplest query: querying all Account records:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
+      ie_close('p');
+      ie_open('p');
+      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
+      ie_open('p');
+      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'byId\' method limits the result with a specific Id.');
+      ie_close('p');
+      ie_open('p');
+      itext('The \'fetch\' method executes the query and returns the first record in the result.');
+      ie_close('p');
+      ie_open('p');
+      itext('The statement is equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
+      ie_open('p');
+      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param620 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param652 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'NesJr.render';
+    $render.soyTemplateName = 'tTuOI.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -185,24 +204,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var NesJr = function (_Component) {
-  _inherits(NesJr, _Component);
+var tTuOI = function (_Component) {
+  _inherits(tTuOI, _Component);
 
-  function NesJr() {
-    _classCallCheck(this, NesJr);
+  function tTuOI() {
+    _classCallCheck(this, tTuOI);
 
-    return _possibleConstructorReturn(this, (NesJr.__proto__ || Object.getPrototypeOf(NesJr)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (tTuOI.__proto__ || Object.getPrototypeOf(tTuOI)).apply(this, arguments));
   }
 
-  return NesJr;
+  return tTuOI;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(NesJr, templates);
-exports.NesJr = NesJr;
+_metalSoy2.default.register(tTuOI, templates);
+exports.tTuOI = tTuOI;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[280]);
+},[284]);

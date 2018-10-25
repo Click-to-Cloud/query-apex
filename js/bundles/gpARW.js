@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([15],{
+webpackJsonppageComponent([13],{
 
-/***/ 272:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,6 +18,8 @@ var _metalComponent2 = _interopRequireDefault(_metalComponent);
 var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
+
+__webpack_require__(4);
 
 __webpack_require__(5);
 
@@ -41,11 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-__webpack_require__(16);
+var _subquerySoy = __webpack_require__(279);
 
-var _fieldSoy = __webpack_require__(273);
-
-var _fieldSoy2 = _interopRequireDefault(_fieldSoy);
+var _subquerySoy2 = _interopRequireDefault(_subquerySoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var HmNGe = function (_Component) {
-  _inherits(HmNGe, _Component);
+var gpARW = function (_Component) {
+  _inherits(gpARW, _Component);
 
-  function HmNGe() {
-    _classCallCheck(this, HmNGe);
+  function gpARW() {
+    _classCallCheck(this, gpARW);
 
-    return _possibleConstructorReturn(this, (HmNGe.__proto__ || Object.getPrototypeOf(HmNGe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (gpARW.__proto__ || Object.getPrototypeOf(gpARW)).apply(this, arguments));
   }
 
-  return HmNGe;
+  return gpARW;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(HmNGe, _fieldSoy2.default);
+_metalSoy2.default.register(gpARW, _subquerySoy2.default);
 
-exports.default = HmNGe;
+exports.default = gpARW;
 
 /***/ }),
 
-/***/ 273:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = HmNGe;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.HmNGe = undefined;
+exports.templates = exports.gpARW = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from field.soy.
+  // This file was automatically generated from subquery.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace HmNGe.
+   * @fileoverview Templates in namespace gpARW.
    * @public
    */
 
-  goog.module('HmNGe.incrementaldom');
+  goog.module('gpARW.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,80 +152,102 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param517 = function param517() {
+    var param590 = function param590() {
       ie_open('h6');
-      var dyn29 = opt_data.page.description;
-      if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
+      var dyn32 = opt_data.page.description;
+      if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('selectField');
-      ie_close('h2');
-      ie_open('h4');
-      itext('public Query selectField(String field)');
-      ie_close('h4');
-      ie_open('p');
-      itext('Select a specific field.');
-      ie_close('p');
-      ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectField(\'Name\').\n    selectField(\'OwnerId\');', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h2');
-      itext('selectFields');
+      itext('addSubquery');
       ie_close('h2');
       ie_open('p');
-      itext('Select specific fields.');
+      itext('Add a subquery to the query, selecting an SObject list from a specific child relationship.');
       ie_close('p');
+      ie_open('p');
+      itext('For example, in this query, the expression enclosed in parentheses is a subquery:');
+      ie_close('p');
+      $templateAlias2({ code: '\nSELECT Name, (SELECT LastName FROM Contacts) FROM Account', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(String field)');
+      itext('public Query addSubquery(String relationshipName)');
       ie_close('h4');
       ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'OwnerId, CreatedById\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\');', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(List<String> fieldList)');
+      itext('public Query addSubquery(String relationshipName, String fields)');
       ie_close('h4');
       ie_open('p');
-      itext('fieldList: A list of field names.');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new List<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('fields: One or more field names in the child relationship that will be selected. If there are more than one field, they will be separated by a comma \',\'.');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', \'FirstName, LastName\').\n    addSubquery(\'Notes\', \'Title\');', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(Set<String> fieldSet)');
+      itext('public Query addSubquery(String relationshipName, Set<String> fieldSet)');
       ie_close('h4');
       ie_open('p');
-      itext('fieldSet: A Set of field names.');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new Set<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('fieldSet: A set of field names in the child relationship that will be selected');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new Set<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(String relationshipName, List<String> fieldList)');
+      ie_close('h4');
+      ie_open('p');
+      itext('relationshipName: Name of the child relationship');
+      ie_close('p');
+      ie_open('p');
+      itext('fieldList: A list of field names in the child relationship that will be selected');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new List<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query addSubquery(Query subquery)');
+      ie_close('h4');
+      ie_open('p');
+      itext('subquery: A subquery instance constructed by the static method');
+      ie_open('code');
+      itext('Query.subquery');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('selectAllFields');
+      itext('subquery');
       ie_close('h2');
+      ie_open('p');
+      itext('Creates a subquery instance.');
+      ie_close('p');
+      ie_open('p');
+      itext('The instance can be linked to the main query using the ');
+      ie_open('code');
+      itext('addSubquery');
+      ie_close('code');
+      itext(' method afterwards.');
+      ie_close('p');
       ie_open('h4');
-      itext('public Query selectAllFields()');
+      itext('public static Query subquery(String relationshipName)');
       ie_close('h4');
       ie_open('p');
-      itext('Select all accessible fields in the current object');
+      itext('relationshipName: Name of the child relationship');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query selectAllFields(String parentField)');
-      ie_close('h4');
-      ie_open('p');
-      itext('Select all accessible fields in the parent field');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param517 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param590 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'HmNGe.render';
+    $render.soyTemplateName = 'gpARW.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -234,24 +256,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var HmNGe = function (_Component) {
-  _inherits(HmNGe, _Component);
+var gpARW = function (_Component) {
+  _inherits(gpARW, _Component);
 
-  function HmNGe() {
-    _classCallCheck(this, HmNGe);
+  function gpARW() {
+    _classCallCheck(this, gpARW);
 
-    return _possibleConstructorReturn(this, (HmNGe.__proto__ || Object.getPrototypeOf(HmNGe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (gpARW.__proto__ || Object.getPrototypeOf(gpARW)).apply(this, arguments));
   }
 
-  return HmNGe;
+  return gpARW;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(HmNGe, templates);
-exports.HmNGe = HmNGe;
+_metalSoy2.default.register(gpARW, templates);
+exports.gpARW = gpARW;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[272]);
+},[278]);

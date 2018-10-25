@@ -19,6 +19,8 @@ var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
 
+__webpack_require__(4);
+
 __webpack_require__(5);
 
 __webpack_require__(6);
@@ -40,8 +42,6 @@ __webpack_require__(13);
 __webpack_require__(14);
 
 __webpack_require__(15);
-
-__webpack_require__(16);
 
 var _indexSoy = __webpack_require__(261);
 

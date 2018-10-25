@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([16],{
+webpackJsonppageComponent([8],{
 
-/***/ 270:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,6 +18,8 @@ var _metalComponent2 = _interopRequireDefault(_metalComponent);
 var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
+
+__webpack_require__(4);
 
 __webpack_require__(5);
 
@@ -41,11 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-__webpack_require__(16);
+var _step_1Soy = __webpack_require__(283);
 
-var _constructorsSoy = __webpack_require__(271);
-
-var _constructorsSoy2 = _interopRequireDefault(_constructorsSoy);
+var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var QDBKh = function (_Component) {
-  _inherits(QDBKh, _Component);
+var oYGBb = function (_Component) {
+  _inherits(oYGBb, _Component);
 
-  function QDBKh() {
-    _classCallCheck(this, QDBKh);
+  function oYGBb() {
+    _classCallCheck(this, oYGBb);
 
-    return _possibleConstructorReturn(this, (QDBKh.__proto__ || Object.getPrototypeOf(QDBKh)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (oYGBb.__proto__ || Object.getPrototypeOf(oYGBb)).apply(this, arguments));
   }
 
-  return QDBKh;
+  return oYGBb;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(QDBKh, _constructorsSoy2.default);
+_metalSoy2.default.register(oYGBb, _step_1Soy2.default);
 
-exports.default = QDBKh;
+exports.default = oYGBb;
 
 /***/ }),
 
-/***/ 271:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = QDBKh;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.QDBKh = undefined;
+exports.templates = exports.oYGBb = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from constructors.soy.
+  // This file was automatically generated from step_1.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace QDBKh.
+   * @fileoverview Templates in namespace oYGBb.
    * @public
    */
 
-  goog.module('QDBKh.incrementaldom');
+  goog.module('oYGBb.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,14 +137,13 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
-  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?)
+   *    site: (?),
+   *    elementClasses: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -152,36 +151,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param501 = function param501() {
-      ie_open('h6');
-      var dyn28 = opt_data.page.description;
-      if (typeof dyn28 == 'function') dyn28();else if (dyn28 != null) itext(dyn28);
-      ie_close('h6');
-      ie_open('article', null, null, 'id', '1');
+    var param641 = function param641() {
       ie_open('h2');
-      itext('Constructors');
+      var dyn33 = opt_data.page.title;
+      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
       ie_close('h2');
       ie_open('p');
-      itext('Creates a new Query instance.');
+      itext('Include ');
+      ie_open('strong');
+      itext('Query.cls');
+      ie_close('strong');
+      itext(' and ');
+      ie_open('strong');
+      itext('QueryTest.cls');
+      ie_close('strong');
+      itext(' (optional) into your Org, and you are ready to go.');
       ie_close('p');
-      ie_open('h4');
-      itext('public Query(String objectName)');
-      ie_close('h4');
-      ie_open('p');
-      itext('objectName: Name of the expected object.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query = new Query(\'Account\');', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param501 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param641 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'QDBKh.render';
+    $render.soyTemplateName = 'oYGBb.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -190,24 +185,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var QDBKh = function (_Component) {
-  _inherits(QDBKh, _Component);
+var oYGBb = function (_Component) {
+  _inherits(oYGBb, _Component);
 
-  function QDBKh() {
-    _classCallCheck(this, QDBKh);
+  function oYGBb() {
+    _classCallCheck(this, oYGBb);
 
-    return _possibleConstructorReturn(this, (QDBKh.__proto__ || Object.getPrototypeOf(QDBKh)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (oYGBb.__proto__ || Object.getPrototypeOf(oYGBb)).apply(this, arguments));
   }
 
-  return QDBKh;
+  return oYGBb;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(QDBKh, templates);
-exports.QDBKh = QDBKh;
+_metalSoy2.default.register(oYGBb, templates);
+exports.oYGBb = oYGBb;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[270]);
+},[282]);

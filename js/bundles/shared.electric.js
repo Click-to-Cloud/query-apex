@@ -34,7 +34,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		18: 0
+/******/ 		19: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -5039,68 +5039,6 @@ exports.default = _core2.default;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.globalEvalStyles = exports.globalEval = exports.features = exports.DomEventHandle = exports.DomEventEmitterProxy = exports.domData = undefined;
-
-var _dom = __webpack_require__(19);
-
-Object.keys(_dom).forEach(function (key) {
-	if (key === "default" || key === "__esModule") return;
-	Object.defineProperty(exports, key, {
-		enumerable: true,
-		get: function get() {
-			return _dom[key];
-		}
-	});
-});
-
-var _dom2 = _interopRequireDefault(_dom);
-
-var _domData = __webpack_require__(26);
-
-var _domData2 = _interopRequireDefault(_domData);
-
-var _DomEventEmitterProxy = __webpack_require__(188);
-
-var _DomEventEmitterProxy2 = _interopRequireDefault(_DomEventEmitterProxy);
-
-var _DomEventHandle = __webpack_require__(32);
-
-var _DomEventHandle2 = _interopRequireDefault(_DomEventHandle);
-
-var _features = __webpack_require__(33);
-
-var _features2 = _interopRequireDefault(_features);
-
-var _globalEval = __webpack_require__(189);
-
-var _globalEval2 = _interopRequireDefault(_globalEval);
-
-var _globalEvalStyles = __webpack_require__(190);
-
-var _globalEvalStyles2 = _interopRequireDefault(_globalEvalStyles);
-
-__webpack_require__(191);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.domData = _domData2.default;
-exports.DomEventEmitterProxy = _DomEventEmitterProxy2.default;
-exports.DomEventHandle = _DomEventHandle2.default;
-exports.features = _features2.default;
-exports.globalEval = _globalEval2.default;
-exports.globalEvalStyles = _globalEvalStyles2.default;
-exports.default = _dom2.default;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
 exports.ElectricUpdates = exports.ElectricSearchAutocomplete = exports.ElectricSearch = exports.ElectricReadingProgress = exports.ElectricNavigation = exports.ElectricCode = exports.ElectricAPIAutocomplete = undefined;
 
 var _ElectricAPIAutocomplete = __webpack_require__(206);
@@ -5143,7 +5081,7 @@ exports.ElectricUpdates = _ElectricUpdates2.default;
 exports.default = _ElectricNavigation2.default;
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5281,7 +5219,7 @@ exports.Topbar = Topbar;
 exports.default = Topbar;
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5374,9 +5312,9 @@ goog.loadModule(function (exports) {
         ie_close('title');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Mono');
         ie_close('link');
-        ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/icon-12/icon-12.css');
-        ie_close('link');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/galano/galano.css');
+        ie_close('link');
+        ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/icon-12/icon-12.css');
         ie_close('link');
         ie_open('link', null, null, 'rel', 'stylesheet', 'href', '/query-apex/vendor/icon-16/icon-16.css');
         ie_close('link');
@@ -5446,7 +5384,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5626,7 +5564,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5828,7 +5766,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5943,7 +5881,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6185,7 +6123,7 @@ exports.default = templates;
 /* jshint ignore:end */
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6252,7 +6190,7 @@ _metalSoy2.default.register(Footer, _FooterSoy2.default);
 exports.default = Footer;
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6337,7 +6275,7 @@ _metalSoy2.default.register(OlderPosts, _OlderPostsSoy2.default);
 exports.default = OlderPosts;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6418,7 +6356,7 @@ _metalSoy2.default.register(Sidebar, _SidebarSoy2.default);
 exports.default = Sidebar;
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6485,7 +6423,7 @@ _metalSoy2.default.register(SocialButtons, _SocialButtonsSoy2.default);
 exports.default = SocialButtons;
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6511,7 +6449,7 @@ var _moment = __webpack_require__(0);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _TutorialTimerSoy = __webpack_require__(260);
 
@@ -6614,6 +6552,68 @@ TutorialTimer.STATE = {
 _metalSoy2.default.register(TutorialTimer, _TutorialTimerSoy2.default);
 
 exports.default = TutorialTimer;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.globalEvalStyles = exports.globalEval = exports.features = exports.DomEventHandle = exports.DomEventEmitterProxy = exports.domData = undefined;
+
+var _dom = __webpack_require__(19);
+
+Object.keys(_dom).forEach(function (key) {
+	if (key === "default" || key === "__esModule") return;
+	Object.defineProperty(exports, key, {
+		enumerable: true,
+		get: function get() {
+			return _dom[key];
+		}
+	});
+});
+
+var _dom2 = _interopRequireDefault(_dom);
+
+var _domData = __webpack_require__(26);
+
+var _domData2 = _interopRequireDefault(_domData);
+
+var _DomEventEmitterProxy = __webpack_require__(188);
+
+var _DomEventEmitterProxy2 = _interopRequireDefault(_DomEventEmitterProxy);
+
+var _DomEventHandle = __webpack_require__(32);
+
+var _DomEventHandle2 = _interopRequireDefault(_DomEventHandle);
+
+var _features = __webpack_require__(33);
+
+var _features2 = _interopRequireDefault(_features);
+
+var _globalEval = __webpack_require__(189);
+
+var _globalEval2 = _interopRequireDefault(_globalEval);
+
+var _globalEvalStyles = __webpack_require__(190);
+
+var _globalEvalStyles2 = _interopRequireDefault(_globalEvalStyles);
+
+__webpack_require__(191);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.domData = _domData2.default;
+exports.DomEventEmitterProxy = _DomEventEmitterProxy2.default;
+exports.DomEventHandle = _DomEventHandle2.default;
+exports.features = _features2.default;
+exports.globalEval = _globalEval2.default;
+exports.globalEvalStyles = _globalEvalStyles2.default;
+exports.default = _dom2.default;
 
 /***/ }),
 /* 17 */
@@ -10135,7 +10135,7 @@ var _children = __webpack_require__(40);
 
 var _changes = __webpack_require__(39);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _data = __webpack_require__(21);
 
@@ -11404,7 +11404,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -11634,7 +11634,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -24842,7 +24842,7 @@ var _metal = __webpack_require__(3);
 
 var _sync = __webpack_require__(182);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _ComponentDataManager = __webpack_require__(34);
 
@@ -36967,7 +36967,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getPatchingComponent = getPatchingComponent;
 exports.patch = patch;
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _data = __webpack_require__(21);
 
@@ -37094,7 +37094,7 @@ exports.convertListenerNamesToFns = convertListenerNamesToFns;
 
 var _metal = __webpack_require__(3);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalComponent = __webpack_require__(1);
 
@@ -38873,7 +38873,7 @@ var _metalDebounce = __webpack_require__(214);
 
 var _metalDebounce2 = _interopRequireDefault(_metalDebounce);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -39597,7 +39597,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -40340,7 +40340,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -40695,7 +40695,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -40801,7 +40801,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -41315,7 +41315,7 @@ var _metalTabs = __webpack_require__(228);
 
 var _metalTabs2 = _interopRequireDefault(_metalTabs);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -42319,7 +42319,7 @@ var _metalComponent = __webpack_require__(1);
 
 var _metalComponent2 = _interopRequireDefault(_metalComponent);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -42456,7 +42456,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalState = __webpack_require__(18);
 
@@ -42990,7 +42990,7 @@ var _metal = __webpack_require__(3);
 
 var _metal2 = _interopRequireDefault(_metal);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -43162,7 +43162,7 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _metal = __webpack_require__(3);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 
@@ -44919,7 +44919,7 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _metal = __webpack_require__(3);
 
-var _metalDom = __webpack_require__(4);
+var _metalDom = __webpack_require__(16);
 
 var _metalDom2 = _interopRequireDefault(_metalDom);
 

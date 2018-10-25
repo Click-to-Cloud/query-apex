@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([4],{
+webpackJsonppageComponent([14],{
 
-/***/ 288:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18,6 +18,8 @@ var _metalComponent2 = _interopRequireDefault(_metalComponent);
 var _metalSoy = __webpack_require__(2);
 
 var _metalSoy2 = _interopRequireDefault(_metalSoy);
+
+__webpack_require__(4);
 
 __webpack_require__(5);
 
@@ -41,11 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-__webpack_require__(16);
+var _resultSoy = __webpack_require__(277);
 
-var _step_5Soy = __webpack_require__(289);
-
-var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
+var _resultSoy2 = _interopRequireDefault(_resultSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CkSBL = function (_Component) {
-  _inherits(CkSBL, _Component);
+var uUZGP = function (_Component) {
+  _inherits(uUZGP, _Component);
 
-  function CkSBL() {
-    _classCallCheck(this, CkSBL);
+  function uUZGP() {
+    _classCallCheck(this, uUZGP);
 
-    return _possibleConstructorReturn(this, (CkSBL.__proto__ || Object.getPrototypeOf(CkSBL)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (uUZGP.__proto__ || Object.getPrototypeOf(uUZGP)).apply(this, arguments));
   }
 
-  return CkSBL;
+  return uUZGP;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(CkSBL, _step_5Soy2.default);
+_metalSoy2.default.register(uUZGP, _resultSoy2.default);
 
-exports.default = CkSBL;
+exports.default = uUZGP;
 
 /***/ }),
 
-/***/ 289:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = CkSBL;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.CkSBL = undefined;
+exports.templates = exports.uUZGP = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_5.soy.
+  // This file was automatically generated from result.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace CkSBL.
+   * @fileoverview Templates in namespace uUZGP.
    * @public
    */
 
-  goog.module('CkSBL.incrementaldom');
+  goog.module('uUZGP.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,13 +139,12 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,48 +152,44 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param749 = function param749() {
+    var param574 = function param574() {
+      ie_open('h6');
+      var dyn31 = opt_data.page.description;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn36 = opt_data.page.title;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
+      itext('run');
       ie_close('h2');
+      ie_open('h4');
+      itext('public List<SObject> run()');
+      ie_close('h4');
       ie_open('p');
-      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Now let\'s try querying the accounts owned by the current user:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
       ie_close('p');
       ie_open('p');
-      itext('Examples are:');
+      itext('Returns a list of SObject');
       ie_close('p');
-      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Alias to ');
+      ie_open('code');
+      itext('toSObjectList()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param749 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param574 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'CkSBL.render';
+    $render.soyTemplateName = 'uUZGP.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +198,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var CkSBL = function (_Component) {
-  _inherits(CkSBL, _Component);
+var uUZGP = function (_Component) {
+  _inherits(uUZGP, _Component);
 
-  function CkSBL() {
-    _classCallCheck(this, CkSBL);
+  function uUZGP() {
+    _classCallCheck(this, uUZGP);
 
-    return _possibleConstructorReturn(this, (CkSBL.__proto__ || Object.getPrototypeOf(CkSBL)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (uUZGP.__proto__ || Object.getPrototypeOf(uUZGP)).apply(this, arguments));
   }
 
-  return CkSBL;
+  return uUZGP;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(CkSBL, templates);
-exports.CkSBL = CkSBL;
+_metalSoy2.default.register(uUZGP, templates);
+exports.uUZGP = uUZGP;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[288]);
+},[276]);
