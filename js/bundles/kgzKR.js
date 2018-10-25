@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([7],{
+webpackJsonppageComponent([14],{
 
-/***/ 284:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_2Soy = __webpack_require__(285);
+var _resultSoy = __webpack_require__(277);
 
-var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
+var _resultSoy2 = _interopRequireDefault(_resultSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var tTuOI = function (_Component) {
-  _inherits(tTuOI, _Component);
+var kgzKR = function (_Component) {
+  _inherits(kgzKR, _Component);
 
-  function tTuOI() {
-    _classCallCheck(this, tTuOI);
+  function kgzKR() {
+    _classCallCheck(this, kgzKR);
 
-    return _possibleConstructorReturn(this, (tTuOI.__proto__ || Object.getPrototypeOf(tTuOI)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (kgzKR.__proto__ || Object.getPrototypeOf(kgzKR)).apply(this, arguments));
   }
 
-  return tTuOI;
+  return kgzKR;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(tTuOI, _step_2Soy2.default);
+_metalSoy2.default.register(kgzKR, _resultSoy2.default);
 
-exports.default = tTuOI;
+exports.default = kgzKR;
 
 /***/ }),
 
-/***/ 285:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = tTuOI;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.tTuOI = undefined;
+exports.templates = exports.kgzKR = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_2.soy.
+  // This file was automatically generated from result.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace tTuOI.
+   * @fileoverview Templates in namespace kgzKR.
    * @public
    */
 
-  goog.module('tTuOI.incrementaldom');
+  goog.module('kgzKR.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,13 +139,12 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,49 +152,125 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param652 = function param652() {
+    var param574 = function param574() {
+      ie_open('h6');
+      var dyn31 = opt_data.page.description;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn34 = opt_data.page.title;
-      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
+      itext('run');
       ie_close('h2');
       ie_open('p');
-      itext('Lets start with a simplest query: querying all Account records:');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public List<SObject> run()');
+      ie_close('h4');
       ie_open('p');
-      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
-      ie_close('p');
-      ie_open('p');
-      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('The \'byId\' method limits the result with a specific Id.');
+      itext('Returns a list of SObject');
       ie_close('p');
       ie_open('p');
-      itext('The \'fetch\' method executes the query and returns the first record in the result.');
+      itext('Alias to ');
+      ie_open('code');
+      itext('toSObjectList()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '2');
+      ie_open('h2');
+      itext('fetch');
+      ie_close('h2');
+      ie_open('p');
+      itext('Fetch a subset of the result');
+      ie_close('p');
+      ie_open('h4');
+      itext('public SObject fetch()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Fetch the first SObject from the result');
       ie_close('p');
       ie_open('p');
-      itext('The statement is equivalent to:');
+      itext('Returns an SObject');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public SObject fetch(Integer n)');
+      ie_close('h4');
       ie_open('p');
-      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
+      itext('Fetch the nth SObject from the result');
       ie_close('p');
+      ie_open('p');
+      itext('n: Indicates the nth SObject in the result list, starting with 0');
+      ie_close('p');
+      ie_open('p');
+      itext('Returns an SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch(2);', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public List<SObject> fetch(Integer first, Integer last)');
+      ie_close('h4');
+      ie_open('p');
+      itext('Fetch a subset of result in the range [first, last)');
+      ie_close('p');
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    fetch(2, 4);', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '3');
+      ie_open('h2');
+      itext('toSObjectList');
+      ie_close('h2');
+      ie_open('p');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
+      ie_close('p');
+      ie_open('h4');
+      itext('public List<SObject> toSObjectList()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      ie_open('p');
+      itext('Alias to ');
+      ie_open('code');
+      itext('run()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    toSObjectList();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '4');
+      ie_open('h2');
+      itext('toIdList');
+      ie_close('h2');
+      ie_open('p');
+      itext('Run the query and return the Id list of the result');
+      ie_close('p');
+      ie_open('h4');
+      itext('public List<Id> toIdList()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Returns a list of Id');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Id> accounts =\n    new Query(\'Account\').\n    toIdList();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param652 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param574 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'tTuOI.render';
+    $render.soyTemplateName = 'kgzKR.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -204,24 +279,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var tTuOI = function (_Component) {
-  _inherits(tTuOI, _Component);
+var kgzKR = function (_Component) {
+  _inherits(kgzKR, _Component);
 
-  function tTuOI() {
-    _classCallCheck(this, tTuOI);
+  function kgzKR() {
+    _classCallCheck(this, kgzKR);
 
-    return _possibleConstructorReturn(this, (tTuOI.__proto__ || Object.getPrototypeOf(tTuOI)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (kgzKR.__proto__ || Object.getPrototypeOf(kgzKR)).apply(this, arguments));
   }
 
-  return tTuOI;
+  return kgzKR;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(tTuOI, templates);
-exports.tTuOI = tTuOI;
+_metalSoy2.default.register(kgzKR, templates);
+exports.kgzKR = kgzKR;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[284]);
+},[276]);

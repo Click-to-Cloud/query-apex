@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([6],{
+webpackJsonppageComponent([3],{
 
-/***/ 286:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_3Soy = __webpack_require__(287);
+var _step_6Soy = __webpack_require__(293);
 
-var _step_3Soy2 = _interopRequireDefault(_step_3Soy);
+var _step_6Soy2 = _interopRequireDefault(_step_6Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PeoeW = function (_Component) {
-  _inherits(PeoeW, _Component);
+var XbxLZ = function (_Component) {
+  _inherits(XbxLZ, _Component);
 
-  function PeoeW() {
-    _classCallCheck(this, PeoeW);
+  function XbxLZ() {
+    _classCallCheck(this, XbxLZ);
 
-    return _possibleConstructorReturn(this, (PeoeW.__proto__ || Object.getPrototypeOf(PeoeW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (XbxLZ.__proto__ || Object.getPrototypeOf(XbxLZ)).apply(this, arguments));
   }
 
-  return PeoeW;
+  return XbxLZ;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PeoeW, _step_3Soy2.default);
+_metalSoy2.default.register(XbxLZ, _step_6Soy2.default);
 
-exports.default = PeoeW;
+exports.default = XbxLZ;
 
 /***/ }),
 
-/***/ 287:
+/***/ 293:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = PeoeW;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.PeoeW = undefined;
+exports.templates = exports.XbxLZ = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_3.soy.
+  // This file was automatically generated from step_6.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace PeoeW.
+   * @fileoverview Templates in namespace XbxLZ.
    * @public
    */
 
-  goog.module('PeoeW.incrementaldom');
+  goog.module('XbxLZ.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,56 +153,40 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param683 = function param683() {
+    var param836 = function param836() {
       ie_open('h2');
-      var dyn35 = opt_data.page.title;
-      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
+      var dyn38 = opt_data.page.title;
+      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
       ie_close('h2');
       ie_open('p');
-      itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
+      itext('In the previous section, we have learned to add a single condition to the query. In many cases, however, that is far from enough. So Query.apex allows calling \'addConditionXX\' multiple times, resulting in combining all the conditions with boolean \'and\' operation.');
       ie_close('p');
       ie_open('p');
-      itext('For example, this query will only select only the Name field from the Account object.');
+      itext('Example:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').selectFields(\'Name\').run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('This is equivalent to:');
+      itext('equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      AND NumberOfEmployees > 0\n      AND Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('We can also call \'selectFields\' method multiple times, the result is additive:');
+      itext('Meanwhile, Query.apex provides a method \'switchToDisjunction\' to change the boolean \'and\' operator to the boolean \'or\' operator. Appending an extra \'switchToDisjunction\' method to the same example above:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'Phone\').\n    selectFields(\'Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    switchToDisjunction().\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('That\'s equivalent to:');
+      itext('equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name, Phone, Website, Description FROM Account ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Alternatively, we can put all the fields in one \'selectFields\' method, still preserving the additivity:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name, Phone, Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Compare with:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<String> fields = new List<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('or:');
-      ie_close('p');
-      $templateAlias2({ code: 'Set<String> fields = new Set<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('To make user convenient, Query.apex provides the \'selectAllFields\' method to select all user accessible fields:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields().\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      OR NumberOfEmployees > 0\n      OR Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param683 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param836 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'PeoeW.render';
+    $render.soyTemplateName = 'XbxLZ.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -211,24 +195,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var PeoeW = function (_Component) {
-  _inherits(PeoeW, _Component);
+var XbxLZ = function (_Component) {
+  _inherits(XbxLZ, _Component);
 
-  function PeoeW() {
-    _classCallCheck(this, PeoeW);
+  function XbxLZ() {
+    _classCallCheck(this, XbxLZ);
 
-    return _possibleConstructorReturn(this, (PeoeW.__proto__ || Object.getPrototypeOf(PeoeW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (XbxLZ.__proto__ || Object.getPrototypeOf(XbxLZ)).apply(this, arguments));
   }
 
-  return PeoeW;
+  return XbxLZ;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(PeoeW, templates);
-exports.PeoeW = PeoeW;
+_metalSoy2.default.register(XbxLZ, templates);
+exports.XbxLZ = XbxLZ;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[286]);
+},[292]);

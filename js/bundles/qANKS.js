@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PdLug = function (_Component) {
-  _inherits(PdLug, _Component);
+var qANKS = function (_Component) {
+  _inherits(qANKS, _Component);
 
-  function PdLug() {
-    _classCallCheck(this, PdLug);
+  function qANKS() {
+    _classCallCheck(this, qANKS);
 
-    return _possibleConstructorReturn(this, (PdLug.__proto__ || Object.getPrototypeOf(PdLug)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qANKS.__proto__ || Object.getPrototypeOf(qANKS)).apply(this, arguments));
   }
 
-  return PdLug;
+  return qANKS;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PdLug, _step_7Soy2.default);
+_metalSoy2.default.register(qANKS, _step_7Soy2.default);
 
-exports.default = PdLug;
+exports.default = qANKS;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = PdLug;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.PdLug = undefined;
+exports.templates = exports.qANKS = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace PdLug.
+   * @fileoverview Templates in namespace qANKS.
    * @public
    */
 
-  goog.module('PdLug.incrementaldom');
+  goog.module('qANKS.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,7 +153,7 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param842 = function param842() {
+    var param867 = function param867() {
       ie_open('h2');
       var dyn39 = opt_data.page.title;
       if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param842 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param867 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'PdLug.render';
+    $render.soyTemplateName = 'qANKS.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,20 +235,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var PdLug = function (_Component) {
-  _inherits(PdLug, _Component);
+var qANKS = function (_Component) {
+  _inherits(qANKS, _Component);
 
-  function PdLug() {
-    _classCallCheck(this, PdLug);
+  function qANKS() {
+    _classCallCheck(this, qANKS);
 
-    return _possibleConstructorReturn(this, (PdLug.__proto__ || Object.getPrototypeOf(PdLug)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qANKS.__proto__ || Object.getPrototypeOf(qANKS)).apply(this, arguments));
   }
 
-  return PdLug;
+  return qANKS;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(PdLug, templates);
-exports.PdLug = PdLug;
+_metalSoy2.default.register(qANKS, templates);
+exports.qANKS = qANKS;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

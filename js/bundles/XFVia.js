@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([3],{
+webpackJsonppageComponent([15],{
 
-/***/ 292:
+/***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_6Soy = __webpack_require__(293);
+var _indexSoy = __webpack_require__(275);
 
-var _step_6Soy2 = _interopRequireDefault(_step_6Soy);
+var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var xXNmZ = function (_Component) {
-  _inherits(xXNmZ, _Component);
+var XFVia = function (_Component) {
+  _inherits(XFVia, _Component);
 
-  function xXNmZ() {
-    _classCallCheck(this, xXNmZ);
+  function XFVia() {
+    _classCallCheck(this, XFVia);
 
-    return _possibleConstructorReturn(this, (xXNmZ.__proto__ || Object.getPrototypeOf(xXNmZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (XFVia.__proto__ || Object.getPrototypeOf(XFVia)).apply(this, arguments));
   }
 
-  return xXNmZ;
+  return XFVia;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(xXNmZ, _step_6Soy2.default);
+_metalSoy2.default.register(XFVia, _indexSoy2.default);
 
-exports.default = xXNmZ;
+exports.default = XFVia;
 
 /***/ }),
 
-/***/ 293:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = xXNmZ;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.xXNmZ = undefined;
+exports.templates = exports.XFVia = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_6.soy.
+  // This file was automatically generated from index.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace xXNmZ.
+   * @fileoverview Templates in namespace XFVia.
    * @public
    */
 
-  goog.module('xXNmZ.incrementaldom');
+  goog.module('XFVia.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,15 +137,12 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,40 +150,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param811 = function param811() {
+    var param563 = function param563() {
+      ie_open('h6');
+      var dyn30 = opt_data.page.description;
+      if (typeof dyn30 == 'function') dyn30();else if (dyn30 != null) itext(dyn30);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn38 = opt_data.page.title;
-      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
+      itext('Query Reference');
       ie_close('h2');
       ie_open('p');
-      itext('In the previous section, we have learned to add a single condition to the query. In many cases, however, that is far from enough. So Query.apex allows calling \'addConditionXX\' multiple times, resulting in combining all the conditions with boolean \'and\' operation.');
+      itext('Here is the reference of the public methods in Query.');
       ie_close('p');
       ie_open('p');
-      itext('Example:');
+      itext('Every public method in Query class that returns a Query type is mutable and chainable.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      AND NumberOfEmployees > 0\n      AND Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Meanwhile, Query.apex provides a method \'switchToDisjunction\' to change the boolean \'and\' operator to the boolean \'or\' operator. Appending an extra \'switchToDisjunction\' method to the same example above:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    switchToDisjunction().\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      OR NumberOfEmployees > 0\n      OR Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param811 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param563 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'xXNmZ.render';
+    $render.soyTemplateName = 'XFVia.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -195,24 +184,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var xXNmZ = function (_Component) {
-  _inherits(xXNmZ, _Component);
+var XFVia = function (_Component) {
+  _inherits(XFVia, _Component);
 
-  function xXNmZ() {
-    _classCallCheck(this, xXNmZ);
+  function XFVia() {
+    _classCallCheck(this, XFVia);
 
-    return _possibleConstructorReturn(this, (xXNmZ.__proto__ || Object.getPrototypeOf(xXNmZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (XFVia.__proto__ || Object.getPrototypeOf(XFVia)).apply(this, arguments));
   }
 
-  return xXNmZ;
+  return XFVia;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(xXNmZ, templates);
-exports.xXNmZ = xXNmZ;
+_metalSoy2.default.register(XFVia, templates);
+exports.XFVia = XFVia;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[292]);
+},[274]);

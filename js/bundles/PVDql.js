@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var gpARW = function (_Component) {
-  _inherits(gpARW, _Component);
+var PVDql = function (_Component) {
+  _inherits(PVDql, _Component);
 
-  function gpARW() {
-    _classCallCheck(this, gpARW);
+  function PVDql() {
+    _classCallCheck(this, PVDql);
 
-    return _possibleConstructorReturn(this, (gpARW.__proto__ || Object.getPrototypeOf(gpARW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PVDql.__proto__ || Object.getPrototypeOf(PVDql)).apply(this, arguments));
   }
 
-  return gpARW;
+  return PVDql;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(gpARW, _subquerySoy2.default);
+_metalSoy2.default.register(PVDql, _subquerySoy2.default);
 
-exports.default = gpARW;
+exports.default = PVDql;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = gpARW;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.gpARW = undefined;
+exports.templates = exports.PVDql = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace gpARW.
+   * @fileoverview Templates in namespace PVDql.
    * @public
    */
 
-  goog.module('gpARW.incrementaldom');
+  goog.module('PVDql.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,7 +152,7 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param590 = function param590() {
+    var param615 = function param615() {
       ie_open('h6');
       var dyn32 = opt_data.page.description;
       if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
@@ -216,7 +216,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '1');
+      ie_open('article', null, null, 'id', '2');
       ie_open('h2');
       itext('subquery');
       ie_close('h2');
@@ -243,11 +243,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param590 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param615 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'gpARW.render';
+    $render.soyTemplateName = 'PVDql.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -256,20 +256,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var gpARW = function (_Component) {
-  _inherits(gpARW, _Component);
+var PVDql = function (_Component) {
+  _inherits(PVDql, _Component);
 
-  function gpARW() {
-    _classCallCheck(this, gpARW);
+  function PVDql() {
+    _classCallCheck(this, PVDql);
 
-    return _possibleConstructorReturn(this, (gpARW.__proto__ || Object.getPrototypeOf(gpARW)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (PVDql.__proto__ || Object.getPrototypeOf(PVDql)).apply(this, arguments));
   }
 
-  return gpARW;
+  return PVDql;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(gpARW, templates);
-exports.gpARW = gpARW;
+_metalSoy2.default.register(PVDql, templates);
+exports.PVDql = PVDql;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

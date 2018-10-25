@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var yXOkz = function (_Component) {
-  _inherits(yXOkz, _Component);
+var hzMOv = function (_Component) {
+  _inherits(hzMOv, _Component);
 
-  function yXOkz() {
-    _classCallCheck(this, yXOkz);
+  function hzMOv() {
+    _classCallCheck(this, hzMOv);
 
-    return _possibleConstructorReturn(this, (yXOkz.__proto__ || Object.getPrototypeOf(yXOkz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hzMOv.__proto__ || Object.getPrototypeOf(hzMOv)).apply(this, arguments));
   }
 
-  return yXOkz;
+  return hzMOv;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(yXOkz, _conditionSoy2.default);
+_metalSoy2.default.register(hzMOv, _conditionSoy2.default);
 
-exports.default = yXOkz;
+exports.default = hzMOv;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = yXOkz;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.yXOkz = undefined;
+exports.templates = exports.hzMOv = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace yXOkz.
+   * @fileoverview Templates in namespace hzMOv.
    * @public
    */
 
-  goog.module('yXOkz.incrementaldom');
+  goog.module('hzMOv.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -851,7 +851,7 @@ goog.loadModule(function (exports) {
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'yXOkz.render';
+    $render.soyTemplateName = 'hzMOv.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -860,20 +860,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var yXOkz = function (_Component) {
-  _inherits(yXOkz, _Component);
+var hzMOv = function (_Component) {
+  _inherits(hzMOv, _Component);
 
-  function yXOkz() {
-    _classCallCheck(this, yXOkz);
+  function hzMOv() {
+    _classCallCheck(this, hzMOv);
 
-    return _possibleConstructorReturn(this, (yXOkz.__proto__ || Object.getPrototypeOf(yXOkz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hzMOv.__proto__ || Object.getPrototypeOf(hzMOv)).apply(this, arguments));
   }
 
-  return yXOkz;
+  return hzMOv;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(yXOkz, templates);
-exports.yXOkz = yXOkz;
+_metalSoy2.default.register(hzMOv, templates);
+exports.hzMOv = hzMOv;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

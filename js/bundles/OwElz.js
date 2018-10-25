@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([8],{
+webpackJsonppageComponent([16],{
 
-/***/ 282:
+/***/ 272:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_1Soy = __webpack_require__(283);
+var _fieldSoy = __webpack_require__(273);
 
-var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
+var _fieldSoy2 = _interopRequireDefault(_fieldSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var oYGBb = function (_Component) {
-  _inherits(oYGBb, _Component);
+var OwElz = function (_Component) {
+  _inherits(OwElz, _Component);
 
-  function oYGBb() {
-    _classCallCheck(this, oYGBb);
+  function OwElz() {
+    _classCallCheck(this, OwElz);
 
-    return _possibleConstructorReturn(this, (oYGBb.__proto__ || Object.getPrototypeOf(oYGBb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (OwElz.__proto__ || Object.getPrototypeOf(OwElz)).apply(this, arguments));
   }
 
-  return oYGBb;
+  return OwElz;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(oYGBb, _step_1Soy2.default);
+_metalSoy2.default.register(OwElz, _fieldSoy2.default);
 
-exports.default = oYGBb;
+exports.default = OwElz;
 
 /***/ }),
 
-/***/ 283:
+/***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = oYGBb;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.oYGBb = undefined;
+exports.templates = exports.OwElz = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_1.soy.
+  // This file was automatically generated from field.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace oYGBb.
+   * @fileoverview Templates in namespace OwElz.
    * @public
    */
 
-  goog.module('oYGBb.incrementaldom');
+  goog.module('OwElz.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,13 +137,14 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -151,32 +152,84 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param641 = function param641() {
+    var param522 = function param522() {
+      ie_open('h6');
+      var dyn29 = opt_data.page.description;
+      if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn33 = opt_data.page.title;
-      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
+      itext('selectField');
+      ie_close('h2');
+      ie_open('h4');
+      itext('public Query selectField(String field)');
+      ie_close('h4');
+      ie_open('p');
+      itext('Select a specific field.');
+      ie_close('p');
+      ie_open('p');
+      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectField(\'Name\').\n    selectField(\'OwnerId\');', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '2');
+      ie_open('h2');
+      itext('selectFields');
       ie_close('h2');
       ie_open('p');
-      itext('Include ');
-      ie_open('strong');
-      itext('Query.cls');
-      ie_close('strong');
-      itext(' and ');
-      ie_open('strong');
-      itext('QueryTest.cls');
-      ie_close('strong');
-      itext(' (optional) into your Org, and you are ready to go.');
+      itext('Select specific fields.');
       ie_close('p');
+      ie_open('h4');
+      itext('public Query selectFields(String field)');
+      ie_close('h4');
+      ie_open('p');
+      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'OwnerId, CreatedById\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectFields(List<String> fieldList)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldList: A list of field names.');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new List<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectFields(Set<String> fieldSet)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldSet: A Set of field names.');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new Set<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '3');
+      ie_open('h2');
+      itext('selectAllFields');
+      ie_close('h2');
+      ie_open('h4');
+      itext('public Query selectAllFields()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Select all accessible fields in the current object');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query selectAllFields(String parentField)');
+      ie_close('h4');
+      ie_open('p');
+      itext('Select all accessible fields in the parent field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\');', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param641 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param522 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'oYGBb.render';
+    $render.soyTemplateName = 'OwElz.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -185,24 +238,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var oYGBb = function (_Component) {
-  _inherits(oYGBb, _Component);
+var OwElz = function (_Component) {
+  _inherits(OwElz, _Component);
 
-  function oYGBb() {
-    _classCallCheck(this, oYGBb);
+  function OwElz() {
+    _classCallCheck(this, OwElz);
 
-    return _possibleConstructorReturn(this, (oYGBb.__proto__ || Object.getPrototypeOf(oYGBb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (OwElz.__proto__ || Object.getPrototypeOf(OwElz)).apply(this, arguments));
   }
 
-  return oYGBb;
+  return OwElz;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(oYGBb, templates);
-exports.oYGBb = oYGBb;
+_metalSoy2.default.register(OwElz, templates);
+exports.OwElz = OwElz;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[282]);
+},[272]);

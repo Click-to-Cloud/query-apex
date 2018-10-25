@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([5],{
+webpackJsonppageComponent([4],{
 
-/***/ 288:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_4Soy = __webpack_require__(289);
+var _step_5Soy = __webpack_require__(291);
 
-var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
+var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var qxLsr = function (_Component) {
-  _inherits(qxLsr, _Component);
+var NSqgV = function (_Component) {
+  _inherits(NSqgV, _Component);
 
-  function qxLsr() {
-    _classCallCheck(this, qxLsr);
+  function NSqgV() {
+    _classCallCheck(this, NSqgV);
 
-    return _possibleConstructorReturn(this, (qxLsr.__proto__ || Object.getPrototypeOf(qxLsr)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NSqgV.__proto__ || Object.getPrototypeOf(NSqgV)).apply(this, arguments));
   }
 
-  return qxLsr;
+  return NSqgV;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(qxLsr, _step_4Soy2.default);
+_metalSoy2.default.register(NSqgV, _step_5Soy2.default);
 
-exports.default = qxLsr;
+exports.default = NSqgV;
 
 /***/ }),
 
-/***/ 289:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = qxLsr;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.qxLsr = undefined;
+exports.templates = exports.NSqgV = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_4.soy.
+  // This file was automatically generated from step_5.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace qxLsr.
+   * @fileoverview Templates in namespace NSqgV.
    * @public
    */
 
-  goog.module('qxLsr.incrementaldom');
+  goog.module('NSqgV.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,44 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param734 = function param734() {
+    var param795 = function param795() {
       ie_open('h2');
-      var dyn36 = opt_data.page.title;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
+      var dyn37 = opt_data.page.title;
+      if (typeof dyn37 == 'function') dyn37();else if (dyn37 != null) itext(dyn37);
       ie_close('h2');
       ie_open('p');
-      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
+      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
+      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
       ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('The statement is equivalent to:');
+      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      itext('Now let\'s try querying the accounts owned by the current user:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
       itext('equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Meanwhile, multiple layer parent relationship is supported:');
+      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Examples are:');
+      ie_close('p');
+      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param734 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param795 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'qxLsr.render';
+    $render.soyTemplateName = 'NSqgV.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -199,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var qxLsr = function (_Component) {
-  _inherits(qxLsr, _Component);
+var NSqgV = function (_Component) {
+  _inherits(NSqgV, _Component);
 
-  function qxLsr() {
-    _classCallCheck(this, qxLsr);
+  function NSqgV() {
+    _classCallCheck(this, NSqgV);
 
-    return _possibleConstructorReturn(this, (qxLsr.__proto__ || Object.getPrototypeOf(qxLsr)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (NSqgV.__proto__ || Object.getPrototypeOf(NSqgV)).apply(this, arguments));
   }
 
-  return qxLsr;
+  return NSqgV;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(qxLsr, templates);
-exports.qxLsr = qxLsr;
+_metalSoy2.default.register(NSqgV, templates);
+exports.NSqgV = NSqgV;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[288]);
+},[290]);
