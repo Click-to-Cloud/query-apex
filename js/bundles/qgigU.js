@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([7],{
+webpackJsonppageComponent([8],{
 
-/***/ 284:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_2Soy = __webpack_require__(285);
+var _step_1Soy = __webpack_require__(283);
 
-var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
+var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var YFflm = function (_Component) {
-  _inherits(YFflm, _Component);
+var qgigU = function (_Component) {
+  _inherits(qgigU, _Component);
 
-  function YFflm() {
-    _classCallCheck(this, YFflm);
+  function qgigU() {
+    _classCallCheck(this, qgigU);
 
-    return _possibleConstructorReturn(this, (YFflm.__proto__ || Object.getPrototypeOf(YFflm)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qgigU.__proto__ || Object.getPrototypeOf(qgigU)).apply(this, arguments));
   }
 
-  return YFflm;
+  return qgigU;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(YFflm, _step_2Soy2.default);
+_metalSoy2.default.register(qgigU, _step_1Soy2.default);
 
-exports.default = YFflm;
+exports.default = qgigU;
 
 /***/ }),
 
-/***/ 285:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = YFflm;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.YFflm = undefined;
+exports.templates = exports.qgigU = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_2.soy.
+  // This file was automatically generated from step_1.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace YFflm.
+   * @fileoverview Templates in namespace qgigU.
    * @public
    */
 
-  goog.module('YFflm.incrementaldom');
+  goog.module('qgigU.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,8 +137,6 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -153,49 +151,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param677 = function param677() {
+    var param691 = function param691() {
       ie_open('h2');
-      var dyn34 = opt_data.page.title;
-      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
+      var dyn33 = opt_data.page.title;
+      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
       ie_close('h2');
       ie_open('p');
-      itext('Lets start with a simplest query: querying all Account records:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
-      ie_close('p');
-      ie_open('p');
-      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('The \'byId\' method limits the result with a specific Id.');
-      ie_close('p');
-      ie_open('p');
-      itext('The \'fetch\' method executes the query and returns the first record in the result.');
-      ie_close('p');
-      ie_open('p');
-      itext('The statement is equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
+      itext('Include ');
+      ie_open('strong');
+      itext('Query.cls');
+      ie_close('strong');
+      itext(' and ');
+      ie_open('strong');
+      itext('QueryTest.cls');
+      ie_close('strong');
+      itext(' (optional) into your Org, and you are ready to go.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param677 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param691 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'YFflm.render';
+    $render.soyTemplateName = 'qgigU.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -204,24 +185,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var YFflm = function (_Component) {
-  _inherits(YFflm, _Component);
+var qgigU = function (_Component) {
+  _inherits(qgigU, _Component);
 
-  function YFflm() {
-    _classCallCheck(this, YFflm);
+  function qgigU() {
+    _classCallCheck(this, qgigU);
 
-    return _possibleConstructorReturn(this, (YFflm.__proto__ || Object.getPrototypeOf(YFflm)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qgigU.__proto__ || Object.getPrototypeOf(qgigU)).apply(this, arguments));
   }
 
-  return YFflm;
+  return qgigU;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(YFflm, templates);
-exports.YFflm = YFflm;
+_metalSoy2.default.register(qgigU, templates);
+exports.qgigU = qgigU;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[284]);
+},[282]);

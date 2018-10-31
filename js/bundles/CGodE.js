@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var qANKS = function (_Component) {
-  _inherits(qANKS, _Component);
+var CGodE = function (_Component) {
+  _inherits(CGodE, _Component);
 
-  function qANKS() {
-    _classCallCheck(this, qANKS);
+  function CGodE() {
+    _classCallCheck(this, CGodE);
 
-    return _possibleConstructorReturn(this, (qANKS.__proto__ || Object.getPrototypeOf(qANKS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CGodE.__proto__ || Object.getPrototypeOf(CGodE)).apply(this, arguments));
   }
 
-  return qANKS;
+  return CGodE;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(qANKS, _step_7Soy2.default);
+_metalSoy2.default.register(CGodE, _step_7Soy2.default);
 
-exports.default = qANKS;
+exports.default = CGodE;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = qANKS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.qANKS = undefined;
+exports.templates = exports.CGodE = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace qANKS.
+   * @fileoverview Templates in namespace CGodE.
    * @public
    */
 
-  goog.module('qANKS.incrementaldom');
+  goog.module('CGodE.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,7 +153,7 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param867 = function param867() {
+    var param892 = function param892() {
       ie_open('h2');
       var dyn39 = opt_data.page.title;
       if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param867 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param892 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'qANKS.render';
+    $render.soyTemplateName = 'CGodE.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,20 +235,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var qANKS = function (_Component) {
-  _inherits(qANKS, _Component);
+var CGodE = function (_Component) {
+  _inherits(CGodE, _Component);
 
-  function qANKS() {
-    _classCallCheck(this, qANKS);
+  function CGodE() {
+    _classCallCheck(this, CGodE);
 
-    return _possibleConstructorReturn(this, (qANKS.__proto__ || Object.getPrototypeOf(qANKS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CGodE.__proto__ || Object.getPrototypeOf(CGodE)).apply(this, arguments));
   }
 
-  return qANKS;
+  return CGodE;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(qANKS, templates);
-exports.qANKS = qANKS;
+_metalSoy2.default.register(CGodE, templates);
+exports.CGodE = CGodE;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

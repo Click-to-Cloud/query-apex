@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([14],{
+webpackJsonppageComponent([1],{
 
-/***/ 276:
+/***/ 296:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _resultSoy = __webpack_require__(277);
+var _step_8Soy = __webpack_require__(297);
 
-var _resultSoy2 = _interopRequireDefault(_resultSoy);
+var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var kgzKR = function (_Component) {
-  _inherits(kgzKR, _Component);
+var nzbkZ = function (_Component) {
+  _inherits(nzbkZ, _Component);
 
-  function kgzKR() {
-    _classCallCheck(this, kgzKR);
+  function nzbkZ() {
+    _classCallCheck(this, nzbkZ);
 
-    return _possibleConstructorReturn(this, (kgzKR.__proto__ || Object.getPrototypeOf(kgzKR)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (nzbkZ.__proto__ || Object.getPrototypeOf(nzbkZ)).apply(this, arguments));
   }
 
-  return kgzKR;
+  return nzbkZ;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(kgzKR, _resultSoy2.default);
+_metalSoy2.default.register(nzbkZ, _step_8Soy2.default);
 
-exports.default = kgzKR;
+exports.default = nzbkZ;
 
 /***/ }),
 
-/***/ 277:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = kgzKR;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.kgzKR = undefined;
+exports.templates = exports.nzbkZ = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from result.soy.
+  // This file was automatically generated from step_8.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace kgzKR.
+   * @fileoverview Templates in namespace nzbkZ.
    * @public
    */
 
-  goog.module('kgzKR.incrementaldom');
+  goog.module('nzbkZ.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -139,12 +139,13 @@ goog.loadModule(function (exports) {
 
   var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
 
-  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?)
+   *    site: (?),
+   *    elementClasses: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -152,125 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param574 = function param574() {
-      ie_open('h6');
-      var dyn31 = opt_data.page.description;
-      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
-      ie_close('h6');
-      ie_open('article', null, null, 'id', '1');
+    var param958 = function param958() {
       ie_open('h2');
-      itext('run');
+      var dyn40 = opt_data.page.title;
+      if (typeof dyn40 == 'function') dyn40();else if (dyn40 != null) itext(dyn40);
       ie_close('h2');
       ie_open('p');
-      itext('Run the query as if running ');
-      ie_open('code');
-      itext('Database.query()');
-      ie_close('code');
-      ie_close('p');
-      ie_open('h4');
-      itext('public List<SObject> run()');
-      ie_close('h4');
-      ie_open('p');
-      itext('Returns a list of SObject');
+      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
       ie_close('p');
       ie_open('p');
-      itext('Alias to ');
-      ie_open('code');
-      itext('toSObjectList()');
-      ie_close('code');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '2');
-      ie_open('h2');
-      itext('fetch');
-      ie_close('h2');
-      ie_open('p');
-      itext('Fetch a subset of the result');
-      ie_close('p');
-      ie_open('h4');
-      itext('public SObject fetch()');
-      ie_close('h4');
-      ie_open('p');
-      itext('Fetch the first SObject from the result');
+      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
       ie_close('p');
       ie_open('p');
-      itext('Returns an SObject');
+      itext('Here is an example of such a query in SOQL:');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public SObject fetch(Integer n)');
-      ie_close('h4');
+      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
       ie_open('p');
-      itext('Fetch the nth SObject from the result');
+      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
       ie_close('p');
       ie_open('p');
-      itext('n: Indicates the nth SObject in the result list, starting with 0');
+      itext('Let\'s see how to construct such a query using Query.apex:');
+      ie_close('p');
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
       ie_close('p');
       ie_open('p');
-      itext('Returns an SObject');
+      itext('Here is another example of a subquery with conditions and limits:');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch(2);', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public List<SObject> fetch(Integer first, Integer last)');
-      ie_close('h4');
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Fetch a subset of result in the range [first, last)');
+      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
       ie_close('p');
-      ie_open('p');
-      itext('Returns a list of SObject');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    fetch(2, 4);', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '3');
-      ie_open('h2');
-      itext('toSObjectList');
-      ie_close('h2');
-      ie_open('p');
-      itext('Run the query as if running ');
-      ie_open('code');
-      itext('Database.query()');
-      ie_close('code');
-      ie_close('p');
-      ie_open('h4');
-      itext('public List<SObject> toSObjectList()');
-      ie_close('h4');
-      ie_open('p');
-      itext('Returns a list of SObject');
-      ie_close('p');
-      ie_open('p');
-      itext('Alias to ');
-      ie_open('code');
-      itext('run()');
-      ie_close('code');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    toSObjectList();', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '4');
-      ie_open('h2');
-      itext('toIdList');
-      ie_close('h2');
-      ie_open('p');
-      itext('Run the query and return the Id list of the result');
-      ie_close('p');
-      ie_open('h4');
-      itext('public List<Id> toIdList()');
-      ie_close('h4');
-      ie_open('p');
-      itext('Returns a list of Id');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Id> accounts =\n    new Query(\'Account\').\n    toIdList();', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param574 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param958 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'kgzKR.render';
+    $render.soyTemplateName = 'nzbkZ.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -279,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var kgzKR = function (_Component) {
-  _inherits(kgzKR, _Component);
+var nzbkZ = function (_Component) {
+  _inherits(nzbkZ, _Component);
 
-  function kgzKR() {
-    _classCallCheck(this, kgzKR);
+  function nzbkZ() {
+    _classCallCheck(this, nzbkZ);
 
-    return _possibleConstructorReturn(this, (kgzKR.__proto__ || Object.getPrototypeOf(kgzKR)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (nzbkZ.__proto__ || Object.getPrototypeOf(nzbkZ)).apply(this, arguments));
   }
 
-  return kgzKR;
+  return nzbkZ;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(kgzKR, templates);
-exports.kgzKR = kgzKR;
+_metalSoy2.default.register(nzbkZ, templates);
+exports.nzbkZ = nzbkZ;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[276]);
+},[296]);

@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([1],{
+webpackJsonppageComponent([7],{
 
-/***/ 296:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_8Soy = __webpack_require__(297);
+var _step_2Soy = __webpack_require__(285);
 
-var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
+var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BNfqF = function (_Component) {
-  _inherits(BNfqF, _Component);
+var vjWPy = function (_Component) {
+  _inherits(vjWPy, _Component);
 
-  function BNfqF() {
-    _classCallCheck(this, BNfqF);
+  function vjWPy() {
+    _classCallCheck(this, vjWPy);
 
-    return _possibleConstructorReturn(this, (BNfqF.__proto__ || Object.getPrototypeOf(BNfqF)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vjWPy.__proto__ || Object.getPrototypeOf(vjWPy)).apply(this, arguments));
   }
 
-  return BNfqF;
+  return vjWPy;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(BNfqF, _step_8Soy2.default);
+_metalSoy2.default.register(vjWPy, _step_2Soy2.default);
 
-exports.default = BNfqF;
+exports.default = vjWPy;
 
 /***/ }),
 
-/***/ 297:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = BNfqF;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.BNfqF = undefined;
+exports.templates = exports.vjWPy = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_8.soy.
+  // This file was automatically generated from step_2.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace BNfqF.
+   * @fileoverview Templates in namespace vjWPy.
    * @public
    */
 
-  goog.module('BNfqF.incrementaldom');
+  goog.module('vjWPy.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,48 +153,49 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param933 = function param933() {
+    var param702 = function param702() {
       ie_open('h2');
-      var dyn40 = opt_data.page.title;
-      if (typeof dyn40 == 'function') dyn40();else if (dyn40 != null) itext(dyn40);
+      var dyn34 = opt_data.page.title;
+      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
       ie_close('h2');
       ie_open('p');
-      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
+      itext('Lets start with a simplest query: querying all Account records:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
       ie_close('p');
       ie_open('p');
-      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
+      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
+      ie_open('p');
+      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The \'byId\' method limits the result with a specific Id.');
       ie_close('p');
       ie_open('p');
-      itext('Here is an example of such a query in SOQL:');
-      ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
-      ie_open('p');
-      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
+      itext('The \'fetch\' method executes the query and returns the first record in the result.');
       ie_close('p');
       ie_open('p');
-      itext('Let\'s see how to construct such a query using Query.apex:');
+      itext('The statement is equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
       ie_open('p');
-      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is another example of a subquery with conditions and limits:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param933 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param702 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'BNfqF.render';
+    $render.soyTemplateName = 'vjWPy.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +204,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var BNfqF = function (_Component) {
-  _inherits(BNfqF, _Component);
+var vjWPy = function (_Component) {
+  _inherits(vjWPy, _Component);
 
-  function BNfqF() {
-    _classCallCheck(this, BNfqF);
+  function vjWPy() {
+    _classCallCheck(this, vjWPy);
 
-    return _possibleConstructorReturn(this, (BNfqF.__proto__ || Object.getPrototypeOf(BNfqF)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vjWPy.__proto__ || Object.getPrototypeOf(vjWPy)).apply(this, arguments));
   }
 
-  return BNfqF;
+  return vjWPy;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(BNfqF, templates);
-exports.BNfqF = BNfqF;
+_metalSoy2.default.register(vjWPy, templates);
+exports.vjWPy = vjWPy;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[296]);
+},[284]);

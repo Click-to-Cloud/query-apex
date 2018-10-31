@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([16],{
+webpackJsonppageComponent([14],{
 
-/***/ 272:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _fieldSoy = __webpack_require__(273);
+var _resultSoy = __webpack_require__(277);
 
-var _fieldSoy2 = _interopRequireDefault(_fieldSoy);
+var _resultSoy2 = _interopRequireDefault(_resultSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OwElz = function (_Component) {
-  _inherits(OwElz, _Component);
+var vcVXa = function (_Component) {
+  _inherits(vcVXa, _Component);
 
-  function OwElz() {
-    _classCallCheck(this, OwElz);
+  function vcVXa() {
+    _classCallCheck(this, vcVXa);
 
-    return _possibleConstructorReturn(this, (OwElz.__proto__ || Object.getPrototypeOf(OwElz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vcVXa.__proto__ || Object.getPrototypeOf(vcVXa)).apply(this, arguments));
   }
 
-  return OwElz;
+  return vcVXa;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(OwElz, _fieldSoy2.default);
+_metalSoy2.default.register(vcVXa, _resultSoy2.default);
 
-exports.default = OwElz;
+exports.default = vcVXa;
 
 /***/ }),
 
-/***/ 273:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = OwElz;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.OwElz = undefined;
+exports.templates = exports.vcVXa = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from field.soy.
+  // This file was automatically generated from result.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace OwElz.
+   * @fileoverview Templates in namespace vcVXa.
    * @public
    */
 
-  goog.module('OwElz.incrementaldom');
+  goog.module('vcVXa.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,84 +152,125 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param522 = function param522() {
+    var param599 = function param599() {
       ie_open('h6');
-      var dyn29 = opt_data.page.description;
-      if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
+      var dyn31 = opt_data.page.description;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('selectField');
+      itext('run');
       ie_close('h2');
+      ie_open('p');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
+      ie_close('p');
       ie_open('h4');
-      itext('public Query selectField(String field)');
+      itext('public List<SObject> run()');
       ie_close('h4');
       ie_open('p');
-      itext('Select a specific field.');
+      itext('Returns a list of SObject');
       ie_close('p');
       ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      itext('Alias to ');
+      ie_open('code');
+      itext('toSObjectList()');
+      ie_close('code');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectField(\'Name\').\n    selectField(\'OwnerId\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('article', null, null, 'id', '2');
       ie_open('h2');
-      itext('selectFields');
+      itext('fetch');
       ie_close('h2');
       ie_open('p');
-      itext('Select specific fields.');
+      itext('Fetch a subset of the result');
       ie_close('p');
       ie_open('h4');
-      itext('public Query selectFields(String field)');
+      itext('public SObject fetch()');
       ie_close('h4');
       ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      itext('Fetch the first SObject from the result');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'OwnerId, CreatedById\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Returns an SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(List<String> fieldList)');
+      itext('public SObject fetch(Integer n)');
       ie_close('h4');
       ie_open('p');
-      itext('fieldList: A list of field names.');
+      itext('Fetch the nth SObject from the result');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new List<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('n: Indicates the nth SObject in the result list, starting with 0');
+      ie_close('p');
+      ie_open('p');
+      itext('Returns an SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch(2);', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(Set<String> fieldSet)');
+      itext('public List<SObject> fetch(Integer first, Integer last)');
       ie_close('h4');
       ie_open('p');
-      itext('fieldSet: A Set of field names.');
+      itext('Fetch a subset of result in the range [first, last)');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new Set<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    fetch(2, 4);', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('article', null, null, 'id', '3');
       ie_open('h2');
-      itext('selectAllFields');
+      itext('toSObjectList');
       ie_close('h2');
+      ie_open('p');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
+      ie_close('p');
       ie_open('h4');
-      itext('public Query selectAllFields()');
+      itext('public List<SObject> toSObjectList()');
       ie_close('h4');
       ie_open('p');
-      itext('Select all accessible fields in the current object');
+      itext('Returns a list of SObject');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Alias to ');
+      ie_open('code');
+      itext('run()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    toSObjectList();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '4');
+      ie_open('h2');
+      itext('toIdList');
+      ie_close('h2');
+      ie_open('p');
+      itext('Run the query and return the Id list of the result');
+      ie_close('p');
       ie_open('h4');
-      itext('public Query selectAllFields(String parentField)');
+      itext('public List<Id> toIdList()');
       ie_close('h4');
       ie_open('p');
-      itext('Select all accessible fields in the parent field');
+      itext('Returns a list of Id');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Id> accounts =\n    new Query(\'Account\').\n    toIdList();', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param522 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param599 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'OwElz.render';
+    $render.soyTemplateName = 'vcVXa.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -238,24 +279,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var OwElz = function (_Component) {
-  _inherits(OwElz, _Component);
+var vcVXa = function (_Component) {
+  _inherits(vcVXa, _Component);
 
-  function OwElz() {
-    _classCallCheck(this, OwElz);
+  function vcVXa() {
+    _classCallCheck(this, vcVXa);
 
-    return _possibleConstructorReturn(this, (OwElz.__proto__ || Object.getPrototypeOf(OwElz)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vcVXa.__proto__ || Object.getPrototypeOf(vcVXa)).apply(this, arguments));
   }
 
-  return OwElz;
+  return vcVXa;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(OwElz, templates);
-exports.OwElz = OwElz;
+_metalSoy2.default.register(vcVXa, templates);
+exports.vcVXa = vcVXa;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[272]);
+},[276]);

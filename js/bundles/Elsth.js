@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([6],{
+webpackJsonppageComponent([15],{
 
-/***/ 286:
+/***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_3Soy = __webpack_require__(287);
+var _indexSoy = __webpack_require__(275);
 
-var _step_3Soy2 = _interopRequireDefault(_step_3Soy);
+var _indexSoy2 = _interopRequireDefault(_indexSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var zOkQS = function (_Component) {
-  _inherits(zOkQS, _Component);
+var Elsth = function (_Component) {
+  _inherits(Elsth, _Component);
 
-  function zOkQS() {
-    _classCallCheck(this, zOkQS);
+  function Elsth() {
+    _classCallCheck(this, Elsth);
 
-    return _possibleConstructorReturn(this, (zOkQS.__proto__ || Object.getPrototypeOf(zOkQS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Elsth.__proto__ || Object.getPrototypeOf(Elsth)).apply(this, arguments));
   }
 
-  return zOkQS;
+  return Elsth;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(zOkQS, _step_3Soy2.default);
+_metalSoy2.default.register(Elsth, _indexSoy2.default);
 
-exports.default = zOkQS;
+exports.default = Elsth;
 
 /***/ }),
 
-/***/ 287:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = zOkQS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.zOkQS = undefined;
+exports.templates = exports.Elsth = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_3.soy.
+  // This file was automatically generated from index.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace zOkQS.
+   * @fileoverview Templates in namespace Elsth.
    * @public
    */
 
-  goog.module('zOkQS.incrementaldom');
+  goog.module('Elsth.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,15 +137,12 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
-  var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
+  var $templateAlias1 = _metalSoy2.default.getTemplate('guide.incrementaldom', 'render');
 
   /**
    * @param {{
    *    page: (?),
-   *    site: (?),
-   *    elementClasses: (?)
+   *    site: (?)
    * }} opt_data
    * @param {(null|undefined)=} opt_ignored
    * @param {Object<string, *>=} opt_ijData
@@ -153,56 +150,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param708 = function param708() {
+    var param588 = function param588() {
+      ie_open('h6');
+      var dyn30 = opt_data.page.description;
+      if (typeof dyn30 == 'function') dyn30();else if (dyn30 != null) itext(dyn30);
+      ie_close('h6');
+      ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      var dyn35 = opt_data.page.title;
-      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
+      itext('Query Reference');
       ie_close('h2');
       ie_open('p');
-      itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
+      itext('Here is the reference of the public methods in Query.');
       ie_close('p');
       ie_open('p');
-      itext('For example, this query will only select only the Name field from the Account object.');
+      itext('Every public method in Query class that returns a Query type is mutable and chainable.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').selectFields(\'Name\').run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This is equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name FROM Account ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can also call \'selectFields\' method multiple times, the result is additive:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'Phone\').\n    selectFields(\'Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('That\'s equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name, Phone, Website, Description FROM Account ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Alternatively, we can put all the fields in one \'selectFields\' method, still preserving the additivity:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name, Phone, Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Compare with:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<String> fields = new List<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('or:');
-      ie_close('p');
-      $templateAlias2({ code: 'Set<String> fields = new Set<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('To make user convenient, Query.apex provides the \'selectAllFields\' method to select all user accessible fields:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields().\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param708 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param588 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'zOkQS.render';
+    $render.soyTemplateName = 'Elsth.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -211,24 +184,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var zOkQS = function (_Component) {
-  _inherits(zOkQS, _Component);
+var Elsth = function (_Component) {
+  _inherits(Elsth, _Component);
 
-  function zOkQS() {
-    _classCallCheck(this, zOkQS);
+  function Elsth() {
+    _classCallCheck(this, Elsth);
 
-    return _possibleConstructorReturn(this, (zOkQS.__proto__ || Object.getPrototypeOf(zOkQS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Elsth.__proto__ || Object.getPrototypeOf(Elsth)).apply(this, arguments));
   }
 
-  return zOkQS;
+  return Elsth;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(zOkQS, templates);
-exports.zOkQS = zOkQS;
+_metalSoy2.default.register(Elsth, templates);
+exports.Elsth = Elsth;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[286]);
+},[274]);

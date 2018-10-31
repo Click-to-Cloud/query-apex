@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([8],{
+webpackJsonppageComponent([4],{
 
-/***/ 282:
+/***/ 290:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_1Soy = __webpack_require__(283);
+var _step_5Soy = __webpack_require__(291);
 
-var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
+var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WvaMM = function (_Component) {
-  _inherits(WvaMM, _Component);
+var MiZYi = function (_Component) {
+  _inherits(MiZYi, _Component);
 
-  function WvaMM() {
-    _classCallCheck(this, WvaMM);
+  function MiZYi() {
+    _classCallCheck(this, MiZYi);
 
-    return _possibleConstructorReturn(this, (WvaMM.__proto__ || Object.getPrototypeOf(WvaMM)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MiZYi.__proto__ || Object.getPrototypeOf(MiZYi)).apply(this, arguments));
   }
 
-  return WvaMM;
+  return MiZYi;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(WvaMM, _step_1Soy2.default);
+_metalSoy2.default.register(MiZYi, _step_5Soy2.default);
 
-exports.default = WvaMM;
+exports.default = MiZYi;
 
 /***/ }),
 
-/***/ 283:
+/***/ 291:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = WvaMM;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.WvaMM = undefined;
+exports.templates = exports.MiZYi = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_1.soy.
+  // This file was automatically generated from step_5.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace WvaMM.
+   * @fileoverview Templates in namespace MiZYi.
    * @public
    */
 
-  goog.module('WvaMM.incrementaldom');
+  goog.module('MiZYi.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,6 +137,8 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
+  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
+
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -151,32 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param666 = function param666() {
+    var param820 = function param820() {
       ie_open('h2');
-      var dyn33 = opt_data.page.title;
-      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
+      var dyn37 = opt_data.page.title;
+      if (typeof dyn37 == 'function') dyn37();else if (dyn37 != null) itext(dyn37);
       ie_close('h2');
       ie_open('p');
-      itext('Include ');
-      ie_open('strong');
-      itext('Query.cls');
-      ie_close('strong');
-      itext(' and ');
-      ie_open('strong');
-      itext('QueryTest.cls');
-      ie_close('strong');
-      itext(' (optional) into your Org, and you are ready to go.');
+      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
       ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Now let\'s try querying the accounts owned by the current user:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
+      ie_close('p');
+      ie_open('p');
+      itext('Examples are:');
+      ie_close('p');
+      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param666 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param820 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'WvaMM.render';
+    $render.soyTemplateName = 'MiZYi.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -185,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var WvaMM = function (_Component) {
-  _inherits(WvaMM, _Component);
+var MiZYi = function (_Component) {
+  _inherits(MiZYi, _Component);
 
-  function WvaMM() {
-    _classCallCheck(this, WvaMM);
+  function MiZYi() {
+    _classCallCheck(this, MiZYi);
 
-    return _possibleConstructorReturn(this, (WvaMM.__proto__ || Object.getPrototypeOf(WvaMM)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MiZYi.__proto__ || Object.getPrototypeOf(MiZYi)).apply(this, arguments));
   }
 
-  return WvaMM;
+  return MiZYi;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(WvaMM, templates);
-exports.WvaMM = WvaMM;
+_metalSoy2.default.register(MiZYi, templates);
+exports.MiZYi = MiZYi;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[282]);
+},[290]);

@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PVDql = function (_Component) {
-  _inherits(PVDql, _Component);
+var iiymC = function (_Component) {
+  _inherits(iiymC, _Component);
 
-  function PVDql() {
-    _classCallCheck(this, PVDql);
+  function iiymC() {
+    _classCallCheck(this, iiymC);
 
-    return _possibleConstructorReturn(this, (PVDql.__proto__ || Object.getPrototypeOf(PVDql)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (iiymC.__proto__ || Object.getPrototypeOf(iiymC)).apply(this, arguments));
   }
 
-  return PVDql;
+  return iiymC;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(PVDql, _subquerySoy2.default);
+_metalSoy2.default.register(iiymC, _subquerySoy2.default);
 
-exports.default = PVDql;
+exports.default = iiymC;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = PVDql;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.PVDql = undefined;
+exports.templates = exports.iiymC = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace PVDql.
+   * @fileoverview Templates in namespace iiymC.
    * @public
    */
 
-  goog.module('PVDql.incrementaldom');
+  goog.module('iiymC.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,7 +152,7 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param615 = function param615() {
+    var param640 = function param640() {
       ie_open('h6');
       var dyn32 = opt_data.page.description;
       if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
@@ -243,11 +243,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param615 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param640 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'PVDql.render';
+    $render.soyTemplateName = 'iiymC.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -256,20 +256,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var PVDql = function (_Component) {
-  _inherits(PVDql, _Component);
+var iiymC = function (_Component) {
+  _inherits(iiymC, _Component);
 
-  function PVDql() {
-    _classCallCheck(this, PVDql);
+  function iiymC() {
+    _classCallCheck(this, iiymC);
 
-    return _possibleConstructorReturn(this, (PVDql.__proto__ || Object.getPrototypeOf(PVDql)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (iiymC.__proto__ || Object.getPrototypeOf(iiymC)).apply(this, arguments));
   }
 
-  return PVDql;
+  return iiymC;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(PVDql, templates);
-exports.PVDql = PVDql;
+_metalSoy2.default.register(iiymC, templates);
+exports.iiymC = iiymC;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */

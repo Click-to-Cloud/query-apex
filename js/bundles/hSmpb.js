@@ -55,23 +55,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hzMOv = function (_Component) {
-  _inherits(hzMOv, _Component);
+var hSmpb = function (_Component) {
+  _inherits(hSmpb, _Component);
 
-  function hzMOv() {
-    _classCallCheck(this, hzMOv);
+  function hSmpb() {
+    _classCallCheck(this, hSmpb);
 
-    return _possibleConstructorReturn(this, (hzMOv.__proto__ || Object.getPrototypeOf(hzMOv)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hSmpb.__proto__ || Object.getPrototypeOf(hSmpb)).apply(this, arguments));
   }
 
-  return hzMOv;
+  return hSmpb;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hzMOv, _conditionSoy2.default);
+_metalSoy2.default.register(hSmpb, _conditionSoy2.default);
 
-exports.default = hzMOv;
+exports.default = hSmpb;
 
 /***/ }),
 
@@ -84,7 +84,7 @@ exports.default = hzMOv;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.hzMOv = undefined;
+exports.templates = exports.hSmpb = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace hzMOv.
+   * @fileoverview Templates in namespace hSmpb.
    * @public
    */
 
-  goog.module('hzMOv.incrementaldom');
+  goog.module('hSmpb.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -162,7 +162,7 @@ goog.loadModule(function (exports) {
       itext('byId');
       ie_close('h2');
       ie_open('p');
-      itext('Add a condition to the query, limiting the sObject to a specific ID or a collection of ID. Alias to ');
+      itext('Add a condition to the query, filtering the result by a specific ID or a collection of ID. Alias to ');
       ie_open('code');
       itext('addConditionEq(\'Id\', ...)');
       ie_close('code');
@@ -190,6 +190,64 @@ goog.loadModule(function (exports) {
       $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    byId(new Set<Id>{\'001O000000qkv3KIAQ\'});', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('article', null, null, 'id', '2');
+      ie_open('h2');
+      itext('lookup');
+      ie_close('h2');
+      ie_open('p');
+      itext('Add a condition to the query, filtering the result by a foreign key.');
+      ie_close('p');
+      ie_open('h4');
+      itext('public Query lookup(String fieldName, Id id)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldName: The lookup field name');
+      ie_close('p');
+      ie_open('p');
+      itext('id: The Id to filter the lookup field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Contact\').\n    lookup(\'AccountId\', \'001O000000qkv3KIAQ\');', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query lookup(String fieldName, List<Id> idList)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldName: The lookup field name');
+      ie_close('p');
+      ie_open('p');
+      itext('idList: The list of Id to filter the lookup field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Contact\').\n    lookup(\'AccountId\', new List<Id>{\'001O000000qkv3KIAQ\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query lookup(String fieldName, Set<Id> idSet)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldName: The lookup field name');
+      ie_close('p');
+      ie_open('p');
+      itext('idSet: The Set of Id to filter the lookup field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Contact\').\n    lookup(\'AccountId\', new Set<Id>{\'001O000000qkv3KIAQ\'});', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query lookup(String fieldName, SObject sobj)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldName: The lookup field name');
+      ie_close('p');
+      ie_open('p');
+      itext('sobj: The SObject record, whose Id will be taken to filter the lookup field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Contact\').\n    lookup(\'AccountId\', new Account(Id = \'001O000000qkv3KIAQ\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public Query lookup(String fieldName, List<SObject> sObjectList)');
+      ie_close('h4');
+      ie_open('p');
+      itext('fieldName: The lookup field name');
+      ie_close('p');
+      ie_open('p');
+      itext('sObjectList: The list of SObject records, whose Id will be taken to filter the lookup field');
+      ie_close('p');
+      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Contact\').\n    lookup(\'AccountId\', new List<Account>{new Account(Id = \'001O000000qkv3KIAQ\')});', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '3');
       ie_open('h2');
       itext('addConditionXX');
       ie_close('h2');
@@ -412,7 +470,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    addConditionLike(\'Name\', \'%Sam%\');', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '3');
+      ie_open('article', null, null, 'id', '4');
       ie_open('h2');
       itext('addCondition');
       ie_close('h2');
@@ -431,7 +489,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addCondition(Query.conditionEq(\'Name\', \'Sam\'));', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '4');
+      ie_open('article', null, null, 'id', '5');
       ie_open('h2');
       itext('conditionXX');
       ie_close('h2');
@@ -647,7 +705,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nQuery.Condition condition =\n    Query.conditionLike(\'Name\', \'%Sam%\');\n\nQuery q =\n    new Query(\'Account\').\n    addCondition(condition);', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '5');
+      ie_open('article', null, null, 'id', '6');
       ie_open('h2');
       itext('doAnd');
       ie_close('h2');
@@ -712,7 +770,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nList<Query.Condition> conditions =\n    new List<Query.Condition>{\n        Query.conditionLike(\'Name\', \'%Sam%\'),\n        Query.conditionEq(\'Phone\', \'123 456 789\'),\n        Query.conditionIn(\'Id\', new Set<Id>{\'00190000012KXI2AAO\'}),\n        Query.conditionGe(\'NumberOfEmployees\', 10)\n    };\n\nQuery.Condition condition =\n    Query.doAnd(conditions);\n\nQuery q =\n    new Query(\'Account\').\n    addCondition(condition);', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '6');
+      ie_open('article', null, null, 'id', '7');
       ie_open('h2');
       itext('doOr');
       ie_close('h2');
@@ -777,7 +835,7 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nList<Query.Condition> conditions =\n    new List<Query.Condition>{\n        Query.conditionLike(\'Name\', \'%Sam%\'),\n        Query.conditionEq(\'Phone\', \'123 456 789\'),\n        Query.conditionIn(\'Id\', new Set<Id>{\'00190000012KXI2AAO\'}),\n        Query.conditionGe(\'NumberOfEmployees\', 10)\n    };\n\nQuery.Condition condition =\n    Query.doOr(conditions);\n\nQuery q =\n    new Query(\'Account\').\n    addCondition(condition);', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
-      ie_open('article', null, null, 'id', '7');
+      ie_open('article', null, null, 'id', '8');
       ie_open('h2');
       itext('Misc');
       ie_close('h2');
@@ -851,7 +909,7 @@ goog.loadModule(function (exports) {
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'hzMOv.render';
+    $render.soyTemplateName = 'hSmpb.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -860,20 +918,20 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var hzMOv = function (_Component) {
-  _inherits(hzMOv, _Component);
+var hSmpb = function (_Component) {
+  _inherits(hSmpb, _Component);
 
-  function hzMOv() {
-    _classCallCheck(this, hzMOv);
+  function hSmpb() {
+    _classCallCheck(this, hSmpb);
 
-    return _possibleConstructorReturn(this, (hzMOv.__proto__ || Object.getPrototypeOf(hzMOv)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (hSmpb.__proto__ || Object.getPrototypeOf(hSmpb)).apply(this, arguments));
   }
 
-  return hzMOv;
+  return hSmpb;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(hzMOv, templates);
-exports.hzMOv = hzMOv;
+_metalSoy2.default.register(hSmpb, templates);
+exports.hSmpb = hSmpb;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
