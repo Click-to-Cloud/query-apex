@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([7],{
+webpackJsonppageComponent([5],{
 
-/***/ 284:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_2Soy = __webpack_require__(285);
+var _step_4Soy = __webpack_require__(277);
 
-var _step_2Soy2 = _interopRequireDefault(_step_2Soy);
+var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var vjWPy = function (_Component) {
-  _inherits(vjWPy, _Component);
+var CdFVt = function (_Component) {
+  _inherits(CdFVt, _Component);
 
-  function vjWPy() {
-    _classCallCheck(this, vjWPy);
+  function CdFVt() {
+    _classCallCheck(this, CdFVt);
 
-    return _possibleConstructorReturn(this, (vjWPy.__proto__ || Object.getPrototypeOf(vjWPy)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CdFVt.__proto__ || Object.getPrototypeOf(CdFVt)).apply(this, arguments));
   }
 
-  return vjWPy;
+  return CdFVt;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(vjWPy, _step_2Soy2.default);
+_metalSoy2.default.register(CdFVt, _step_4Soy2.default);
 
-exports.default = vjWPy;
+exports.default = CdFVt;
 
 /***/ }),
 
-/***/ 285:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = vjWPy;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.vjWPy = undefined;
+exports.templates = exports.CdFVt = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_2.soy.
+  // This file was automatically generated from step_4.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace vjWPy.
+   * @fileoverview Templates in namespace CdFVt.
    * @public
    */
 
-  goog.module('vjWPy.incrementaldom');
+  goog.module('CdFVt.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,49 +153,44 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param702 = function param702() {
+    var param789 = function param789() {
       ie_open('h2');
-      var dyn34 = opt_data.page.title;
-      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
+      var dyn36 = opt_data.page.title;
+      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
       ie_close('h2');
       ie_open('p');
-      itext('Lets start with a simplest query: querying all Account records:');
+      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = new Query(\'Account\').run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('The \'run\' method executes the query and returns the type \'List<SObject>\'.');
-      ie_close('p');
-      ie_open('p');
-      itext('This is equivalent to this statement, selecting only the ID field in the Account records.');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts = [ SELECT Id FROM Account ];', mode: 'sql' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can now move further by querying an Account record with a specific Id, which is quite an common case in development.');
-      ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('The \'byId\' method limits the result with a specific Id.');
-      ie_close('p');
-      ie_open('p');
-      itext('The \'fetch\' method executes the query and returns the first record in the result.');
+      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
       ie_close('p');
       ie_open('p');
       itext('The statement is equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'sql' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('That\'s our first tutorial of Query.apex. We just learned to build a simple query from Query.apex.');
+      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
       ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Meanwhile, multiple layer parent relationship is supported:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param702 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param789 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'vjWPy.render';
+    $render.soyTemplateName = 'CdFVt.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -204,24 +199,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var vjWPy = function (_Component) {
-  _inherits(vjWPy, _Component);
+var CdFVt = function (_Component) {
+  _inherits(CdFVt, _Component);
 
-  function vjWPy() {
-    _classCallCheck(this, vjWPy);
+  function CdFVt() {
+    _classCallCheck(this, CdFVt);
 
-    return _possibleConstructorReturn(this, (vjWPy.__proto__ || Object.getPrototypeOf(vjWPy)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (CdFVt.__proto__ || Object.getPrototypeOf(CdFVt)).apply(this, arguments));
   }
 
-  return vjWPy;
+  return CdFVt;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(vjWPy, templates);
-exports.vjWPy = vjWPy;
+_metalSoy2.default.register(CdFVt, templates);
+exports.CdFVt = CdFVt;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[284]);
+},[276]);

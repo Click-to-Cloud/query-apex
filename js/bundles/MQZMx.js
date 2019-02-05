@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([1],{
+webpackJsonppageComponent([8],{
 
-/***/ 296:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_8Soy = __webpack_require__(297);
+var _step_1Soy = __webpack_require__(271);
 
-var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
+var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var nzbkZ = function (_Component) {
-  _inherits(nzbkZ, _Component);
+var MQZMx = function (_Component) {
+  _inherits(MQZMx, _Component);
 
-  function nzbkZ() {
-    _classCallCheck(this, nzbkZ);
+  function MQZMx() {
+    _classCallCheck(this, MQZMx);
 
-    return _possibleConstructorReturn(this, (nzbkZ.__proto__ || Object.getPrototypeOf(nzbkZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MQZMx.__proto__ || Object.getPrototypeOf(MQZMx)).apply(this, arguments));
   }
 
-  return nzbkZ;
+  return MQZMx;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(nzbkZ, _step_8Soy2.default);
+_metalSoy2.default.register(MQZMx, _step_1Soy2.default);
 
-exports.default = nzbkZ;
+exports.default = MQZMx;
 
 /***/ }),
 
-/***/ 297:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = nzbkZ;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.nzbkZ = undefined;
+exports.templates = exports.MQZMx = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_8.soy.
+  // This file was automatically generated from step_1.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace nzbkZ.
+   * @fileoverview Templates in namespace MQZMx.
    * @public
    */
 
-  goog.module('nzbkZ.incrementaldom');
+  goog.module('MQZMx.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,8 +137,6 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -153,48 +151,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param958 = function param958() {
+    var param696 = function param696() {
       ie_open('h2');
-      var dyn40 = opt_data.page.title;
-      if (typeof dyn40 == 'function') dyn40();else if (dyn40 != null) itext(dyn40);
+      var dyn33 = opt_data.page.title;
+      if (typeof dyn33 == 'function') dyn33();else if (dyn33 != null) itext(dyn33);
       ie_close('h2');
       ie_open('p');
-      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
-      ie_close('p');
-      ie_open('p');
-      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is an example of such a query in SOQL:');
-      ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
-      ie_open('p');
-      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
-      ie_close('p');
-      ie_open('p');
-      itext('Let\'s see how to construct such a query using Query.apex:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
-      ie_close('p');
-      ie_open('p');
-      itext('Here is another example of a subquery with conditions and limits:');
-      ie_close('p');
-      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      itext('Include ');
+      ie_open('strong');
+      itext('Query.cls');
+      ie_close('strong');
+      itext(' and ');
+      ie_open('strong');
+      itext('QueryTest.cls');
+      ie_close('strong');
+      itext(' (optional) into your Org, and you are ready to go.');
       ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param958 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param696 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'nzbkZ.render';
+    $render.soyTemplateName = 'MQZMx.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +185,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var nzbkZ = function (_Component) {
-  _inherits(nzbkZ, _Component);
+var MQZMx = function (_Component) {
+  _inherits(MQZMx, _Component);
 
-  function nzbkZ() {
-    _classCallCheck(this, nzbkZ);
+  function MQZMx() {
+    _classCallCheck(this, MQZMx);
 
-    return _possibleConstructorReturn(this, (nzbkZ.__proto__ || Object.getPrototypeOf(nzbkZ)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (MQZMx.__proto__ || Object.getPrototypeOf(MQZMx)).apply(this, arguments));
   }
 
-  return nzbkZ;
+  return MQZMx;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(nzbkZ, templates);
-exports.nzbkZ = nzbkZ;
+_metalSoy2.default.register(MQZMx, templates);
+exports.MQZMx = MQZMx;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[296]);
+},[270]);

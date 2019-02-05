@@ -1,7 +1,7 @@
 var pageComponent =
 webpackJsonppageComponent([2],{
 
-/***/ 294:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_7Soy = __webpack_require__(295);
+var _step_7Soy = __webpack_require__(283);
 
 var _step_7Soy2 = _interopRequireDefault(_step_7Soy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CGodE = function (_Component) {
-  _inherits(CGodE, _Component);
+var amlhA = function (_Component) {
+  _inherits(amlhA, _Component);
 
-  function CGodE() {
-    _classCallCheck(this, CGodE);
+  function amlhA() {
+    _classCallCheck(this, amlhA);
 
-    return _possibleConstructorReturn(this, (CGodE.__proto__ || Object.getPrototypeOf(CGodE)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (amlhA.__proto__ || Object.getPrototypeOf(amlhA)).apply(this, arguments));
   }
 
-  return CGodE;
+  return amlhA;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(CGodE, _step_7Soy2.default);
+_metalSoy2.default.register(amlhA, _step_7Soy2.default);
 
-exports.default = CGodE;
+exports.default = amlhA;
 
 /***/ }),
 
-/***/ 295:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = CGodE;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.CGodE = undefined;
+exports.templates = exports.amlhA = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace CGodE.
+   * @fileoverview Templates in namespace amlhA.
    * @public
    */
 
-  goog.module('CGodE.incrementaldom');
+  goog.module('amlhA.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,7 +153,7 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param892 = function param892() {
+    var param897 = function param897() {
       ie_open('h2');
       var dyn39 = opt_data.page.title;
       if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param892 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param897 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'CGodE.render';
+    $render.soyTemplateName = 'amlhA.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,24 +235,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var CGodE = function (_Component) {
-  _inherits(CGodE, _Component);
+var amlhA = function (_Component) {
+  _inherits(amlhA, _Component);
 
-  function CGodE() {
-    _classCallCheck(this, CGodE);
+  function amlhA() {
+    _classCallCheck(this, amlhA);
 
-    return _possibleConstructorReturn(this, (CGodE.__proto__ || Object.getPrototypeOf(CGodE)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (amlhA.__proto__ || Object.getPrototypeOf(amlhA)).apply(this, arguments));
   }
 
-  return CGodE;
+  return amlhA;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(CGodE, templates);
-exports.CGodE = CGodE;
+_metalSoy2.default.register(amlhA, templates);
+exports.amlhA = amlhA;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[294]);
+},[282]);

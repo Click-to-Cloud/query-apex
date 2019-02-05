@@ -1,7 +1,7 @@
 var pageComponent =
 webpackJsonppageComponent([18],{
 
-/***/ 268:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _conditionSoy = __webpack_require__(269);
+var _conditionSoy = __webpack_require__(287);
 
 var _conditionSoy2 = _interopRequireDefault(_conditionSoy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hSmpb = function (_Component) {
-  _inherits(hSmpb, _Component);
+var vUjrT = function (_Component) {
+  _inherits(vUjrT, _Component);
 
-  function hSmpb() {
-    _classCallCheck(this, hSmpb);
+  function vUjrT() {
+    _classCallCheck(this, vUjrT);
 
-    return _possibleConstructorReturn(this, (hSmpb.__proto__ || Object.getPrototypeOf(hSmpb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vUjrT.__proto__ || Object.getPrototypeOf(vUjrT)).apply(this, arguments));
   }
 
-  return hSmpb;
+  return vUjrT;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hSmpb, _conditionSoy2.default);
+_metalSoy2.default.register(vUjrT, _conditionSoy2.default);
 
-exports.default = hSmpb;
+exports.default = vUjrT;
 
 /***/ }),
 
-/***/ 269:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = hSmpb;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.hSmpb = undefined;
+exports.templates = exports.vUjrT = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace hSmpb.
+   * @fileoverview Templates in namespace vUjrT.
    * @public
    */
 
-  goog.module('hSmpb.incrementaldom');
+  goog.module('vUjrT.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -900,6 +900,136 @@ goog.loadModule(function (exports) {
       ie_close('p');
       $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'David\').\n    resetCondition();', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
+      ie_open('article', null, null, 'id', '9');
+      ie_open('h2');
+      itext('Date Literals');
+      ie_close('h2');
+      ie_open('p');
+      itext('The second parameter of the ');
+      ie_open('code');
+      itext('addConditionXX');
+      ie_close('code');
+      itext(' and ');
+      ie_open('code');
+      itext('conditionXX');
+      ie_close('code');
+      itext(' methods is usually a binding variable, but in some cases, we can use date literals to build date or date time related conditions more easily.');
+      ie_close('p');
+      $templateAlias2({ code: 'Query q =\n    new Query(\'Account\').\n    addConditionLe(\'LastModifiedDate\', Query.TODAY).\n    addConditionEq(\'CreatedDate\', Query.LAST_N_WEEKS(3));', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('The predefined Date Literals includes ones with no parameters, and some with an Integer as a parameter.');
+      ie_close('p');
+      ie_open('h5');
+      itext('public static final DateLiteral YESTERDAY');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral TODAY');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral TOMORROW');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_WEEK');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_WEEK');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_WEEK');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_MONTH');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_MONTH');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_MONTH');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_90_DAYS');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_90_DAYS');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_FISCAL_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_FISCAL_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_FISCAL_QUARTER');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral THIS_FISCAL_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral LAST_FISCAL_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static final DateLiteral NEXT_FISCAL_YEAR');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_DAYS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_DAYS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_WEEKS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_WEEKS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_MONTHS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_MONTHS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_QUARTERS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_QUARTERS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_YEARS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_YEARS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_FISCAL_QUARTERS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_FISCAL_QUARTERS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral LAST_N_FISCAL_YEARS(Integer n)');
+      ie_close('h5');
+      ie_open('h5');
+      itext('public static DateLiteral NEXT_N_FISCAL_YEARS(Integer n)');
+      ie_close('h5');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
@@ -909,7 +1039,7 @@ goog.loadModule(function (exports) {
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'hSmpb.render';
+    $render.soyTemplateName = 'vUjrT.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -918,24 +1048,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var hSmpb = function (_Component) {
-  _inherits(hSmpb, _Component);
+var vUjrT = function (_Component) {
+  _inherits(vUjrT, _Component);
 
-  function hSmpb() {
-    _classCallCheck(this, hSmpb);
+  function vUjrT() {
+    _classCallCheck(this, vUjrT);
 
-    return _possibleConstructorReturn(this, (hSmpb.__proto__ || Object.getPrototypeOf(hSmpb)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vUjrT.__proto__ || Object.getPrototypeOf(vUjrT)).apply(this, arguments));
   }
 
-  return hSmpb;
+  return vUjrT;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(hSmpb, templates);
-exports.hSmpb = hSmpb;
+_metalSoy2.default.register(vUjrT, templates);
+exports.vUjrT = vUjrT;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[268]);
+},[286]);

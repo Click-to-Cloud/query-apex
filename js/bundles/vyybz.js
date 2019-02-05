@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([13],{
+webpackJsonppageComponent([14],{
 
-/***/ 278:
+/***/ 294:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _subquerySoy = __webpack_require__(279);
+var _resultSoy = __webpack_require__(295);
 
-var _subquerySoy2 = _interopRequireDefault(_subquerySoy);
+var _resultSoy2 = _interopRequireDefault(_resultSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var iiymC = function (_Component) {
-  _inherits(iiymC, _Component);
+var vyybz = function (_Component) {
+  _inherits(vyybz, _Component);
 
-  function iiymC() {
-    _classCallCheck(this, iiymC);
+  function vyybz() {
+    _classCallCheck(this, vyybz);
 
-    return _possibleConstructorReturn(this, (iiymC.__proto__ || Object.getPrototypeOf(iiymC)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vyybz.__proto__ || Object.getPrototypeOf(vyybz)).apply(this, arguments));
   }
 
-  return iiymC;
+  return vyybz;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(iiymC, _subquerySoy2.default);
+_metalSoy2.default.register(vyybz, _resultSoy2.default);
 
-exports.default = iiymC;
+exports.default = vyybz;
 
 /***/ }),
 
-/***/ 279:
+/***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = iiymC;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.iiymC = undefined;
+exports.templates = exports.vyybz = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from subquery.soy.
+  // This file was automatically generated from result.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace iiymC.
+   * @fileoverview Templates in namespace vyybz.
    * @public
    */
 
-  goog.module('iiymC.incrementaldom');
+  goog.module('vyybz.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,102 +152,125 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param640 = function param640() {
+    var param604 = function param604() {
       ie_open('h6');
-      var dyn32 = opt_data.page.description;
-      if (typeof dyn32 == 'function') dyn32();else if (dyn32 != null) itext(dyn32);
+      var dyn31 = opt_data.page.description;
+      if (typeof dyn31 == 'function') dyn31();else if (dyn31 != null) itext(dyn31);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('addSubquery');
+      itext('run');
       ie_close('h2');
       ie_open('p');
-      itext('Add a subquery to the query, selecting an SObject list from a specific child relationship.');
-      ie_close('p');
-      ie_open('p');
-      itext('For example, in this query, the expression enclosed in parentheses is a subquery:');
-      ie_close('p');
-      $templateAlias2({ code: '\nSELECT Name, (SELECT LastName FROM Contacts) FROM Account', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\');', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, String fields)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fields: One or more field names in the child relationship that will be selected. If there are more than one field, they will be separated by a comma \',\'.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', \'FirstName, LastName\').\n    addSubquery(\'Notes\', \'Title\');', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, Set<String> fieldSet)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fieldSet: A set of field names in the child relationship that will be selected');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new Set<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(String relationshipName, List<String> fieldList)');
-      ie_close('h4');
-      ie_open('p');
-      itext('relationshipName: Name of the child relationship');
-      ie_close('p');
-      ie_open('p');
-      itext('fieldList: A list of field names in the child relationship that will be selected');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(\'Contacts\', new List<String>{\'FirstName\', \'LastName\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query addSubquery(Query subquery)');
-      ie_close('h4');
-      ie_open('p');
-      itext('subquery: A subquery instance constructed by the static method');
+      itext('Run the query as if running ');
       ie_open('code');
-      itext('Query.subquery');
+      itext('Database.query()');
       ie_close('code');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public List<SObject> run()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      ie_open('p');
+      itext('Alias to ');
+      ie_open('code');
+      itext('toSObjectList()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('article', null, null, 'id', '2');
       ie_open('h2');
-      itext('subquery');
+      itext('fetch');
       ie_close('h2');
       ie_open('p');
-      itext('Creates a subquery instance.');
-      ie_close('p');
-      ie_open('p');
-      itext('The instance can be linked to the main query using the ');
-      ie_open('code');
-      itext('addSubquery');
-      ie_close('code');
-      itext(' method afterwards.');
+      itext('Fetch a subset of the result');
       ie_close('p');
       ie_open('h4');
-      itext('public static Query subquery(String relationshipName)');
+      itext('public SObject fetch()');
       ie_close('h4');
       ie_open('p');
-      itext('relationshipName: Name of the child relationship');
+      itext('Fetch the first SObject from the result');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery q =\n    new Query(\'Account\').\n    addSubquery(Query.subquery(\'Contacts\'));', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Returns an SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public SObject fetch(Integer n)');
+      ie_close('h4');
+      ie_open('p');
+      itext('Fetch the nth SObject from the result');
+      ie_close('p');
+      ie_open('p');
+      itext('n: Indicates the nth SObject in the result list, starting with 0');
+      ie_close('p');
+      ie_open('p');
+      itext('Returns an SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)\n    new Query(\'Account\').\n    fetch(2);', mode: 'javascript' }, null, opt_ijData);
+      ie_open('h4');
+      itext('public List<SObject> fetch(Integer first, Integer last)');
+      ie_close('h4');
+      ie_open('p');
+      itext('Fetch a subset of result in the range [first, last)');
+      ie_close('p');
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    fetch(2, 4);', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '3');
+      ie_open('h2');
+      itext('toSObjectList');
+      ie_close('h2');
+      ie_open('p');
+      itext('Run the query as if running ');
+      ie_open('code');
+      itext('Database.query()');
+      ie_close('code');
+      ie_close('p');
+      ie_open('h4');
+      itext('public List<SObject> toSObjectList()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Returns a list of SObject');
+      ie_close('p');
+      ie_open('p');
+      itext('Alias to ');
+      ie_open('code');
+      itext('run()');
+      ie_close('code');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    toSObjectList();', mode: 'javascript' }, null, opt_ijData);
+      ie_close('article');
+      ie_open('article', null, null, 'id', '4');
+      ie_open('h2');
+      itext('toIdList');
+      ie_close('h2');
+      ie_open('p');
+      itext('Run the query and return the Id list of the result');
+      ie_close('p');
+      ie_open('h4');
+      itext('public List<Id> toIdList()');
+      ie_close('h4');
+      ie_open('p');
+      itext('Returns a list of Id');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Id> accounts =\n    new Query(\'Account\').\n    toIdList();', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param640 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param604 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'iiymC.render';
+    $render.soyTemplateName = 'vyybz.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -256,24 +279,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var iiymC = function (_Component) {
-  _inherits(iiymC, _Component);
+var vyybz = function (_Component) {
+  _inherits(vyybz, _Component);
 
-  function iiymC() {
-    _classCallCheck(this, iiymC);
+  function vyybz() {
+    _classCallCheck(this, vyybz);
 
-    return _possibleConstructorReturn(this, (iiymC.__proto__ || Object.getPrototypeOf(iiymC)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (vyybz.__proto__ || Object.getPrototypeOf(vyybz)).apply(this, arguments));
   }
 
-  return iiymC;
+  return vyybz;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(iiymC, templates);
-exports.iiymC = iiymC;
+_metalSoy2.default.register(vyybz, templates);
+exports.vyybz = vyybz;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[278]);
+},[294]);

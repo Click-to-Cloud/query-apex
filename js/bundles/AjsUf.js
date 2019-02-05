@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([6],{
+webpackJsonppageComponent([4],{
 
-/***/ 286:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_3Soy = __webpack_require__(287);
+var _step_5Soy = __webpack_require__(279);
 
-var _step_3Soy2 = _interopRequireDefault(_step_3Soy);
+var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var hPYKV = function (_Component) {
-  _inherits(hPYKV, _Component);
+var AjsUf = function (_Component) {
+  _inherits(AjsUf, _Component);
 
-  function hPYKV() {
-    _classCallCheck(this, hPYKV);
+  function AjsUf() {
+    _classCallCheck(this, AjsUf);
 
-    return _possibleConstructorReturn(this, (hPYKV.__proto__ || Object.getPrototypeOf(hPYKV)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AjsUf.__proto__ || Object.getPrototypeOf(AjsUf)).apply(this, arguments));
   }
 
-  return hPYKV;
+  return AjsUf;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(hPYKV, _step_3Soy2.default);
+_metalSoy2.default.register(AjsUf, _step_5Soy2.default);
 
-exports.default = hPYKV;
+exports.default = AjsUf;
 
 /***/ }),
 
-/***/ 287:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = hPYKV;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.hPYKV = undefined;
+exports.templates = exports.AjsUf = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_3.soy.
+  // This file was automatically generated from step_5.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace hPYKV.
+   * @fileoverview Templates in namespace AjsUf.
    * @public
    */
 
-  goog.module('hPYKV.incrementaldom');
+  goog.module('AjsUf.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,56 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param733 = function param733() {
+    var param825 = function param825() {
       ie_open('h2');
-      var dyn35 = opt_data.page.title;
-      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
+      var dyn37 = opt_data.page.title;
+      if (typeof dyn37 == 'function') dyn37();else if (dyn37 != null) itext(dyn37);
       ie_close('h2');
       ie_open('p');
-      itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
+      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
+      ie_close('p');
+      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Now let\'s try querying the accounts owned by the current user:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('equivalent to:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
       ie_close('p');
       ie_open('p');
-      itext('For example, this query will only select only the Name field from the Account object.');
+      itext('Examples are:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').selectFields(\'Name\').run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This is equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name FROM Account ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('We can also call \'selectFields\' method multiple times, the result is additive:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'Phone\').\n    selectFields(\'Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('That\'s equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name, Phone, Website, Description FROM Account ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Alternatively, we can put all the fields in one \'selectFields\' method, still preserving the additivity:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name, Phone, Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Compare with:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<String> fields = new List<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('or:');
-      ie_close('p');
-      $templateAlias2({ code: 'Set<String> fields = new Set<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('To make user convenient, Query.apex provides the \'selectAllFields\' method to select all user accessible fields:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields().\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param733 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param825 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'hPYKV.render';
+    $render.soyTemplateName = 'AjsUf.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -211,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var hPYKV = function (_Component) {
-  _inherits(hPYKV, _Component);
+var AjsUf = function (_Component) {
+  _inherits(AjsUf, _Component);
 
-  function hPYKV() {
-    _classCallCheck(this, hPYKV);
+  function AjsUf() {
+    _classCallCheck(this, AjsUf);
 
-    return _possibleConstructorReturn(this, (hPYKV.__proto__ || Object.getPrototypeOf(hPYKV)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AjsUf.__proto__ || Object.getPrototypeOf(AjsUf)).apply(this, arguments));
   }
 
-  return hPYKV;
+  return AjsUf;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(hPYKV, templates);
-exports.hPYKV = hPYKV;
+_metalSoy2.default.register(AjsUf, templates);
+exports.AjsUf = AjsUf;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[286]);
+},[278]);

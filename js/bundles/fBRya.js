@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([5],{
+webpackJsonppageComponent([1],{
 
-/***/ 288:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_4Soy = __webpack_require__(289);
+var _step_8Soy = __webpack_require__(285);
 
-var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
+var _step_8Soy2 = _interopRequireDefault(_step_8Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var iDkQf = function (_Component) {
-  _inherits(iDkQf, _Component);
+var fBRya = function (_Component) {
+  _inherits(fBRya, _Component);
 
-  function iDkQf() {
-    _classCallCheck(this, iDkQf);
+  function fBRya() {
+    _classCallCheck(this, fBRya);
 
-    return _possibleConstructorReturn(this, (iDkQf.__proto__ || Object.getPrototypeOf(iDkQf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (fBRya.__proto__ || Object.getPrototypeOf(fBRya)).apply(this, arguments));
   }
 
-  return iDkQf;
+  return fBRya;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(iDkQf, _step_4Soy2.default);
+_metalSoy2.default.register(fBRya, _step_8Soy2.default);
 
-exports.default = iDkQf;
+exports.default = fBRya;
 
 /***/ }),
 
-/***/ 289:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = iDkQf;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.iDkQf = undefined;
+exports.templates = exports.fBRya = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_4.soy.
+  // This file was automatically generated from step_8.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace iDkQf.
+   * @fileoverview Templates in namespace fBRya.
    * @public
    */
 
-  goog.module('iDkQf.incrementaldom');
+  goog.module('fBRya.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,44 +153,48 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param784 = function param784() {
+    var param963 = function param963() {
       ie_open('h2');
-      var dyn36 = opt_data.page.title;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
+      var dyn40 = opt_data.page.title;
+      if (typeof dyn40 == 'function') dyn40();else if (dyn40 != null) itext(dyn40);
       ie_close('h2');
       ie_open('p');
-      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
+      itext('In this section, we will see how a child relationship query, sometimes called subquery, can be constructed. But before that, let\'s review how a subquery works in Salesforce:');
       ie_close('p');
       ie_open('p');
-      itext('The statement is equivalent to:');
+      itext('Take the objects Account and Contact as an example. Contact object has a lookup field (foreign key) pointing to a Contact, so Account is the parent of Contact, and in reverse Contact is the child of Account. We already saw that in previous sections, when querying the Contact object, it\'s also possible to get the fields in the parent object, which is Account object in this case. However, it would be slightly more complicated when trying to query a field from a child.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      itext('Here is an example of such a query in SOQL:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nSELECT Name, (SELECT FirstName, LastName FROM Contacts) FROM Account', mode: 'text' }, null, opt_ijData);
       ie_open('p');
-      itext('equivalent to:');
+      itext('In this case, \'Contacts\' is the child relationship name, and the query inside the parentheses is a subquery.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Meanwhile, multiple layer parent relationship is supported:');
+      itext('Let\'s see how to construct such a query using Query.apex:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        selectFields(\'FirstName, LastName\')\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Similar to the condition, we need to construct a subquery using the static method \'subquery\', which takes a child relationship name as a parameter, before calling the \'addSubquery\' member method.');
+      ie_close('p');
+      ie_open('p');
+      itext('Here is another example of a subquery with conditions and limits:');
+      ie_close('p');
+      $templateAlias2({ code: '\nList<Account> accounts =\n    new Query(\'Account\').\n    addSubquery(\n        Query.subquery(\'Contacts\').\n        addConditionEq(\'FirstName\', \'Sam\').\n        addConditionIn(\'LastName\', new List<String>{\'Tarly\'})\n    ).\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('As we can see, after constructing the subquery, we can still do field selection and add conditions using the same methods in Query. Using a combination of the methods above, we should be able to build a query with a subquery in any complexity.');
+      ie_close('p');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param784 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param963 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'iDkQf.render';
+    $render.soyTemplateName = 'fBRya.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -199,24 +203,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var iDkQf = function (_Component) {
-  _inherits(iDkQf, _Component);
+var fBRya = function (_Component) {
+  _inherits(fBRya, _Component);
 
-  function iDkQf() {
-    _classCallCheck(this, iDkQf);
+  function fBRya() {
+    _classCallCheck(this, fBRya);
 
-    return _possibleConstructorReturn(this, (iDkQf.__proto__ || Object.getPrototypeOf(iDkQf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (fBRya.__proto__ || Object.getPrototypeOf(fBRya)).apply(this, arguments));
   }
 
-  return iDkQf;
+  return fBRya;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(iDkQf, templates);
-exports.iDkQf = iDkQf;
+_metalSoy2.default.register(fBRya, templates);
+exports.fBRya = fBRya;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[288]);
+},[284]);

@@ -1,18 +1,15 @@
+/**
+ * Senna.js - A blazing-fast Single Page Application engine
+ * @author Liferay, Inc.
+ * @version v2.7.3
+ * @link http://sennajs.com
+ * @license BSD-3-Clause
+ */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
 	(factory((global.senna = {})));
 }(this, (function (exports) { 'use strict';
-
-var globals = globals || {};
-
-if (typeof window !== 'undefined') {
-	globals.window = window;
-}
-
-if (typeof document !== 'undefined') {
-	globals.document = document;
-}
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -211,7 +208,7 @@ function disableCompatibilityMode() {
  *       using "key" to keep working like before. NOTE: this may cause
  *       problems, since "key" is meant to be used differently. Only use this
  *       if it's not possible to upgrade the code to use "ref" instead.
- * @param {Object=} opt_data Optional object with data to specify more
+ * @param {Object=} data Optional object with data to specify more
  *     details, such as:
  *         - renderers {Array} the template renderers that should be in
  *           compatibility mode, either their constructors or strings
@@ -220,9 +217,9 @@ function disableCompatibilityMode() {
  * @type {Object}
  */
 function enableCompatibilityMode() {
-  var opt_data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  compatibilityModeData_ = opt_data;
+  compatibilityModeData_ = data;
 }
 
 /**
@@ -275,17 +272,20 @@ function getFunctionName(fn) {
  * be recalculated even if this function is called multiple times.
  * @param {!function()} ctor Class constructor.
  * @param {string} propertyName Property name to be merged.
- * @param {function(*, *):*=} opt_mergeFn Function that receives the merged
+ * @param {function(*, *):*=} mergeFn Function that receives the merged
  *     value of the property so far and the next value to be merged to it.
  *     Should return these two merged together. If not passed the final property
  *     will be the first truthy value among ancestors.
+ * @return {Object}
  */
-function getStaticProperty(ctor, propertyName, opt_mergeFn) {
+function getStaticProperty(ctor, propertyName) {
+  var mergeFn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : getFirstTruthy_;
+
   var mergedName = propertyName + '_MERGED';
   if (!ctor.hasOwnProperty(mergedName)) {
+    // eslint-disable-next-line
     var merged = ctor.hasOwnProperty(propertyName) ? ctor[propertyName] : null;
     if (ctor.__proto__ && !ctor.__proto__.isPrototypeOf(Function)) {
-      var mergeFn = opt_mergeFn || getFirstTruthy_;
       merged = mergeFn(merged, getStaticProperty(ctor.__proto__, propertyName, mergeFn));
     }
     ctor[mergedName] = merged;
@@ -294,34 +294,35 @@ function getStaticProperty(ctor, propertyName, opt_mergeFn) {
 }
 
 /**
- * Gets an unique id. If `opt_object` argument is passed, the object is
+ * Gets an unique id. If `object` argument is passed, the object is
  * mutated with an unique id. Consecutive calls with the same object
  * reference won't mutate the object again, instead the current object uid
  * returns. See {@link UID_PROPERTY}.
- * @param {Object=} opt_object Optional object to be mutated with the uid. If
+ * @param {Object=} object Optional object to be mutated with the uid. If
  *     not specified this method only returns the uid.
- * @param {boolean=} opt_noInheritance Optional flag indicating if this
+ * @param {boolean=} noInheritance Optional flag indicating if this
  *     object's uid property can be inherited from parents or not.
  * @throws {Error} when invoked to indicate the method should be overridden.
+ * @return {number}
  */
-function getUid(opt_object, opt_noInheritance) {
-  if (opt_object) {
-    var id = opt_object[UID_PROPERTY];
-    if (opt_noInheritance && !opt_object.hasOwnProperty(UID_PROPERTY)) {
+function getUid(object, noInheritance) {
+  if (object) {
+    var id = object[UID_PROPERTY];
+    if (noInheritance && !object.hasOwnProperty(UID_PROPERTY)) {
       id = null;
     }
-    return id || (opt_object[UID_PROPERTY] = uniqueIdCounter_++);
+    return id || (object[UID_PROPERTY] = uniqueIdCounter_++);
   }
   return uniqueIdCounter_++;
 }
 
 /**
  * The identity function. Returns its first argument.
- * @param {*=} opt_returnValue The single value that will be returned.
+ * @param {*=} returnValue The single value that will be returned.
  * @return {?} The first argument.
  */
-function identityFunction(opt_returnValue) {
-  return opt_returnValue;
+function identityFunction(returnValue) {
+  return returnValue;
 }
 
 /**
@@ -447,10 +448,18 @@ function isString(val) {
  * Sets to true if running inside Node.js environment with extra check for
  * `process.browser` to skip Karma runner environment. Karma environment has
  * `process` defined even though it runs on the browser.
+ * @param {?Object} options Contains `checkEnv` property which if true, checks
+ * the NODE_ENV variable. If NODE_ENV equals 'test', the function returns false.
  * @return {boolean}
  */
 function isServerSide() {
-  return typeof process !== 'undefined' && typeof process.env !== 'undefined' && process.env.NODE_ENV !== 'test' && !process.browser;
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { checkEnv: true };
+
+  var serverSide = typeof process !== 'undefined' && !process.browser;
+  if (serverSide && options.checkEnv) {
+    serverSide = typeof process.env !== 'undefined' && process.env.NODE_ENV !== 'test';
+  }
+  return serverSide;
 }
 
 /**
@@ -492,6 +501,10 @@ var core$2 = Object.freeze({
 // default imports for this file still work. It's best to use the named exports
 // for each function instead though, since that allows bundlers like Rollup to
 // reduce the bundle size by removing unused code.
+
+/**
+ * Set of utilities for array operations
+ */
 
 var array = function () {
 	function array() {
@@ -541,14 +554,15 @@ var array = function () {
 		/**
    * Transforms the input nested array to become flat.
    * @param {Array.<*|Array.<*>>} arr Nested array to flatten.
-   * @param {Array.<*>} opt_output Optional output array.
+   * @param {Array.<*>=} output Optional output array.
    * @return {Array.<*>} Flat array.
    */
 
 	}, {
 		key: 'flatten',
-		value: function flatten(arr, opt_output) {
-			var output = opt_output || [];
+		value: function flatten(arr) {
+			var output = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
 			for (var i = 0; i < arr.length; i++) {
 				if (Array.isArray(arr[i])) {
 					array.flatten(arr[i], output);
@@ -596,7 +610,7 @@ var array = function () {
    * is faster and working on all array-like objects (like arguments).
    * @param {!Object} arr Array-like object to slice.
    * @param {number} start The index that should start the slice.
-   * @param {number=} opt_end The index where the slice should end, not
+   * @param {number=} end The index where the slice should end, not
    *   included in the final array. If not given, all elements after the
    *   start index will be included.
    * @return {!Array}
@@ -604,9 +618,10 @@ var array = function () {
 
 	}, {
 		key: 'slice',
-		value: function slice(arr, start, opt_end) {
+		value: function slice(arr, start) {
+			var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : arr.length;
+
 			var sliced = [];
-			var end = isDef(opt_end) ? opt_end : arr.length;
 			for (var i = start; i < end; i++) {
 				sliced.push(arr[i]);
 			}
@@ -616,7 +631,7 @@ var array = function () {
 	return array;
 }();
 
-/*!
+/* !
  * Polyfill from Google's Closure Library.
  * Copyright 2013 The Closure Library Authors. All Rights Reserved.
  */
@@ -641,18 +656,18 @@ async.throwException = function (exception) {
  * Fires the provided callback just before the current callstack unwinds, or as
  * soon as possible after the current JS execution context.
  * @param {function(this:THIS)} callback
- * @param {THIS=} opt_context Object to use as the "this value" when calling
+ * @param {THIS=} context Object to use as the "this value" when calling
  *     the provided function.
  * @template THIS
  */
-async.run = function (callback, opt_context) {
+async.run = function (callback, context) {
 	if (!async.run.workQueueScheduled_) {
 		// Nothing is currently scheduled, schedule it now.
 		async.nextTick(async.run.processWorkQueue);
 		async.run.workQueueScheduled_ = true;
 	}
 
-	async.run.workQueue_.push(new async.run.WorkItem_(callback, opt_context));
+	async.run.workQueue_.push(new async.run.WorkItem_(callback, context));
 };
 
 /** @private {boolean} */
@@ -708,27 +723,23 @@ async.run.WorkItem_ = function (fn, scope) {
  * reasons.
  * @param {function(this:SCOPE)} callback Callback function to fire as soon as
  *     possible.
- * @param {SCOPE=} opt_context Object in whose scope to call the listener.
+ * @param {SCOPE=} context Object in whose scope to call the listener.
  * @template SCOPE
  */
-async.nextTick = function (callback, opt_context) {
+async.nextTick = function (callback, context) {
 	var cb = callback;
-	if (opt_context) {
-		cb = callback.bind(opt_context);
+	if (context) {
+		cb = callback.bind(context);
 	}
 	cb = async.nextTick.wrapCallback_(cb);
-	// Introduced and currently only supported by IE10.
-	// Verify if variable is defined on the current runtime (i.e., node, browser).
-	// Can't use typeof enclosed in a function (such as core.isFunction) or an
-	// exception will be thrown when the function is called on an environment
-	// where the variable is undefined.
-	if (typeof setImmediate === 'function') {
-		setImmediate(cb);
-		return;
-	}
 	// Look for and cache the custom fallback version of setImmediate.
 	if (!async.nextTick.setImmediate_) {
-		async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+		if (typeof setImmediate === 'function' && isServerSide({ checkEnv: false })) {
+			async.nextTick.setImmediate_ = setImmediate;
+		} else {
+			// eslint-disable-next-line
+			async.nextTick.setImmediate_ = async.nextTick.getSetImmediateEmulator_();
+		}
 	}
 	async.nextTick.setImmediate_(cb);
 };
@@ -770,6 +781,7 @@ async.nextTick.getSetImmediateEmulator_ = function () {
 			var iframe = document.createElement('iframe');
 			iframe.style.display = 'none';
 			iframe.src = '';
+			iframe.title = '';
 			document.documentElement.appendChild(iframe);
 			var win = iframe.contentWindow;
 			var doc = win.document;
@@ -844,8 +856,8 @@ async.nextTick.getSetImmediateEmulator_ = function () {
  * @return {function()} The wrapped callback.
  * @private
  */
-async.nextTick.wrapCallback_ = function (opt_returnValue) {
-	return opt_returnValue;
+async.nextTick.wrapCallback_ = function (callback) {
+	return callback;
 };
 
 /**
@@ -857,6 +869,9 @@ async.nextTick.wrapCallback_ = function (opt_returnValue) {
  */
 
 var Disposable = function () {
+	/**
+  * Disposable constructor
+  */
 	function Disposable() {
 		classCallCheck(this, Disposable);
 
@@ -906,6 +921,10 @@ var Disposable = function () {
 	return Disposable;
 }();
 
+/**
+ * Set of utilities for object operations
+ */
+
 var object = function () {
 	function object() {
 		classCallCheck(this, object);
@@ -921,10 +940,18 @@ var object = function () {
    * @return {Object} Returns the target object reference.
    */
 		value: function mixin(target) {
-			var key = void 0,
-			    source = void 0;
-			for (var i = 1; i < arguments.length; i++) {
-				source = arguments[i];
+			var key = void 0;
+			var source = void 0;
+
+			for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+				args[_key - 1] = arguments[_key];
+			}
+
+			for (var i = 0; i < args.length; i++) {
+				source = args[i];
+				// Possible prototype chain leak, breaks 1 metal-dom and
+				// 1 metal-incremental-dom test if guard-for-in rule is addressed
+				// eslint-disable-next-line
 				for (key in source) {
 					target[key] = source[key];
 				}
@@ -935,15 +962,16 @@ var object = function () {
 		/**
    * Returns an object based on its fully qualified external name.
    * @param {string} name The fully qualified name.
-   * @param {object=} opt_obj The object within which to look; default is
+   * @param {object=} scope The object within which to look; default is
    *     <code>window</code>.
    * @return {?} The value (object or primitive) or, if not found, undefined.
    */
 
 	}, {
 		key: 'getObjectByName',
-		value: function getObjectByName(name, opt_obj) {
-			var scope = opt_obj || window;
+		value: function getObjectByName(name) {
+			var scope = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+
 			var parts = name.split('.');
 			return parts.reduce(function (part, key) {
 				return part[key];
@@ -972,6 +1000,8 @@ var object = function () {
 		/**
    * Checks if the two given objects are equal. This is done via a shallow
    * check, including only the keys directly contained by the 2 objects.
+   * @param {Object} obj1
+   * @param {Object} obj2
    * @return {boolean}
    */
 
@@ -998,6 +1028,10 @@ var object = function () {
 	}]);
 	return object;
 }();
+
+/**
+ * Set of utilities for string operations
+ */
 
 var string = function () {
 	function string() {
@@ -1042,22 +1076,22 @@ var string = function () {
 		}
 
 		/**
-  * Escapes characters in the string that are not safe to use in a RegExp.
-  * @param {*} str The string to escape. If not a string, it will be casted
-  *     to one.
-  * @return {string} A RegExp safe, escaped copy of {@code s}.
-  */
+   * Escapes characters in the string that are not safe to use in a RegExp.
+   * @param {*} str The string to escape. If not a string, it will be casted
+   *     to one.
+   * @return {string} A RegExp safe, escaped copy of {@code s}.
+   */
 
 	}, {
 		key: 'escapeRegex',
 		value: function escapeRegex(str) {
-			return String(str).replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g, '\\$1').replace(/\x08/g, '\\x08');
+			return String(str).replace(/([-()[\]{}+?*.$^|,:#<!\\])/g, '\\$1').replace(/\x08/g, '\\x08'); // eslint-disable-line
 		}
 
 		/**
-  * Returns a string with at least 64-bits of randomness.
-  * @return {string} A random string, e.g. sn1s7vb4gcic.
-  */
+   * Returns a string with at least 64-bits of randomness.
+   * @return {string} A random string, e.g. sn1s7vb4gcic.
+   */
 
 	}, {
 		key: 'getRandomString',
@@ -1105,6 +1139,2269 @@ var string = function () {
 	}]);
 	return string;
 }();
+
+var METAL_DATA = '__metal_data__';
+
+/**
+ * Set of utilities for dom data operations
+ */
+
+var domData = function () {
+	function domData() {
+		classCallCheck(this, domData);
+	}
+
+	createClass(domData, null, [{
+		key: 'get',
+
+		/**
+   * Gets Metal.js's data for the given element.
+   * @param {!Element} element
+   * @param {string=} name Optional property from the data to be returned.
+   * @param {*=} initialValue Optional value to the set the requested property
+   *     to if it doesn't exist yet in the data.
+   * @return {!Object}
+   */
+		value: function get$$1(element, name, initialValue) {
+			if (!element[METAL_DATA]) {
+				element[METAL_DATA] = {};
+			}
+			if (!name) {
+				return element[METAL_DATA];
+			}
+			if (!isDef(element[METAL_DATA][name]) && isDef(initialValue)) {
+				element[METAL_DATA][name] = initialValue;
+			}
+			return element[METAL_DATA][name];
+		}
+
+		/**
+   * Checks if the given element has data stored in it.
+   * @param {!Element} element
+   * @return {boolean}
+   */
+
+	}, {
+		key: 'has',
+		value: function has(element) {
+			return !!element[METAL_DATA];
+		}
+
+		/**
+   * Sets Metal.js's data for the given element.
+   * @param {!Element} element
+   * @param {string=} name Property from the data to be set.
+   * @param {*=} value Value to be set on the element.
+   * @return {!Object|*}
+   */
+
+	}, {
+		key: 'set',
+		value: function set$$1(element, name, value) {
+			if (!element[METAL_DATA]) {
+				element[METAL_DATA] = {};
+			}
+			if (!name || !isDef(value)) {
+				return element[METAL_DATA];
+			}
+			element[METAL_DATA][name] = value;
+			return element[METAL_DATA][name];
+		}
+	}]);
+	return domData;
+}();
+
+/**
+ * EventHandle utility. Holds information about an event subscription, and
+ * allows removing them easily.
+ * EventHandle is a Disposable, but it's important to note that the
+ * EventEmitter that created it is not the one responsible for disposing it.
+ * That responsibility is for the code that holds a reference to it.
+ * @extends {Disposable}
+ */
+
+var EventHandle = function (_Disposable) {
+	inherits(EventHandle, _Disposable);
+
+	/**
+  * EventHandle constructor
+  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  */
+	function EventHandle(emitter, event, listener) {
+		classCallCheck(this, EventHandle);
+
+		/**
+   * The EventEmitter instance that the event was subscribed to.
+   * @type {EventEmitter}
+   * @protected
+   */
+		var _this = possibleConstructorReturn(this, (EventHandle.__proto__ || Object.getPrototypeOf(EventHandle)).call(this));
+
+		_this.emitter_ = emitter;
+
+		/**
+   * The name of the event that was subscribed to.
+   * @type {string}
+   * @protected
+   */
+		_this.event_ = event;
+
+		/**
+   * The listener subscribed to the event.
+   * @type {Function}
+   * @protected
+   */
+		_this.listener_ = listener;
+		return _this;
+	}
+
+	/**
+  * Disposes of this instance's object references.
+  * @override
+  */
+
+
+	createClass(EventHandle, [{
+		key: 'disposeInternal',
+		value: function disposeInternal() {
+			this.removeListener();
+			this.emitter_ = null;
+			this.listener_ = null;
+		}
+
+		/**
+   * Removes the listener subscription from the emitter.
+   */
+
+	}, {
+		key: 'removeListener',
+		value: function removeListener() {
+			if (!this.emitter_.isDisposed()) {
+				this.emitter_.removeListener(this.event_, this.listener_);
+			}
+		}
+	}]);
+	return EventHandle;
+}(Disposable);
+
+var singleArray_ = [0];
+
+/**
+ * EventEmitter utility.
+ * @extends {Disposable}
+ */
+
+var EventEmitter$1 = function (_Disposable) {
+	inherits(EventEmitter, _Disposable);
+
+	/**
+  * EventEmitter constructor
+  */
+	function EventEmitter() {
+		classCallCheck(this, EventEmitter);
+
+		/**
+   * Holds event listeners scoped by event type.
+   * @type {Object<string, !Array<!function()>>}
+   * @protected
+   */
+		var _this = possibleConstructorReturn(this, (EventEmitter.__proto__ || Object.getPrototypeOf(EventEmitter)).call(this));
+
+		_this.events_ = null;
+
+		/**
+   * Handlers that are triggered when an event is listened to.
+   * @type {Array}
+   */
+		_this.listenerHandlers_ = null;
+
+		/**
+   * Configuration option which determines if an event facade should be sent
+   * as a param of listeners when emitting events. If set to true, the facade
+   * will be passed as the first argument of the listener.
+   * @type {boolean}
+   * @protected
+   */
+		_this.shouldUseFacade_ = false;
+		return _this;
+	}
+
+	/**
+  * Adds a handler to given holder variable. If the holder doesn't have a
+  * value yet, it will receive the handler directly. If the holder is an array,
+  * the value will just be added to it. Otherwise, the holder will be set to a
+  * new array containing its previous value plus the new handler.
+  * @param {*} holder
+  * @param {!function()|Object} handler
+  * @return {*} The holder's new value.
+  * @protected
+  */
+
+
+	createClass(EventEmitter, [{
+		key: 'addHandler_',
+		value: function addHandler_(holder, handler) {
+			if (!holder) {
+				holder = handler;
+			} else {
+				if (!Array.isArray(holder)) {
+					holder = [holder];
+				}
+				holder.push(handler);
+			}
+			return holder;
+		}
+
+		/**
+   * Adds a listener to the end of the listeners array for the specified events.
+   * @param {!(Array|string)} event
+   * @param {!Function} listener
+   * @param {boolean} defaultListener Flag indicating if this listener is a default
+   *   action for this event. Default actions are run last, and only if no previous
+   *   listener call `preventDefault()` on the received event facade.
+   * @return {!EventHandle} Can be used to remove the listener.
+   */
+
+	}, {
+		key: 'addListener',
+		value: function addListener(event, listener, defaultListener) {
+			this.validateListener_(listener);
+
+			var events = this.toEventsArray_(event);
+			for (var i = 0; i < events.length; i++) {
+				this.addSingleListener_(events[i], listener, defaultListener);
+			}
+
+			return new EventHandle(this, event, listener);
+		}
+
+		/**
+   * Adds a listener to the end of the listeners array for a single event.
+   * @param {string} event
+   * @param {!Function} listener
+   * @param {boolean} defaultListener Flag indicating if this listener is a default
+   *   action for this event. Default actions are run last, and only if no previous
+   *   listener call `preventDefault()` on the received event facade.
+   * @param {Function=} origin The original function that was added as a
+   *   listener, if there is any.
+   * @protected
+   */
+
+	}, {
+		key: 'addSingleListener_',
+		value: function addSingleListener_(event, listener, defaultListener, origin) {
+			this.runListenerHandlers_(event);
+			if (defaultListener || origin) {
+				listener = {
+					default: defaultListener,
+					fn: listener,
+					origin: origin
+				};
+			}
+			this.events_ = this.events_ || {};
+			this.events_[event] = this.addHandler_(this.events_[event], listener);
+		}
+
+		/**
+   * Builds facade for the given event.
+   * @param {string} event
+   * @return {Object}
+   * @protected
+   */
+
+	}, {
+		key: 'buildFacade_',
+		value: function buildFacade_(event) {
+			if (this.getShouldUseFacade()) {
+				var facade = {
+					preventDefault: function preventDefault() {
+						facade.preventedDefault = true;
+					},
+					target: this,
+					type: event
+				};
+				return facade;
+			}
+		}
+
+		/**
+   * Disposes of this instance's object references.
+   * @override
+   */
+
+	}, {
+		key: 'disposeInternal',
+		value: function disposeInternal() {
+			this.events_ = null;
+		}
+
+		/**
+   * Execute each of the listeners in order with the supplied arguments.
+   * @param {string} event
+   * @param {*} opt_args [arg1], [arg2], [...]
+   * @return {boolean} Returns true if event had listeners, false otherwise.
+   */
+
+	}, {
+		key: 'emit',
+		value: function emit(event) {
+			var listeners = this.getRawListeners_(event);
+			if (listeners.length === 0) {
+				return false;
+			}
+
+			var args = array.slice(arguments, 1); // eslint-disable-line
+			this.runListeners_(listeners, args, this.buildFacade_(event));
+			return true;
+		}
+
+		/**
+   * Gets the listener objects for the given event, if there are any.
+   * @param {string} event
+   * @return {!Array}
+   * @protected
+   */
+
+	}, {
+		key: 'getRawListeners_',
+		value: function getRawListeners_(event) {
+			var directListeners = toArray$1(this.events_ && this.events_[event]);
+			return directListeners.concat(toArray$1(this.events_ && this.events_['*']));
+		}
+
+		/**
+   * Gets the configuration option which determines if an event facade should
+   * be sent as a param of listeners when emitting events. If set to true, the
+   * facade will be passed as the first argument of the listener.
+   * @return {boolean}
+   */
+
+	}, {
+		key: 'getShouldUseFacade',
+		value: function getShouldUseFacade() {
+			return this.shouldUseFacade_;
+		}
+
+		/**
+   * Returns an array of listeners for the specified event.
+   * @param {string} event
+   * @return {Array} Array of listeners.
+   */
+
+	}, {
+		key: 'listeners',
+		value: function listeners(event) {
+			return this.getRawListeners_(event).map(function (listener) {
+				return listener.fn ? listener.fn : listener;
+			});
+		}
+
+		/**
+   * Adds a listener that will be invoked a fixed number of times for the
+   * events. After each event is triggered the specified amount of times, the
+   * listener is removed for it.
+   * @param {!(Array|string)} event
+   * @param {number} amount The amount of times this event should be listened
+   * to.
+   * @param {!Function} listener
+   * @return {!EventHandle} Can be used to remove the listener.
+   */
+
+	}, {
+		key: 'many',
+		value: function many(event, amount, listener) {
+			var events = this.toEventsArray_(event);
+			for (var i = 0; i < events.length; i++) {
+				this.many_(events[i], amount, listener);
+			}
+
+			return new EventHandle(this, event, listener);
+		}
+
+		/**
+   * Adds a listener that will be invoked a fixed number of times for a single
+   * event. After the event is triggered the specified amount of times, the
+   * listener is removed.
+   * @param {string} event
+   * @param {number} amount The amount of times this event should be listened
+   * to.
+   * @param {!Function} listener
+   * @protected
+   */
+
+	}, {
+		key: 'many_',
+		value: function many_(event, amount, listener) {
+			var self = this;
+
+			if (amount <= 0) {
+				return;
+			}
+
+			/**
+    *
+    */
+			function handlerInternal() {
+				if (--amount === 0) {
+					self.removeListener(event, handlerInternal);
+				}
+				listener.apply(self, arguments); // eslint-disable-line
+			}
+
+			self.addSingleListener_(event, handlerInternal, false, listener);
+		}
+
+		/**
+   * Checks if a listener object matches the given listener function. To match,
+   * it needs to either point to that listener or have it as its origin.
+   * @param {!Object} listenerObj
+   * @param {!Function} listener
+   * @return {boolean}
+   * @protected
+   */
+
+	}, {
+		key: 'matchesListener_',
+		value: function matchesListener_(listenerObj, listener) {
+			var fn = listenerObj.fn || listenerObj;
+			return fn === listener || listenerObj.origin && listenerObj.origin === listener // eslint-disable-line
+			;
+		}
+
+		/**
+   * Removes a listener for the specified events.
+   * Caution: changes array indices in the listener array behind the listener.
+   * @param {!(Array|string)} event
+   * @param {!Function} listener
+   * @return {!Object} Returns emitter, so calls can be chained.
+   */
+
+	}, {
+		key: 'off',
+		value: function off(event, listener) {
+			this.validateListener_(listener);
+			if (!this.events_) {
+				return this;
+			}
+
+			var events = this.toEventsArray_(event);
+			for (var i = 0; i < events.length; i++) {
+				this.events_[events[i]] = this.removeMatchingListenerObjs_(toArray$1(this.events_[events[i]]), listener);
+			}
+
+			return this;
+		}
+
+		/**
+   * Adds a listener to the end of the listeners array for the specified events.
+   * @param {!(Array|string)} events
+   * @param {!Function} listener
+   * @return {!EventHandle} Can be used to remove the listener.
+   */
+
+	}, {
+		key: 'on',
+		value: function on() {
+			return this.addListener.apply(this, arguments); // eslint-disable-line
+		}
+
+		/**
+   * Adds handler that gets triggered when an event is listened to on this
+   * instance.
+   * @param {!function()} handler
+   */
+
+	}, {
+		key: 'onListener',
+		value: function onListener(handler) {
+			this.listenerHandlers_ = this.addHandler_(this.listenerHandlers_, handler); // eslint-disable-line
+		}
+
+		/**
+   * Adds a one time listener for the events. This listener is invoked only the
+   * next time each event is fired, after which it is removed.
+   * @param {!(Array|string)} events
+   * @param {!Function} listener
+   * @return {!EventHandle} Can be used to remove the listener.
+   */
+
+	}, {
+		key: 'once',
+		value: function once(events, listener) {
+			return this.many(events, 1, listener);
+		}
+
+		/**
+   * Removes all listeners, or those of the specified events. It's not a good
+   * idea to remove listeners that were added elsewhere in the code,
+   * especially when it's on an emitter that you didn't create.
+   * @param {(Array|string)=} event
+   * @return {!Object} Returns emitter, so calls can be chained.
+   */
+
+	}, {
+		key: 'removeAllListeners',
+		value: function removeAllListeners(event) {
+			if (this.events_) {
+				if (event) {
+					var events = this.toEventsArray_(event);
+					for (var i = 0; i < events.length; i++) {
+						this.events_[events[i]] = null;
+					}
+				} else {
+					this.events_ = null;
+				}
+			}
+			return this;
+		}
+
+		/**
+   * Removes all listener objects from the given array that match the given
+   * listener function.
+   * @param {Array.<Object>} listenerObjs
+   * @param {!Function} listener
+   * @return {Array.<Object>|Object} The new listeners array for this event.
+   * @protected
+   */
+
+	}, {
+		key: 'removeMatchingListenerObjs_',
+		value: function removeMatchingListenerObjs_(listenerObjs, listener) {
+			var finalListeners = [];
+			for (var i = 0; i < listenerObjs.length; i++) {
+				if (!this.matchesListener_(listenerObjs[i], listener)) {
+					finalListeners.push(listenerObjs[i]);
+				}
+			}
+			return finalListeners.length > 0 ? finalListeners : null;
+		}
+
+		/**
+   * Removes a listener for the specified events.
+   * Caution: changes array indices in the listener array behind the listener.
+   * @param {!(Array|string)} events
+   * @param {!Function} listener
+   * @return {!Object} Returns emitter, so calls can be chained.
+   */
+
+	}, {
+		key: 'removeListener',
+		value: function removeListener() {
+			return this.off.apply(this, arguments); // eslint-disable-line
+		}
+
+		/**
+   * Runs the handlers when an event is listened to.
+   * @param {string} event
+   * @protected
+   */
+
+	}, {
+		key: 'runListenerHandlers_',
+		value: function runListenerHandlers_(event) {
+			var handlers = this.listenerHandlers_;
+			if (handlers) {
+				handlers = toArray$1(handlers);
+				for (var i = 0; i < handlers.length; i++) {
+					handlers[i](event);
+				}
+			}
+		}
+
+		/**
+   * Runs the given listeners.
+   * @param {!Array} listeners
+   * @param {!Array} args
+   * @param {Object} facade
+   * @protected
+   */
+
+	}, {
+		key: 'runListeners_',
+		value: function runListeners_(listeners, args, facade) {
+			if (facade) {
+				args.push(facade);
+			}
+
+			var defaultListeners = [];
+			for (var i = 0; i < listeners.length; i++) {
+				var listener = listeners[i].fn || listeners[i];
+				if (listeners[i].default) {
+					defaultListeners.push(listener);
+				} else {
+					listener.apply(this, args);
+				}
+			}
+			if (!facade || !facade.preventedDefault) {
+				for (var j = 0; j < defaultListeners.length; j++) {
+					defaultListeners[j].apply(this, args);
+				}
+			}
+		}
+
+		/**
+   * Sets the configuration option which determines if an event facade should
+   * be sent as a param of listeners when emitting events. If set to true, the
+   * facade will be passed as the first argument of the listener.
+   * @param {boolean} shouldUseFacade
+   * @return {!Object} Returns emitter, so calls can be chained.
+   */
+
+	}, {
+		key: 'setShouldUseFacade',
+		value: function setShouldUseFacade(shouldUseFacade) {
+			this.shouldUseFacade_ = shouldUseFacade;
+			return this;
+		}
+
+		/**
+   * Converts the parameter to an array if only one event is given. Reuses the
+   * same array each time this conversion is done, to avoid using more memory
+   * than necessary.
+   * @param  {!(Array|string)} events
+   * @return {!Array}
+   * @protected
+   */
+
+	}, {
+		key: 'toEventsArray_',
+		value: function toEventsArray_(events) {
+			if (isString(events)) {
+				singleArray_[0] = events;
+				events = singleArray_;
+			}
+			return events;
+		}
+
+		/**
+   * Checks if the given listener is valid, throwing an exception when it's not.
+   * @param  {*} listener
+   * @protected
+   */
+
+	}, {
+		key: 'validateListener_',
+		value: function validateListener_(listener) {
+			if (!isFunction(listener)) {
+				throw new TypeError('Listener must be a function');
+			}
+		}
+	}]);
+	return EventEmitter;
+}(Disposable);
+
+/**
+ * Converts to an array
+ * @param {Object} val
+ * @return {Array}
+ */
+
+
+function toArray$1(val) {
+	val = val || [];
+	return Array.isArray(val) ? val : [val];
+}
+
+/**
+ * EventEmitterProxy utility. It's responsible for linking two EventEmitter
+ * instances together, emitting events from the first emitter through the
+ * second one. That means that listening to a supported event on the target
+ * emitter will mean listening to it on the origin emitter as well.
+ * @extends {Disposable}
+ */
+
+var EventEmitterProxy = function (_Disposable) {
+	inherits(EventEmitterProxy, _Disposable);
+
+	/**
+  * @param {EventEmitter} originEmitter Events originated on this emitter
+  * will be fired for the target emitter's listeners as well.
+  * @param {EventEmitter} targetEmitter Event listeners attached to this emitter
+  * will also be triggered when the event is fired by the origin emitter.
+  * @param {Object} blacklist Optional blacklist of events that should not be
+  * proxied.
+  * @param {Object} whitelist
+  */
+	function EventEmitterProxy(originEmitter, targetEmitter, blacklist, whitelist) {
+		classCallCheck(this, EventEmitterProxy);
+
+		/**
+   * Map of events that should not be proxied.
+   * @type {Object}
+   * @protected
+   */
+		var _this = possibleConstructorReturn(this, (EventEmitterProxy.__proto__ || Object.getPrototypeOf(EventEmitterProxy)).call(this));
+
+		_this.blacklist_ = blacklist;
+
+		/**
+   * The origin emitter. This emitter's events will be proxied through the
+   * target emitter.
+   * @type {EventEmitter}
+   * @protected
+   */
+		_this.originEmitter_ = originEmitter;
+
+		/**
+   * A list of events that are pending to be listened by an actual origin
+   * emitter. Events are stored here when the origin doesn't exist, so they
+   * can be set on a new origin when one is set.
+   * @type {Array}
+   * @protected
+   */
+		_this.pendingEvents_ = null;
+
+		/**
+   * Holds a map of events from the origin emitter that are already being proxied.
+   * @type {Object<string, !EventHandle>}
+   * @protected
+   */
+		_this.proxiedEvents_ = null;
+
+		/**
+   * The target emitter. This emitter will emit all events that come from
+   * the origin emitter.
+   * @type {EventEmitter}
+   * @protected
+   */
+		_this.targetEmitter_ = targetEmitter;
+
+		/**
+   * Map of events that should be proxied. If whitelist is set blacklist is ignored.
+   * @type {Object}
+   * @protected
+   */
+		_this.whitelist_ = whitelist;
+
+		_this.startProxy_();
+		return _this;
+	}
+
+	/**
+  * Adds the given listener for the given event.
+  * @param {string} event
+  * @param {!function()} listener
+  * @return {!EventHandle} The listened event's handle.
+  * @protected
+  */
+
+
+	createClass(EventEmitterProxy, [{
+		key: 'addListener_',
+		value: function addListener_(event, listener) {
+			return this.originEmitter_.on(event, listener);
+		}
+
+		/**
+   * @inheritDoc
+   */
+
+	}, {
+		key: 'disposeInternal',
+		value: function disposeInternal() {
+			this.removeListeners_();
+			this.proxiedEvents_ = null;
+			this.originEmitter_ = null;
+			this.targetEmitter_ = null;
+		}
+
+		/**
+   * Emits the specified event type on the target emitter.
+   * @protected
+   */
+
+	}, {
+		key: 'emitOnTarget_',
+		value: function emitOnTarget_() {
+			var _targetEmitter_;
+
+			(_targetEmitter_ = this.targetEmitter_).emit.apply(_targetEmitter_, arguments);
+		}
+
+		/**
+   * Proxies the given event from the origin to the target emitter.
+   * @param {string} event
+   */
+
+	}, {
+		key: 'proxyEvent',
+		value: function proxyEvent(event) {
+			if (this.shouldProxyEvent_(event)) {
+				this.tryToAddListener_(event);
+			}
+		}
+
+		/**
+   * Removes the proxy listener for all events.
+   * @protected
+   */
+
+	}, {
+		key: 'removeListeners_',
+		value: function removeListeners_() {
+			if (this.proxiedEvents_) {
+				var events = Object.keys(this.proxiedEvents_);
+				for (var i = 0; i < events.length; i++) {
+					this.proxiedEvents_[events[i]].removeListener();
+				}
+				this.proxiedEvents_ = null;
+			}
+			this.pendingEvents_ = null;
+		}
+
+		/**
+   * Changes the origin emitter. This automatically detaches any events that
+   * were already being proxied from the previous emitter, and starts proxying
+   * them on the new emitter instead.
+   * @param {!EventEmitter} originEmitter
+   */
+
+	}, {
+		key: 'setOriginEmitter',
+		value: function setOriginEmitter(originEmitter) {
+			var _this2 = this;
+
+			var events = this.originEmitter_ && this.proxiedEvents_ ? Object.keys(this.proxiedEvents_) : this.pendingEvents_;
+			this.originEmitter_ = originEmitter;
+			if (events) {
+				this.removeListeners_();
+				events.forEach(function (event) {
+					return _this2.proxyEvent(event);
+				});
+			}
+		}
+
+		/**
+   * Checks if the given event should be proxied.
+   * @param {string} event
+   * @return {boolean}
+   * @protected
+   */
+
+	}, {
+		key: 'shouldProxyEvent_',
+		value: function shouldProxyEvent_(event) {
+			if (this.whitelist_ && !this.whitelist_[event]) {
+				return false;
+			}
+			if (this.blacklist_ && this.blacklist_[event]) {
+				return false;
+			}
+			return !this.proxiedEvents_ || !this.proxiedEvents_[event];
+		}
+
+		/**
+   * Starts proxying all events from the origin to the target emitter.
+   * @protected
+   */
+
+	}, {
+		key: 'startProxy_',
+		value: function startProxy_() {
+			this.targetEmitter_.onListener(this.proxyEvent.bind(this));
+		}
+
+		/**
+   * Adds a listener to the origin emitter, if it exists. Otherwise, stores
+   * the pending listener so it can be used on a future origin emitter.
+   * @param {string} event
+   * @protected
+   */
+
+	}, {
+		key: 'tryToAddListener_',
+		value: function tryToAddListener_(event) {
+			if (this.originEmitter_) {
+				this.proxiedEvents_ = this.proxiedEvents_ || {};
+				this.proxiedEvents_[event] = this.addListener_(event, this.emitOnTarget_.bind(this, event));
+			} else {
+				this.pendingEvents_ = this.pendingEvents_ || [];
+				this.pendingEvents_.push(event);
+			}
+		}
+	}]);
+	return EventEmitterProxy;
+}(Disposable);
+
+/**
+ * EventHandler utility. It's useful for easily removing a group of
+ * listeners from different EventEmitter instances.
+ * @extends {Disposable}
+ */
+
+var EventHandler = function (_Disposable) {
+	inherits(EventHandler, _Disposable);
+
+	/**
+  * EventHandler constructor
+  */
+	function EventHandler() {
+		classCallCheck(this, EventHandler);
+
+		/**
+   * An array that holds the added event handles, so the listeners can be
+   * removed later.
+   * @type {Array.<EventHandle>}
+   * @protected
+   */
+		var _this = possibleConstructorReturn(this, (EventHandler.__proto__ || Object.getPrototypeOf(EventHandler)).call(this));
+
+		_this.eventHandles_ = [];
+		return _this;
+	}
+
+	/**
+  * Adds event handles to be removed later through the `removeAllListeners`
+  * method.
+  * @param {...(!EventHandle)} var_args
+  */
+
+
+	createClass(EventHandler, [{
+		key: 'add',
+		value: function add() {
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
+
+			for (var i = 0; i < arguments.length; i++) {
+				this.eventHandles_.push(args[i]);
+			}
+		}
+
+		/**
+   * Disposes of this instance's object references.
+   * @override
+   */
+
+	}, {
+		key: 'disposeInternal',
+		value: function disposeInternal() {
+			this.eventHandles_ = null;
+		}
+
+		/**
+   * Removes all listeners that have been added through the `add` method.
+   */
+
+	}, {
+		key: 'removeAllListeners',
+		value: function removeAllListeners() {
+			for (var i = 0; i < this.eventHandles_.length; i++) {
+				this.eventHandles_[i].removeListener();
+			}
+
+			this.eventHandles_ = [];
+		}
+	}]);
+	return EventHandler;
+}(Disposable);
+
+/**
+ * This is a special EventHandle, that is responsible for dom delegated events
+ * (only the ones that receive a target element, not a selector string).
+ * @extends {EventHandle}
+ */
+
+var DomDelegatedEventHandle = function (_EventHandle) {
+	inherits(DomDelegatedEventHandle, _EventHandle);
+
+	/**
+  * The constructor for `DomDelegatedEventHandle`.
+  * @param {!Event} emitter Element the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  * @param {string=} selector An optional selector used when delegating
+  *     the event.
+  * @constructor
+  */
+	function DomDelegatedEventHandle(emitter, event, listener, selector) {
+		classCallCheck(this, DomDelegatedEventHandle);
+
+		var _this = possibleConstructorReturn(this, (DomDelegatedEventHandle.__proto__ || Object.getPrototypeOf(DomDelegatedEventHandle)).call(this, emitter, event, listener));
+
+		_this.selector_ = selector;
+		return _this;
+	}
+
+	/**
+  * @inheritDoc
+  */
+
+
+	createClass(DomDelegatedEventHandle, [{
+		key: 'removeListener',
+		value: function removeListener() {
+			var delegating = domData.get(this.emitter_, 'delegating', {});
+			var listeners = domData.get(this.emitter_, 'listeners', {});
+			var selector = this.selector_;
+			var arr = isString(selector) ? delegating[this.event_].selectors : listeners;
+			var key = isString(selector) ? selector : this.event_;
+
+			array.remove(arr[key] || [], this.listener_);
+			if (arr[key] && arr[key].length === 0) {
+				delete arr[key];
+			}
+		}
+	}]);
+	return DomDelegatedEventHandle;
+}(EventHandle);
+
+/**
+ * This is a special EventHandle, that is responsible for dom events, instead
+ * of EventEmitter events.
+ * @extends {EventHandle}
+ */
+
+var DomEventHandle = function (_EventHandle) {
+	inherits(DomEventHandle, _EventHandle);
+
+	/**
+  * The constructor for `DomEventHandle`.
+  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
+  * @param {string} event The name of the event that was subscribed to.
+  * @param {!Function} listener The listener subscribed to the event.
+  * @param {boolean} capture Flag indicating if listener should be triggered
+  *   during capture phase, instead of during the bubbling phase. Defaults to false.
+  * @constructor
+  */
+	function DomEventHandle(emitter, event, listener, capture) {
+		classCallCheck(this, DomEventHandle);
+
+		var _this = possibleConstructorReturn(this, (DomEventHandle.__proto__ || Object.getPrototypeOf(DomEventHandle)).call(this, emitter, event, listener));
+
+		_this.capture_ = capture;
+		return _this;
+	}
+
+	/**
+  * @inheritDoc
+  */
+
+
+	createClass(DomEventHandle, [{
+		key: 'removeListener',
+		value: function removeListener() {
+			this.emitter_.removeEventListener(this.event_, this.listener_, this.capture_);
+		}
+	}]);
+	return DomEventHandle;
+}(EventHandle);
+
+var elementsByTag_ = {};
+var supportCache_ = {};
+var customEvents = {};
+
+var LAST_CONTAINER = '__metal_last_container__';
+var USE_CAPTURE = {
+	blur: true,
+	error: true,
+	focus: true,
+	invalid: true,
+	load: true,
+	scroll: true
+};
+
+/**
+ * Adds the requested CSS classes to an element.
+ * @param {!Element|!Nodelist} elements The element or elements to add CSS classes to.
+ * @param {string} classes CSS classes to add.
+ */
+function addClasses(elements, classes) {
+	if (!isObject(elements) || !isString(classes)) {
+		return;
+	}
+
+	if (!elements.length) {
+		elements = [elements];
+	}
+
+	for (var i = 0; i < elements.length; i++) {
+		if ('classList' in elements[i]) {
+			addClassesWithNative_(elements[i], classes);
+		} else {
+			addClassesWithoutNative_(elements[i], classes);
+		}
+	}
+}
+
+/**
+ * Adds the requested CSS classes to an element using classList.
+ * @param {!Element} element The element to add CSS classes to.
+ * @param {string} classes CSS classes to add.
+ * @private
+ */
+function addClassesWithNative_(element, classes) {
+	classes.split(' ').forEach(function (className) {
+		if (className) {
+			element.classList.add(className);
+		}
+	});
+}
+
+/**
+ * Adds the requested CSS classes to an element without using classList.
+ * @param {!Element} element The element to add CSS classes to.
+ * @param {string} classes CSS classes to add.
+ * @private
+ */
+function addClassesWithoutNative_(element, classes) {
+	var elementClassName = ' ' + element.className + ' ';
+	var classesToAppend = '';
+
+	classes = classes.split(' ');
+
+	for (var i = 0; i < classes.length; i++) {
+		var className = classes[i];
+
+		if (elementClassName.indexOf(' ' + className + ' ') === -1) {
+			classesToAppend += ' ' + className;
+		}
+	}
+
+	if (classesToAppend) {
+		element.className = element.className + classesToAppend;
+	}
+}
+
+/**
+ * Adds an event listener to the given element, to be triggered via delegate.
+ * @param {!Element} element
+ * @param {string} eventName
+ * @param {!function()} listener
+ * @private
+ */
+function addElementListener_(element, eventName, listener) {
+	addToArr_(domData.get(element, 'listeners', {}), eventName, listener);
+}
+
+/**
+ * Adds an event listener to the given element, to be triggered via delegate
+ * selectors.
+ * @param {!Element} element
+ * @param {string} eventName
+ * @param {string} selector
+ * @param {!function()} listener
+ * @private
+ */
+function addSelectorListener_(element, eventName, selector, listener) {
+	var delegatingData = domData.get(element, 'delegating', {});
+	addToArr_(delegatingData[eventName].selectors, selector, listener);
+}
+
+/**
+ * Adds a value to an array inside an object, creating it first if it doesn't
+ * yet exist.
+ * @param {!Array} arr
+ * @param {string} key
+ * @param {*} value
+ * @private
+ */
+function addToArr_(arr, key, value) {
+	if (!arr[key]) {
+		arr[key] = [];
+	}
+	arr[key].push(value);
+}
+
+/**
+ * Attaches a delegate listener, unless there's already one attached.
+ * @param {!Element} element
+ * @param {string} eventName
+ * @private
+ */
+function attachDelegateEvent_(element, eventName) {
+	var delegatingData = domData.get(element, 'delegating', {});
+	if (!delegatingData[eventName]) {
+		delegatingData[eventName] = {
+			handle: on(element, eventName, handleDelegateEvent_, !!USE_CAPTURE[eventName]),
+			selectors: {}
+		};
+	}
+}
+
+/**
+ * Gets the closest element up the tree from the given element (including
+ * itself) that matches the specified selector, or null if none match.
+ * @param {Element} element
+ * @param {string} selector
+ * @return {Element}
+ */
+function closest(element, selector) {
+	while (element && !match(element, selector)) {
+		element = element.parentNode;
+	}
+	return element;
+}
+
+/**
+ * Appends a child node with text or other nodes to a parent node. If
+ * child is a HTML string it will be automatically converted to a document
+ * fragment before appending it to the parent.
+ * @param {!Element} parent The node to append nodes to.
+ * @param {!(Element|NodeList|string)} child The thing to append to the parent.
+ * @return {!Element} The appended child.
+ */
+function append(parent, child) {
+	if (isString(child)) {
+		child = buildFragment(child);
+	}
+	if (isNodeListLike(child)) {
+		var childArr = Array.prototype.slice.call(child);
+		for (var i = 0; i < childArr.length; i++) {
+			parent.appendChild(childArr[i]);
+		}
+	} else {
+		parent.appendChild(child);
+	}
+	return child;
+}
+
+/**
+ * Helper for converting a HTML string into a document fragment.
+ * @param {string} htmlString The HTML string to convert.
+ * @return {!Element} The resulting document fragment.
+ */
+function buildFragment(htmlString) {
+	var tempDiv = document.createElement('div');
+	tempDiv.innerHTML = '<br>' + htmlString;
+	tempDiv.removeChild(tempDiv.firstChild);
+
+	var fragment = document.createDocumentFragment();
+	while (tempDiv.firstChild) {
+		fragment.appendChild(tempDiv.firstChild);
+	}
+	return fragment;
+}
+
+/**
+ * Checks if the first element contains the second one.
+ * @param {!Element} element1
+ * @param {!Element} element2
+ * @return {boolean}
+ */
+function contains(element1, element2) {
+	if (isDocument(element1)) {
+		// document.contains is not defined on IE9, so call it on documentElement instead.
+		return element1.documentElement.contains(element2);
+	} else {
+		return element1.contains(element2);
+	}
+}
+
+/**
+ * Listens to the specified event on the given DOM element, but only calls the
+ * given callback listener when it's triggered by elements that match the
+ * given selector or target element.
+ * @param {!Element} element The DOM element the event should be listened on.
+ * @param {string} eventName The name of the event to listen to.
+ * @param {!Element|string} selectorOrTarget Either an element or css selector
+ *     that should match the event for the listener to be triggered.
+ * @param {!function(!Object)} callback Function to be called when the event
+ *     is triggered. It will receive the normalized event object.
+ * @param {boolean=} defaultListener Optional flag indicating if this is a default
+ *     listener. That means that it would only be executed after all non
+ *     default listeners, and only if the event isn't prevented via
+ *     `preventDefault`.
+ * @return {!EventHandle} Can be used to remove the listener.
+ */
+function delegate(element, eventName, selectorOrTarget, callback, defaultListener) {
+	var customConfig = customEvents[eventName];
+	if (customConfig && customConfig.delegate) {
+		eventName = customConfig.originalEvent;
+		callback = customConfig.handler.bind(customConfig, callback);
+	}
+
+	if (defaultListener) {
+		// Wrap callback so we don't set property directly on it.
+		callback = callback.bind();
+		callback.defaultListener_ = true;
+	}
+
+	attachDelegateEvent_(element, eventName);
+	if (isString(selectorOrTarget)) {
+		addSelectorListener_(element, eventName, selectorOrTarget, callback);
+	} else {
+		addElementListener_(selectorOrTarget, eventName, callback);
+	}
+
+	return new DomDelegatedEventHandle(isString(selectorOrTarget) ? element : selectorOrTarget, eventName, callback, isString(selectorOrTarget) ? selectorOrTarget : null);
+}
+
+/**
+ * Verifies if the element is able to trigger the Click event,
+ * simulating browsers behaviour, avoiding event listeners to be called by triggerEvent method.
+ * @param {Element} node Element to be checked.
+ * @param {string} eventName The event name.
+ * @param {Object=} eventObj
+ * @private
+ * @return {boolean}
+ */
+function isAbleToInteractWith_(node, eventName, eventObj) {
+	if (eventObj && eventName === 'click' && eventObj.button === 2) {
+		// Firefox triggers "click" events on the document for right clicks. This
+		// causes our delegate logic to trigger it for regular elements too, which
+		// shouldn't happen. Ignoring them here.
+		return false;
+	}
+
+	var matchesSelector = ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'FIELDSET'];
+	if (eventName === 'click' && matchesSelector.indexOf(node.tagName) > -1) {
+		return !(node.disabled || parent(node, 'fieldset[disabled]'));
+	}
+	return true;
+}
+
+/**
+ * Returns true if the specified value is a NodeList or like one.
+ * @param {?} val Variable to test.
+ * @return {boolean} Whether variable is like a NodeList.
+ */
+function isNodeListLike(val) {
+	return isDefAndNotNull(val) && typeof val.length === 'number' && typeof val.item === 'function';
+}
+
+/**
+ * Inserts node in document as last element.
+ * @param {Element} node Element to remove children from.
+ */
+
+
+/**
+ * Removes node from document.
+ * @param {Element} node Element to remove children from.
+ */
+function exitDocument(node) {
+	if (node && node.parentNode) {
+		node.parentNode.removeChild(node);
+	}
+}
+
+/**
+ * This is called when an event is triggered by a delegate listener. All
+ * matching listeners of this event type from `target` to `currentTarget` will
+ * be triggered.
+ * @param {!Event} event The event payload.
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function handleDelegateEvent_(event) {
+	normalizeDelegateEvent_(event);
+	var ret = true;
+	var container = event.currentTarget;
+	var defFns = [];
+
+	ret &= triggerDelegatedListeners_(container, event, defFns);
+	ret &= triggerDefaultDelegatedListeners_(defFns, event);
+
+	event.delegateTarget = null;
+	event[LAST_CONTAINER] = container;
+	return ret;
+}
+
+/**
+ * Checks if the given element has the requested css class.
+ * @param {!Element} element
+ * @param {string} className
+ * @return {boolean}
+ */
+
+
+/**
+ * Checks if the given element is empty or not.
+ * @param {!Element} element
+ * @return {boolean}
+ */
+
+
+/**
+ * Check if an element matches a given selector.
+ * @param {Element} element
+ * @param {string} selector
+ * @return {boolean}
+ */
+function match(element, selector) {
+	if (!element || element.nodeType !== 1) {
+		return false;
+	}
+
+	var p = Element.prototype;
+	var m = p.matches || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector;
+	if (m) {
+		return m.call(element, selector);
+	}
+
+	return matchFallback_(element, selector);
+}
+
+/**
+ * Check if an element matches a given selector, using an internal implementation
+ * instead of calling existing javascript functions.
+ * @param {Element} element
+ * @param {string} selector
+ * @return {boolean}
+ * @private
+ */
+function matchFallback_(element, selector) {
+	var parentNode = element.parentNode;
+
+	if (parentNode) {
+		var nodes = parentNode.querySelectorAll(selector);
+
+		for (var i = 0; i < nodes.length; ++i) {
+			if (nodes[i] === element) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Returns the next sibling of the given element that matches the specified
+ * selector, or null if there is none.
+ * @param {!Element} element
+ * @param {?string} selector
+ * @return {Element|null}
+ */
+
+
+/**
+ * Normalizes the event payload for delegate listeners.
+ * @param {!Event} event
+ * @private
+ */
+function normalizeDelegateEvent_(event) {
+	event.stopPropagation = stopPropagation_;
+	event.stopImmediatePropagation = stopImmediatePropagation_;
+}
+
+/**
+ * Listens to the specified event on the given DOM element. This function normalizes
+ * DOM event payloads and functions so they'll work the same way on all supported
+ * browsers.
+ * @param {!Element|string} element The DOM element to listen to the event on, or
+ *   a selector that should be delegated on the entire document.
+ * @param {string} eventName The name of the event to listen to.
+ * @param {!function(!Object)} callback Function to be called when the event is
+ *   triggered. It will receive the normalized event object.
+ * @param {boolean} capture Flag indicating if listener should be triggered
+ *   during capture phase, instead of during the bubbling phase. Defaults to false.
+ * @return {!DomEventHandle} Can be used to remove the listener.
+ */
+function on(element, eventName, callback, capture) {
+	if (isString(element)) {
+		return delegate(document, eventName, element, callback);
+	}
+	var customConfig = customEvents[eventName];
+	if (customConfig && customConfig.event) {
+		eventName = customConfig.originalEvent;
+		callback = customConfig.handler.bind(customConfig, callback);
+	}
+	element.addEventListener(eventName, callback, capture);
+	return new DomEventHandle(element, eventName, callback, capture);
+}
+
+/**
+ * Listens to the specified event on the given DOM element once. This
+ * function normalizes DOM event payloads and functions so they'll work the
+ * same way on all supported browsers.
+ * @param {!Element} element The DOM element to listen to the event on.
+ * @param {string} eventName The name of the event to listen to.
+ * @param {!function(!Object)} callback Function to be called when the event
+ *   is triggered. It will receive the normalized event object.
+ * @return {!DomEventHandle} Can be used to remove the listener.
+ */
+function once(element, eventName, callback) {
+	var domEventHandle = on(element, eventName, function () {
+		domEventHandle.removeListener();
+		return callback.apply(this, arguments); // eslint-disable-line
+	});
+	return domEventHandle;
+}
+
+/**
+ * Gets the first parent from the given element that matches the specified
+ * selector, or null if none match.
+ * @param {!Element} element
+ * @param {string} selector
+ * @return {Element}
+ */
+function parent(element, selector) {
+	return closest(element.parentNode, selector);
+}
+
+/**
+ * Inserts a node before first child of the parent. If child is a HTML string
+ * it will be converted to document fragment before prepending it to the parent.
+ * @param {!Element} parent The node to prepend to.
+ * @param {!(Element|NodeList|string)} child The thing to prepend to the parent.
+ * @return {!Element} The prepended child.
+ */
+
+
+/**
+ * Registers a custom event.
+ * @param {string} eventName The name of the custom event.
+ * @param {!Object} customConfig An object with information about how the event
+ *   should be handled.
+ */
+function registerCustomEvent(eventName, customConfig) {
+	customEvents[eventName] = customConfig;
+}
+
+/**
+ * Removes all the child nodes on a DOM node.
+ * @param {Element} node Element to remove children from.
+ */
+function removeChildren(node) {
+	var child = void 0;
+	while (child = node.firstChild) {
+		node.removeChild(child);
+	}
+}
+
+/**
+ * Removes the requested CSS classes from an element.
+ * @param {!Element|!NodeList} elements The element or elements to remove CSS classes from.
+ * @param {string} classes CSS classes to remove.
+ */
+function removeClasses(elements, classes) {
+	if (!isObject(elements) || !isString(classes)) {
+		return;
+	}
+
+	if (!elements.length) {
+		elements = [elements];
+	}
+
+	for (var i = 0; i < elements.length; i++) {
+		if ('classList' in elements[i]) {
+			removeClassesWithNative_(elements[i], classes);
+		} else {
+			removeClassesWithoutNative_(elements[i], classes);
+		}
+	}
+}
+
+/**
+ * Removes the requested CSS classes from an element using classList.
+ * @param {!Element} element The element to remove CSS classes from.
+ * @param {string} classes CSS classes to remove.
+ * @private
+ */
+function removeClassesWithNative_(element, classes) {
+	classes.split(' ').forEach(function (className) {
+		if (className) {
+			element.classList.remove(className);
+		}
+	});
+}
+
+/**
+ * Removes the requested CSS classes from an element without using classList.
+ * @param {!Element} element The element to remove CSS classes from.
+ * @param {string} classes CSS classes to remove.
+ * @private
+ */
+function removeClassesWithoutNative_(element, classes) {
+	var elementClassName = ' ' + element.className + ' ';
+
+	classes = classes.split(' ');
+
+	for (var i = 0; i < classes.length; i++) {
+		elementClassName = elementClassName.replace(' ' + classes[i] + ' ', ' ');
+	}
+
+	element.className = elementClassName.trim();
+}
+
+/**
+ * Replaces the first element with the second.
+ * @param {Element} element1
+ * @param {Element} element2
+ */
+
+
+/**
+ * The function that replaces `stopImmediatePropagation_` for events.
+ * @private
+ */
+function stopImmediatePropagation_() {
+	var event = this; // eslint-disable-line
+	event.stopped = true;
+	event.stoppedImmediate = true;
+	Event.prototype.stopImmediatePropagation.call(event);
+}
+
+/**
+ * The function that replaces `stopPropagation` for events.
+ * @private
+ */
+function stopPropagation_() {
+	var event = this; // eslint-disable-line
+	event.stopped = true;
+	Event.prototype.stopPropagation.call(event);
+}
+
+/**
+ * Checks if the given element supports the given event type.
+ * @param {!Element|string} element The DOM element or element tag name to check.
+ * @param {string} eventName The name of the event to check.
+ * @return {boolean}
+ */
+function supportsEvent(element, eventName) {
+	if (customEvents[eventName]) {
+		return true;
+	}
+
+	if (isString(element)) {
+		if (!elementsByTag_[element]) {
+			elementsByTag_[element] = document.createElement(element);
+		}
+		element = elementsByTag_[element];
+	}
+
+	var tag = element.tagName;
+	if (!supportCache_[tag] || !supportCache_[tag].hasOwnProperty(eventName)) {
+		supportCache_[tag] = supportCache_[tag] || {};
+		supportCache_[tag][eventName] = 'on' + eventName in element;
+	}
+	return supportCache_[tag][eventName];
+}
+
+/**
+ * This triggers all default matched delegated listeners of a given event type.
+ * @param {!Array} defFns Array to collect default listeners in, instead
+ * @param {!Event} event
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function triggerDefaultDelegatedListeners_(defFns, event) {
+	var ret = true;
+
+	for (var i = 0; i < defFns.length && !event.defaultPrevented; i++) {
+		event.delegateTarget = defFns[i].element;
+		ret &= defFns[i].fn(event);
+	}
+
+	return ret;
+}
+
+/**
+ * This triggers all matched delegated listeners of a given event type when its
+ * delegated target is able to interact.
+ * @param {!Element} container
+ * @param {!Event} event
+ * @param {!Array} defaultFns Array to collect default listeners in, instead
+ *     of running them.
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function triggerDelegatedListeners_(container, event, defaultFns) {
+	var ret = true;
+	var currElement = event.target;
+	var limit = container.parentNode;
+
+	while (currElement && currElement !== limit && !event.stopped) {
+		if (isAbleToInteractWith_(currElement, event.type, event)) {
+			event.delegateTarget = currElement;
+			ret &= triggerElementListeners_(currElement, event, defaultFns);
+			ret &= triggerSelectorListeners_(container, currElement, event, defaultFns);
+		}
+		currElement = currElement.parentNode;
+	}
+
+	return ret;
+}
+
+/**
+ * Converts the given argument to a DOM element. Strings are assumed to
+ * be selectors, and so a matched element will be returned. If the arg
+ * is already a DOM element it will be the return value.
+ * @param {string|Element|Document} selectorOrElement
+ * @return {Element} The converted element, or null if none was found.
+ */
+
+
+/**
+ * Adds or removes one or more classes from an element. If any of the classes
+ * is present, it will be removed from the element, or added otherwise.
+ * @param {!Element} element The element which classes will be toggled.
+ * @param {string} classes The classes which have to added or removed from the element.
+ */
+
+
+/**
+ * Triggers all listeners for the given event type that are stored in the
+ * specified element.
+ * @param {!Element} element
+ * @param {!Event} event
+ * @param {!Array} defaultFns Array to collect default listeners in, instead
+ *     of running them.
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function triggerElementListeners_(element, event, defaultFns) {
+	var lastContainer = event[LAST_CONTAINER];
+	if (!isDef(lastContainer) || !contains(lastContainer, element)) {
+		var listeners = domData.get(element, 'listeners', {})[event.type];
+		return triggerListeners_(listeners, event, element, defaultFns);
+	}
+	return true;
+}
+
+/**
+ * Triggers the specified event on the given element.
+ * NOTE: This should mostly be used for testing, not on real code.
+ * @param {!Element} element The node that should trigger the event.
+ * @param {string} eventName The name of the event to be triggred.
+ * @param {Object=} eventObj An object with data that should be on the
+ *   triggered event's payload.
+ */
+
+
+/**
+ * Triggers the given listeners array.
+ * @param {Array<!function()>} listeners
+ * @param {!Event} event
+ * @param {!Element} element
+ * @param {!Array} defaultFns Array to collect default listeners in, instead
+ *     of running them.
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function triggerListeners_(listeners, event, element, defaultFns) {
+	var ret = true;
+	listeners = listeners || [];
+	for (var i = 0; i < listeners.length && !event.stoppedImmediate; i++) {
+		if (listeners[i].defaultListener_) {
+			defaultFns.push({
+				element: element,
+				fn: listeners[i]
+			});
+		} else {
+			ret &= listeners[i](event);
+		}
+	}
+	return ret;
+}
+
+/**
+ * Triggers all selector listeners for the given event.
+ * @param {!Element} container
+ * @param {!Element} element
+ * @param {!Event} event
+ * @param {!Array} defaultFns Array to collect default listeners in, instead
+ *     of running them.
+ * @return {boolean} False if at least one of the triggered callbacks returns
+ *     false, or true otherwise.
+ * @private
+ */
+function triggerSelectorListeners_(container, element, event, defaultFns) {
+	var ret = true;
+	var data = domData.get(container, 'delegating', {});
+	var map = data[event.type].selectors;
+	var selectors = Object.keys(map);
+	for (var i = 0; i < selectors.length && !event.stoppedImmediate; i++) {
+		if (match(element, selectors[i])) {
+			var listeners = map[selectors[i]];
+			ret &= triggerListeners_(listeners, event, element, defaultFns);
+		}
+	}
+	return ret;
+}
+
+// This file exists just for backwards compatibility, making sure that old
+// default imports for this file still work. It's best to use the named exports
+// for each function instead though, since that allows bundlers like Rollup to
+// reduce the bundle size by removing unused code.
+
+/**
+ * DomEventEmitterProxy utility. It extends `EventEmitterProxy` to also accept
+ * dom elements as origin emitters.
+ * @extends {EventEmitterProxy}
+ */
+
+var DomEventEmitterProxy = function (_EventEmitterProxy) {
+	inherits(DomEventEmitterProxy, _EventEmitterProxy);
+
+	function DomEventEmitterProxy() {
+		classCallCheck(this, DomEventEmitterProxy);
+		return possibleConstructorReturn(this, (DomEventEmitterProxy.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy)).apply(this, arguments));
+	}
+
+	createClass(DomEventEmitterProxy, [{
+		key: 'addListener_',
+
+		/**
+   * Adds the given listener for the given event.
+   * @param {string} event
+   * @param {!function()} listener
+   * @return {!EventHandle} The listened event's handle.
+   * @protected
+   * @override
+   */
+		value: function addListener_(event, listener) {
+			if (this.originEmitter_.addEventListener) {
+				if (this.isDelegateEvent_(event)) {
+					var index = event.indexOf(':', 9);
+					var eventName = event.substring(9, index);
+					var selector = event.substring(index + 1);
+					return delegate(this.originEmitter_, eventName, selector, listener); // eslint-disable-line
+				} else {
+					return on(this.originEmitter_, event, listener);
+				}
+			} else {
+				return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'addListener_', this).call(this, event, listener);
+			}
+		}
+
+		/**
+   * Checks if the given event is of the delegate type.
+   * @param {string} event
+   * @return {boolean}
+   * @protected
+   */
+
+	}, {
+		key: 'isDelegateEvent_',
+		value: function isDelegateEvent_(event) {
+			return event.substr(0, 9) === 'delegate:';
+		}
+
+		/**
+   * Checks if the given event is supported by the origin element.
+   * @param {string} event
+   * @protected
+   * @return {boolean}
+   */
+
+	}, {
+		key: 'isSupportedDomEvent_',
+		value: function isSupportedDomEvent_(event) {
+			if (!this.originEmitter_ || !this.originEmitter_.addEventListener) {
+				return true;
+			}
+			return this.isDelegateEvent_(event) && event.indexOf(':', 9) !== -1 || supportsEvent(this.originEmitter_, event);
+		}
+
+		/**
+   * Checks if the given event should be proxied.
+   * @param {string} event
+   * @return {boolean}
+   * @protected
+   * @override
+   */
+
+	}, {
+		key: 'shouldProxyEvent_',
+		value: function shouldProxyEvent_(event) {
+			return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'shouldProxyEvent_', this).call(this, event) && this.isSupportedDomEvent_(event); // eslint-disable-line
+		}
+	}]);
+	return DomEventEmitterProxy;
+}(EventEmitterProxy);
+
+/**
+ * Class with static methods responsible for doing browser feature checks.
+ */
+
+var features = function () {
+	function features() {
+		classCallCheck(this, features);
+	}
+
+	createClass(features, null, [{
+		key: 'checkAnimationEventName',
+
+		/**
+   * Some browsers still supports prefixed animation events. This method can
+   * be used to retrieve the current browser event name for both, animation
+   * and transition.
+   * @return {object}
+   */
+		value: function checkAnimationEventName() {
+			if (features.animationEventName_ === undefined) {
+				features.animationEventName_ = {
+					animation: features.checkAnimationEventName_('animation'),
+					transition: features.checkAnimationEventName_('transition')
+				};
+			}
+			return features.animationEventName_;
+		}
+
+		/**
+   * @protected
+   * @param {string} type Type to test: animation, transition.
+   * @return {string} Browser event name.
+   */
+
+	}, {
+		key: 'checkAnimationEventName_',
+		value: function checkAnimationEventName_(type) {
+			var prefixes = ['Webkit', 'MS', 'O', ''];
+			var typeTitleCase = string.replaceInterval(type, 0, 1, type.substring(0, 1).toUpperCase());
+			var suffixes = [typeTitleCase + 'End', typeTitleCase + 'End', typeTitleCase + 'End', type + 'end'];
+			if (!features.animationElement_) {
+				features.animationElement_ = document.createElement('div');
+			}
+			for (var i = 0; i < prefixes.length; i++) {
+				if (features.animationElement_.style[prefixes[i] + typeTitleCase] !== undefined // eslint-disable-line
+				) {
+						return prefixes[i].toLowerCase() + suffixes[i];
+					}
+			}
+			return type + 'end';
+		}
+
+		/**
+   * Some browsers (like IE9) change the order of element attributes, when html
+   * is rendered. This method can be used to check if this behavior happens on
+   * the current browser.
+   * @return {boolean}
+   */
+
+	}, {
+		key: 'checkAttrOrderChange',
+		value: function checkAttrOrderChange() {
+			if (features.attrOrderChange_ === undefined) {
+				var originalContent = '<div data-component="" data-ref=""></div>';
+				var element = document.createElement('div');
+				append(element, originalContent);
+				features.attrOrderChange_ = originalContent !== element.innerHTML;
+			}
+			return features.attrOrderChange_;
+		}
+	}]);
+	return features;
+}();
+
+features.animationElement_ = undefined;
+features.animationEventName_ = undefined;
+features.attrOrderChange_ = undefined;
+
+/**
+ * Utility functions for running javascript code in the global scope.
+ */
+
+var globalEval = function () {
+	function globalEval() {
+		classCallCheck(this, globalEval);
+	}
+
+	createClass(globalEval, null, [{
+		key: 'run',
+
+		/**
+   * Evaluates the given string in the global scope.
+   * @param {string} text
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   * @return {Element} script
+   */
+		value: function run(text, appendFn) {
+			var script = document.createElement('script');
+			script.text = text;
+			if (appendFn) {
+				appendFn(script);
+			} else {
+				document.head.appendChild(script);
+			}
+			exitDocument(script);
+			return script;
+		}
+
+		/**
+   * Evaluates the given javascript file in the global scope.
+   * @param {string} src The file's path.
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the script has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   * @return {Element} script
+   */
+
+	}, {
+		key: 'runFile',
+		value: function runFile(src, defaultFn, appendFn) {
+			var script = document.createElement('script');
+			script.src = src;
+
+			var callback = function callback() {
+				exitDocument(script);
+				defaultFn && defaultFn();
+			};
+			once(script, 'load', callback);
+			once(script, 'error', callback);
+
+			if (appendFn) {
+				appendFn(script);
+			} else {
+				document.head.appendChild(script);
+			}
+
+			return script;
+		}
+
+		/**
+   * Evaluates the code referenced by the given script element.
+   * @param {!Element} script
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the script has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   * @return {Element} script
+   */
+
+	}, {
+		key: 'runScript',
+		value: function runScript(script, defaultFn, appendFn) {
+			var callback = function callback() {
+				defaultFn && defaultFn();
+			};
+			if (script.type && script.type !== 'text/javascript') {
+				async.nextTick(callback);
+				return;
+			}
+			exitDocument(script);
+			if (script.src) {
+				return globalEval.runFile(script.src, defaultFn, appendFn);
+			} else {
+				async.nextTick(callback);
+				return globalEval.run(script.text, appendFn);
+			}
+		}
+
+		/**
+   * Evaluates any script tags present in the given element.
+   * @param {!Element} element
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the script has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   */
+
+	}, {
+		key: 'runScriptsInElement',
+		value: function runScriptsInElement(element, defaultFn, appendFn) {
+			var scripts = element.querySelectorAll('script');
+			if (scripts.length) {
+				globalEval.runScriptsInOrder(scripts, 0, defaultFn, appendFn);
+			} else if (defaultFn) {
+				async.nextTick(defaultFn);
+			}
+		}
+
+		/**
+   * Runs the given scripts elements in the order that they appear.
+   * @param {!NodeList} scripts
+   * @param {number} index
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the script has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   */
+
+	}, {
+		key: 'runScriptsInOrder',
+		value: function runScriptsInOrder(scripts, index, defaultFn, appendFn) {
+			globalEval.runScript(scripts.item(index), function () {
+				if (index < scripts.length - 1) {
+					globalEval.runScriptsInOrder(scripts, index + 1, defaultFn, appendFn); // eslint-disable-line
+				} else if (defaultFn) {
+					async.nextTick(defaultFn);
+				}
+			}, appendFn);
+		}
+	}]);
+	return globalEval;
+}();
+
+/**
+ * Utility functions for running styles.
+ */
+
+var globalEvalStyles = function () {
+	function globalEvalStyles() {
+		classCallCheck(this, globalEvalStyles);
+	}
+
+	createClass(globalEvalStyles, null, [{
+		key: 'run',
+
+		/**
+   * Evaluates the given style.
+   * @param {string} text
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   * @return {Element} style
+   */
+		value: function run(text, appendFn) {
+			var style = document.createElement('style');
+			style.innerHTML = text;
+			if (appendFn) {
+				appendFn(style);
+			} else {
+				document.head.appendChild(style);
+			}
+			return style;
+		}
+
+		/**
+   * Evaluates the given style file.
+   * @param {string} href The file's path.
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the styles has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   * @return {Element} style
+   */
+
+	}, {
+		key: 'runFile',
+		value: function runFile(href, defaultFn, appendFn) {
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.href = href;
+			globalEvalStyles.runStyle(link, defaultFn, appendFn);
+			return link;
+		}
+
+		/**
+   * Evaluates the code referenced by the given style/link element.
+   * @param {!Element} style
+   * @param {function()=} defaultFn Optional function to be called
+   *   when the script has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   *  @return {Element} style
+   */
+
+	}, {
+		key: 'runStyle',
+		value: function runStyle(style, defaultFn, appendFn) {
+			var callback = function callback() {
+				defaultFn && defaultFn();
+			};
+			if (style.rel && style.rel !== 'stylesheet') {
+				async.nextTick(callback);
+				return;
+			}
+
+			if (style.tagName === 'STYLE') {
+				async.nextTick(callback);
+			} else {
+				once(style, 'load', callback);
+				once(style, 'error', callback);
+			}
+
+			if (appendFn) {
+				appendFn(style);
+			} else {
+				document.head.appendChild(style);
+			}
+
+			return style;
+		}
+
+		/**
+   * Evaluates any style present in the given element.
+   * @param {!Element} element
+   * @param {function()=} defaultFn Optional function to be called when the
+   *   style has been run.
+   * @param {function()=} appendFn Optional function to append the node
+   *   into document.
+   */
+
+	}, {
+		key: 'runStylesInElement',
+		value: function runStylesInElement(element, defaultFn, appendFn) {
+			var styles = element.querySelectorAll('style,link');
+			if (styles.length === 0 && defaultFn) {
+				async.nextTick(defaultFn);
+				return;
+			}
+
+			var loadCount = 0;
+			var callback = function callback() {
+				if (defaultFn && ++loadCount === styles.length) {
+					async.nextTick(defaultFn);
+				}
+			};
+			for (var i = 0; i < styles.length; i++) {
+				globalEvalStyles.runStyle(styles[i], callback, appendFn);
+			}
+		}
+	}]);
+	return globalEvalStyles;
+}();
+
+/**
+ * Register custom events for event delegation.
+ */
+function registerEvents() {
+	var mouseEventMap = {
+		mouseenter: 'mouseover',
+		mouseleave: 'mouseout',
+		pointerenter: 'pointerover',
+		pointerleave: 'pointerout'
+	};
+	Object.keys(mouseEventMap).forEach(function (eventName) {
+		registerCustomEvent(eventName, {
+			delegate: true,
+			handler: function handler(callback, event) {
+				var related = event.relatedTarget;
+				var target = event.delegateTarget;
+				// eslint-disable-next-line
+				if (!related || related !== target && !contains(target, related)) {
+					event.customType = eventName;
+					return callback(event);
+				}
+			},
+			originalEvent: mouseEventMap[eventName]
+		});
+	});
+
+	var animationEventMap = {
+		animation: 'animationend',
+		transition: 'transitionend'
+	};
+	Object.keys(animationEventMap).forEach(function (eventType) {
+		var eventName = animationEventMap[eventType];
+		registerCustomEvent(eventName, {
+			event: true,
+			delegate: true,
+			handler: function handler(callback, event) {
+				event.customType = eventName;
+				return callback(event);
+			},
+			originalEvent: features.checkAnimationEventName()[eventType]
+		});
+	});
+}
+
+if (!isServerSide()) {
+	registerEvents();
+}
+
+var globals = globals || {};
+
+if (typeof window !== 'undefined') {
+	globals.window = window;
+}
+
+if (typeof document !== 'undefined') {
+	globals.document = document;
+}
 
 /**
  * Parses the given uri string into an object.
@@ -2363,7 +4660,7 @@ var utils = function () {
 			try {
 				return new Uri(url);
 			} catch (err) {
-				console.error(err.message + ' ' + url);
+				void 0;
 				return false;
 			}
 		}
@@ -2383,6 +4680,19 @@ var utils = function () {
 		}
 
 		/**
+   * Remove elements from the document.
+   * @param {!Array<Element>} elements
+   */
+
+	}, {
+		key: 'removeElementsFromDocument',
+		value: function removeElementsFromDocument(elements) {
+			elements.forEach(function (element) {
+				return exitDocument(element);
+			});
+		}
+
+		/**
   * Removes trailing slash in path.
   * @param {!string}
   * @return {string}
@@ -2396,6 +4706,19 @@ var utils = function () {
 				path = path.substr(0, length - 1);
 			}
 			return path;
+		}
+
+		/**
+   * Adds a random suffix to the href attribute of the element.
+   * @param {!element} element
+   * @return {element}
+   */
+
+	}, {
+		key: 'setElementWithRandomHref',
+		value: function setElementWithRandomHref(element) {
+			element.href = element.href + '?q=' + Math.random();
+			return element;
 		}
 
 		/**
@@ -2427,2168 +4750,6 @@ var dataAttributes = {
 	surface: 'data-senna-surface',
 	updateScrollPosition: 'data-senna-update-scroll-position'
 };
-
-var METAL_DATA = '__metal_data__';
-
-var domData = function () {
-	function domData() {
-		classCallCheck(this, domData);
-	}
-
-	createClass(domData, null, [{
-		key: 'get',
-
-		/**
-   * Gets Metal.js's data for the given element.
-   * @param {!Element} element
-   * @param {string=} opt_name Optional property from the data to be returned.
-   * @param {*} opt_initialVal Optinal value to the set the requested property
-   *     to if it doesn't exist yet in the data.
-   * @return {!Object}
-   */
-		value: function get$$1(element, opt_name, opt_initialVal) {
-			if (!element[METAL_DATA]) {
-				element[METAL_DATA] = {};
-			}
-			if (!opt_name) {
-				return element[METAL_DATA];
-			}
-			if (!element[METAL_DATA][opt_name] && opt_initialVal) {
-				element[METAL_DATA][opt_name] = opt_initialVal;
-			}
-			return element[METAL_DATA][opt_name];
-		}
-
-		/**
-   * Checks if the given element has data stored in it.
-   * @param {!Element} element
-   * @return {boolean}
-   */
-
-	}, {
-		key: 'has',
-		value: function has(element) {
-			return !!element[METAL_DATA];
-		}
-	}]);
-	return domData;
-}();
-
-/**
- * EventHandle utility. Holds information about an event subscription, and
- * allows removing them easily.
- * EventHandle is a Disposable, but it's important to note that the
- * EventEmitter that created it is not the one responsible for disposing it.
- * That responsibility is for the code that holds a reference to it.
- * @param {!EventEmitter} emitter Emitter the event was subscribed to.
- * @param {string} event The name of the event that was subscribed to.
- * @param {!Function} listener The listener subscribed to the event.
- * @constructor
- * @extends {Disposable}
- */
-
-var EventHandle = function (_Disposable) {
-	inherits(EventHandle, _Disposable);
-
-	function EventHandle(emitter, event, listener) {
-		classCallCheck(this, EventHandle);
-
-		/**
-   * The EventEmitter instance that the event was subscribed to.
-   * @type {EventEmitter}
-   * @protected
-   */
-		var _this = possibleConstructorReturn(this, (EventHandle.__proto__ || Object.getPrototypeOf(EventHandle)).call(this));
-
-		_this.emitter_ = emitter;
-
-		/**
-   * The name of the event that was subscribed to.
-   * @type {string}
-   * @protected
-   */
-		_this.event_ = event;
-
-		/**
-   * The listener subscribed to the event.
-   * @type {Function}
-   * @protected
-   */
-		_this.listener_ = listener;
-		return _this;
-	}
-
-	/**
-  * Disposes of this instance's object references.
-  * @override
-  */
-
-
-	createClass(EventHandle, [{
-		key: 'disposeInternal',
-		value: function disposeInternal() {
-			this.removeListener();
-			this.emitter_ = null;
-			this.listener_ = null;
-		}
-
-		/**
-   * Removes the listener subscription from the emitter.
-   */
-
-	}, {
-		key: 'removeListener',
-		value: function removeListener() {
-			if (!this.emitter_.isDisposed()) {
-				this.emitter_.removeListener(this.event_, this.listener_);
-			}
-		}
-	}]);
-	return EventHandle;
-}(Disposable);
-
-var singleArray_ = [0];
-
-/**
- * EventEmitter utility.
- * @constructor
- * @extends {Disposable}
- */
-
-var EventEmitter$1 = function (_Disposable) {
-	inherits(EventEmitter, _Disposable);
-
-	function EventEmitter() {
-		classCallCheck(this, EventEmitter);
-
-		/**
-   * Holds event listeners scoped by event type.
-   * @type {Object<string, !Array<!function()>>}
-   * @protected
-   */
-		var _this = possibleConstructorReturn(this, (EventEmitter.__proto__ || Object.getPrototypeOf(EventEmitter)).call(this));
-
-		_this.events_ = null;
-
-		/**
-   * Handlers that are triggered when an event is listened to.
-   * @type {Array}
-   */
-		_this.listenerHandlers_ = null;
-
-		/**
-   * Configuration option which determines if an event facade should be sent
-   * as a param of listeners when emitting events. If set to true, the facade
-   * will be passed as the first argument of the listener.
-   * @type {boolean}
-   * @protected
-   */
-		_this.shouldUseFacade_ = false;
-		return _this;
-	}
-
-	/**
-  * Adds a handler to given holder variable. If the holder doesn't have a
-  * value yet, it will receive the handler directly. If the holder is an array,
-  * the value will just be added to it. Otherwise, the holder will be set to a
-  * new array containing its previous value plus the new handler.
-  * @param {*} holder
-  * @param {!function()|Object} handler
-  * @return {*} The holder's new value.
-  * @protected
-  */
-
-
-	createClass(EventEmitter, [{
-		key: 'addHandler_',
-		value: function addHandler_(holder, handler) {
-			if (!holder) {
-				holder = handler;
-			} else {
-				if (!Array.isArray(holder)) {
-					holder = [holder];
-				}
-				holder.push(handler);
-			}
-			return holder;
-		}
-
-		/**
-   * Adds a listener to the end of the listeners array for the specified events.
-   * @param {!(Array|string)} event
-   * @param {!Function} listener
-   * @param {boolean} opt_default Flag indicating if this listener is a default
-   *   action for this event. Default actions are run last, and only if no previous
-   *   listener call `preventDefault()` on the received event facade.
-   * @return {!EventHandle} Can be used to remove the listener.
-   */
-
-	}, {
-		key: 'addListener',
-		value: function addListener(event, listener, opt_default) {
-			this.validateListener_(listener);
-
-			var events = this.toEventsArray_(event);
-			for (var i = 0; i < events.length; i++) {
-				this.addSingleListener_(events[i], listener, opt_default);
-			}
-
-			return new EventHandle(this, event, listener);
-		}
-
-		/**
-   * Adds a listener to the end of the listeners array for a single event.
-   * @param {string} event
-   * @param {!Function} listener
-   * @param {boolean} opt_default Flag indicating if this listener is a default
-   *   action for this event. Default actions are run last, and only if no previous
-   *   listener call `preventDefault()` on the received event facade.
-   * @return {!EventHandle} Can be used to remove the listener.
-   * @param {Function=} opt_origin The original function that was added as a
-   *   listener, if there is any.
-   * @protected
-   */
-
-	}, {
-		key: 'addSingleListener_',
-		value: function addSingleListener_(event, listener, opt_default, opt_origin) {
-			this.runListenerHandlers_(event);
-			if (opt_default || opt_origin) {
-				listener = {
-					default: opt_default,
-					fn: listener,
-					origin: opt_origin
-				};
-			}
-			this.events_ = this.events_ || {};
-			this.events_[event] = this.addHandler_(this.events_[event], listener);
-		}
-
-		/**
-   * Builds facade for the given event.
-   * @param {string} event
-   * @return {Object}
-   * @protected
-   */
-
-	}, {
-		key: 'buildFacade_',
-		value: function buildFacade_(event) {
-			if (this.getShouldUseFacade()) {
-				var facade = {
-					preventDefault: function preventDefault() {
-						facade.preventedDefault = true;
-					},
-					target: this,
-					type: event
-				};
-				return facade;
-			}
-		}
-
-		/**
-   * Disposes of this instance's object references.
-   * @override
-   */
-
-	}, {
-		key: 'disposeInternal',
-		value: function disposeInternal() {
-			this.events_ = null;
-		}
-
-		/**
-   * Execute each of the listeners in order with the supplied arguments.
-   * @param {string} event
-   * @param {*} opt_args [arg1], [arg2], [...]
-   * @return {boolean} Returns true if event had listeners, false otherwise.
-   */
-
-	}, {
-		key: 'emit',
-		value: function emit(event) {
-			var listeners = this.getRawListeners_(event);
-			if (listeners.length === 0) {
-				return false;
-			}
-
-			var args = array.slice(arguments, 1);
-			this.runListeners_(listeners, args, this.buildFacade_(event));
-			return true;
-		}
-
-		/**
-   * Gets the listener objects for the given event, if there are any.
-   * @param {string} event
-   * @return {!Array}
-   * @protected
-   */
-
-	}, {
-		key: 'getRawListeners_',
-		value: function getRawListeners_(event) {
-			var directListeners = toArray$1(this.events_ && this.events_[event]);
-			return directListeners.concat(toArray$1(this.events_ && this.events_['*']));
-		}
-
-		/**
-   * Gets the configuration option which determines if an event facade should
-   * be sent as a param of listeners when emitting events. If set to true, the
-   * facade will be passed as the first argument of the listener.
-   * @return {boolean}
-   */
-
-	}, {
-		key: 'getShouldUseFacade',
-		value: function getShouldUseFacade() {
-			return this.shouldUseFacade_;
-		}
-
-		/**
-   * Returns an array of listeners for the specified event.
-   * @param {string} event
-   * @return {Array} Array of listeners.
-   */
-
-	}, {
-		key: 'listeners',
-		value: function listeners(event) {
-			return this.getRawListeners_(event).map(function (listener) {
-				return listener.fn ? listener.fn : listener;
-			});
-		}
-
-		/**
-   * Adds a listener that will be invoked a fixed number of times for the
-   * events. After each event is triggered the specified amount of times, the
-   * listener is removed for it.
-   * @param {!(Array|string)} event
-   * @param {number} amount The amount of times this event should be listened
-   * to.
-   * @param {!Function} listener
-   * @return {!EventHandle} Can be used to remove the listener.
-   */
-
-	}, {
-		key: 'many',
-		value: function many(event, amount, listener) {
-			var events = this.toEventsArray_(event);
-			for (var i = 0; i < events.length; i++) {
-				this.many_(events[i], amount, listener);
-			}
-
-			return new EventHandle(this, event, listener);
-		}
-
-		/**
-   * Adds a listener that will be invoked a fixed number of times for a single
-   * event. After the event is triggered the specified amount of times, the
-   * listener is removed.
-   * @param {string} event
-   * @param {number} amount The amount of times this event should be listened
-   * to.
-   * @param {!Function} listener
-   * @protected
-   */
-
-	}, {
-		key: 'many_',
-		value: function many_(event, amount, listener) {
-			var self = this;
-
-			if (amount <= 0) {
-				return;
-			}
-
-			function handlerInternal() {
-				if (--amount === 0) {
-					self.removeListener(event, handlerInternal);
-				}
-				listener.apply(self, arguments);
-			}
-
-			self.addSingleListener_(event, handlerInternal, false, listener);
-		}
-
-		/**
-   * Checks if a listener object matches the given listener function. To match,
-   * it needs to either point to that listener or have it as its origin.
-   * @param {!Object} listenerObj
-   * @param {!Function} listener
-   * @return {boolean}
-   * @protected
-   */
-
-	}, {
-		key: 'matchesListener_',
-		value: function matchesListener_(listenerObj, listener) {
-			var fn = listenerObj.fn || listenerObj;
-			return fn === listener || listenerObj.origin && listenerObj.origin === listener;
-		}
-
-		/**
-   * Removes a listener for the specified events.
-   * Caution: changes array indices in the listener array behind the listener.
-   * @param {!(Array|string)} events
-   * @param {!Function} listener
-   * @return {!Object} Returns emitter, so calls can be chained.
-   */
-
-	}, {
-		key: 'off',
-		value: function off(event, listener) {
-			this.validateListener_(listener);
-			if (!this.events_) {
-				return this;
-			}
-
-			var events = this.toEventsArray_(event);
-			for (var i = 0; i < events.length; i++) {
-				this.events_[events[i]] = this.removeMatchingListenerObjs_(toArray$1(this.events_[events[i]]), listener);
-			}
-
-			return this;
-		}
-
-		/**
-   * Adds a listener to the end of the listeners array for the specified events.
-   * @param {!(Array|string)} events
-   * @param {!Function} listener
-   * @return {!EventHandle} Can be used to remove the listener.
-   */
-
-	}, {
-		key: 'on',
-		value: function on() {
-			return this.addListener.apply(this, arguments);
-		}
-
-		/**
-   * Adds handler that gets triggered when an event is listened to on this
-   * instance.
-   * @param {!function()}
-   */
-
-	}, {
-		key: 'onListener',
-		value: function onListener(handler) {
-			this.listenerHandlers_ = this.addHandler_(this.listenerHandlers_, handler);
-		}
-
-		/**
-   * Adds a one time listener for the events. This listener is invoked only the
-   * next time each event is fired, after which it is removed.
-   * @param {!(Array|string)} events
-   * @param {!Function} listener
-   * @return {!EventHandle} Can be used to remove the listener.
-   */
-
-	}, {
-		key: 'once',
-		value: function once(events, listener) {
-			return this.many(events, 1, listener);
-		}
-
-		/**
-   * Removes all listeners, or those of the specified events. It's not a good
-   * idea to remove listeners that were added elsewhere in the code,
-   * especially when it's on an emitter that you didn't create.
-   * @param {(Array|string)=} opt_events
-   * @return {!Object} Returns emitter, so calls can be chained.
-   */
-
-	}, {
-		key: 'removeAllListeners',
-		value: function removeAllListeners(opt_events) {
-			if (this.events_) {
-				if (opt_events) {
-					var events = this.toEventsArray_(opt_events);
-					for (var i = 0; i < events.length; i++) {
-						this.events_[events[i]] = null;
-					}
-				} else {
-					this.events_ = null;
-				}
-			}
-			return this;
-		}
-
-		/**
-   * Removes all listener objects from the given array that match the given
-   * listener function.
-   * @param {Array.<Object>} listenerObjs
-   * @param {!Function} listener
-   * @return {Array.<Object>|Object} The new listeners array for this event.
-   * @protected
-   */
-
-	}, {
-		key: 'removeMatchingListenerObjs_',
-		value: function removeMatchingListenerObjs_(listenerObjs, listener) {
-			var finalListeners = [];
-			for (var i = 0; i < listenerObjs.length; i++) {
-				if (!this.matchesListener_(listenerObjs[i], listener)) {
-					finalListeners.push(listenerObjs[i]);
-				}
-			}
-			return finalListeners.length > 0 ? finalListeners : null;
-		}
-
-		/**
-   * Removes a listener for the specified events.
-   * Caution: changes array indices in the listener array behind the listener.
-   * @param {!(Array|string)} events
-   * @param {!Function} listener
-   * @return {!Object} Returns emitter, so calls can be chained.
-   */
-
-	}, {
-		key: 'removeListener',
-		value: function removeListener() {
-			return this.off.apply(this, arguments);
-		}
-
-		/**
-   * Runs the handlers when an event is listened to.
-   * @param {string} event
-   * @protected
-   */
-
-	}, {
-		key: 'runListenerHandlers_',
-		value: function runListenerHandlers_(event) {
-			var handlers = this.listenerHandlers_;
-			if (handlers) {
-				handlers = toArray$1(handlers);
-				for (var i = 0; i < handlers.length; i++) {
-					handlers[i](event);
-				}
-			}
-		}
-
-		/**
-   * Runs the given listeners.
-   * @param {!Array} listeners
-   * @param {!Array} args
-   * @param (Object) facade
-   * @protected
-   */
-
-	}, {
-		key: 'runListeners_',
-		value: function runListeners_(listeners, args, facade) {
-			if (facade) {
-				args.push(facade);
-			}
-
-			var defaultListeners = [];
-			for (var i = 0; i < listeners.length; i++) {
-				var listener = listeners[i].fn || listeners[i];
-				if (listeners[i].default) {
-					defaultListeners.push(listener);
-				} else {
-					listener.apply(this, args);
-				}
-			}
-			if (!facade || !facade.preventedDefault) {
-				for (var j = 0; j < defaultListeners.length; j++) {
-					defaultListeners[j].apply(this, args);
-				}
-			}
-		}
-
-		/**
-   * Sets the configuration option which determines if an event facade should
-   * be sent as a param of listeners when emitting events. If set to true, the
-   * facade will be passed as the first argument of the listener.
-   * @param {boolean} shouldUseFacade
-   * @return {!Object} Returns emitter, so calls can be chained.
-   */
-
-	}, {
-		key: 'setShouldUseFacade',
-		value: function setShouldUseFacade(shouldUseFacade) {
-			this.shouldUseFacade_ = shouldUseFacade;
-			return this;
-		}
-
-		/**
-   * Converts the parameter to an array if only one event is given. Reuses the
-   * same array each time this conversion is done, to avoid using more memory
-   * than necessary.
-   * @param  {!(Array|string)} events
-   * @return {!Array}
-   * @protected
-   */
-
-	}, {
-		key: 'toEventsArray_',
-		value: function toEventsArray_(events) {
-			if (isString(events)) {
-				singleArray_[0] = events;
-				events = singleArray_;
-			}
-			return events;
-		}
-
-		/**
-   * Checks if the given listener is valid, throwing an exception when it's not.
-   * @param  {*} listener
-   * @protected
-   */
-
-	}, {
-		key: 'validateListener_',
-		value: function validateListener_(listener) {
-			if (!isFunction(listener)) {
-				throw new TypeError('Listener must be a function');
-			}
-		}
-	}]);
-	return EventEmitter;
-}(Disposable);
-
-function toArray$1(val) {
-	val = val || [];
-	return Array.isArray(val) ? val : [val];
-}
-
-/**
- * EventEmitterProxy utility. It's responsible for linking two EventEmitter
- * instances together, emitting events from the first emitter through the
- * second one. That means that listening to a supported event on the target
- * emitter will mean listening to it on the origin emitter as well.
- * @param {EventEmitter} originEmitter Events originated on this emitter
- *   will be fired for the target emitter's listeners as well.
- * @param {EventEmitter} targetEmitter Event listeners attached to this emitter
- *   will also be triggered when the event is fired by the origin emitter.
- * @param {Object} opt_blacklist Optional blacklist of events that should not be
- *   proxied.
- * @constructor
- * @extends {Disposable}
- */
-
-var EventEmitterProxy = function (_Disposable) {
-	inherits(EventEmitterProxy, _Disposable);
-
-	function EventEmitterProxy(originEmitter, targetEmitter, opt_blacklist, opt_whitelist) {
-		classCallCheck(this, EventEmitterProxy);
-
-		/**
-   * Map of events that should not be proxied.
-   * @type {Object}
-   * @protected
-   */
-		var _this = possibleConstructorReturn(this, (EventEmitterProxy.__proto__ || Object.getPrototypeOf(EventEmitterProxy)).call(this));
-
-		_this.blacklist_ = opt_blacklist;
-
-		/**
-   * The origin emitter. This emitter's events will be proxied through the
-   * target emitter.
-   * @type {EventEmitter}
-   * @protected
-   */
-		_this.originEmitter_ = originEmitter;
-
-		/**
-   * A list of events that are pending to be listened by an actual origin
-   * emitter. Events are stored here when the origin doesn't exist, so they
-   * can be set on a new origin when one is set.
-   * @type {Array}
-   * @protected
-   */
-		_this.pendingEvents_ = null;
-
-		/**
-   * Holds a map of events from the origin emitter that are already being proxied.
-   * @type {Object<string, !EventHandle>}
-   * @protected
-   */
-		_this.proxiedEvents_ = null;
-
-		/**
-   * The target emitter. This emitter will emit all events that come from
-   * the origin emitter.
-   * @type {EventEmitter}
-   * @protected
-   */
-		_this.targetEmitter_ = targetEmitter;
-
-		/**
-   * Map of events that should be proxied. If whitelist is set blacklist is ignored.
-   * @type {Object}
-   * @protected
-   */
-		_this.whitelist_ = opt_whitelist;
-
-		_this.startProxy_();
-		return _this;
-	}
-
-	/**
-  * Adds the given listener for the given event.
-  * @param {string} event
-  * @param {!function()} listener
-  * @return {!EventHandle} The listened event's handle.
-  * @protected
-  */
-
-
-	createClass(EventEmitterProxy, [{
-		key: 'addListener_',
-		value: function addListener_(event, listener) {
-			return this.originEmitter_.on(event, listener);
-		}
-
-		/**
-   * @inheritDoc
-   */
-
-	}, {
-		key: 'disposeInternal',
-		value: function disposeInternal() {
-			this.removeListeners_();
-			this.proxiedEvents_ = null;
-			this.originEmitter_ = null;
-			this.targetEmitter_ = null;
-		}
-
-		/**
-   * Emits the specified event type on the target emitter.
-   * @protected
-   */
-
-	}, {
-		key: 'emitOnTarget_',
-		value: function emitOnTarget_() {
-			this.targetEmitter_.emit.apply(this.targetEmitter_, arguments);
-		}
-
-		/**
-   * Proxies the given event from the origin to the target emitter.
-   * @param {string} event
-   */
-
-	}, {
-		key: 'proxyEvent',
-		value: function proxyEvent(event) {
-			if (this.shouldProxyEvent_(event)) {
-				this.tryToAddListener_(event);
-			}
-		}
-
-		/**
-   * Removes the proxy listener for all events.
-   * @protected
-   */
-
-	}, {
-		key: 'removeListeners_',
-		value: function removeListeners_() {
-			if (this.proxiedEvents_) {
-				var events = Object.keys(this.proxiedEvents_);
-				for (var i = 0; i < events.length; i++) {
-					this.proxiedEvents_[events[i]].removeListener();
-				}
-				this.proxiedEvents_ = null;
-			}
-			this.pendingEvents_ = null;
-		}
-
-		/**
-   * Changes the origin emitter. This automatically detaches any events that
-   * were already being proxied from the previous emitter, and starts proxying
-   * them on the new emitter instead.
-   * @param {!EventEmitter} originEmitter
-   */
-
-	}, {
-		key: 'setOriginEmitter',
-		value: function setOriginEmitter(originEmitter) {
-			var _this2 = this;
-
-			var events = this.originEmitter_ && this.proxiedEvents_ ? Object.keys(this.proxiedEvents_) : this.pendingEvents_;
-			this.originEmitter_ = originEmitter;
-			if (events) {
-				this.removeListeners_();
-				events.forEach(function (event) {
-					return _this2.proxyEvent(event);
-				});
-			}
-		}
-
-		/**
-   * Checks if the given event should be proxied.
-   * @param {string} event
-   * @return {boolean}
-   * @protected
-   */
-
-	}, {
-		key: 'shouldProxyEvent_',
-		value: function shouldProxyEvent_(event) {
-			if (this.whitelist_ && !this.whitelist_[event]) {
-				return false;
-			}
-			if (this.blacklist_ && this.blacklist_[event]) {
-				return false;
-			}
-			return !this.proxiedEvents_ || !this.proxiedEvents_[event];
-		}
-
-		/**
-   * Starts proxying all events from the origin to the target emitter.
-   * @protected
-   */
-
-	}, {
-		key: 'startProxy_',
-		value: function startProxy_() {
-			this.targetEmitter_.onListener(this.proxyEvent.bind(this));
-		}
-
-		/**
-   * Adds a listener to the origin emitter, if it exists. Otherwise, stores
-   * the pending listener so it can be used on a future origin emitter.
-   * @param {string} event
-   * @protected
-   */
-
-	}, {
-		key: 'tryToAddListener_',
-		value: function tryToAddListener_(event) {
-			if (this.originEmitter_) {
-				this.proxiedEvents_ = this.proxiedEvents_ || {};
-				this.proxiedEvents_[event] = this.addListener_(event, this.emitOnTarget_.bind(this, event));
-			} else {
-				this.pendingEvents_ = this.pendingEvents_ || [];
-				this.pendingEvents_.push(event);
-			}
-		}
-	}]);
-	return EventEmitterProxy;
-}(Disposable);
-
-/**
- * EventHandler utility. It's useful for easily removing a group of
- * listeners from different EventEmitter instances.
- * @constructor
- * @extends {Disposable}
- */
-
-var EventHandler = function (_Disposable) {
-	inherits(EventHandler, _Disposable);
-
-	function EventHandler() {
-		classCallCheck(this, EventHandler);
-
-		/**
-   * An array that holds the added event handles, so the listeners can be
-   * removed later.
-   * @type {Array.<EventHandle>}
-   * @protected
-   */
-		var _this = possibleConstructorReturn(this, (EventHandler.__proto__ || Object.getPrototypeOf(EventHandler)).call(this));
-
-		_this.eventHandles_ = [];
-		return _this;
-	}
-
-	/**
-  * Adds event handles to be removed later through the `removeAllListeners`
-  * method.
-  * @param {...(!EventHandle)} var_args
-  */
-
-
-	createClass(EventHandler, [{
-		key: 'add',
-		value: function add() {
-			for (var i = 0; i < arguments.length; i++) {
-				this.eventHandles_.push(arguments[i]);
-			}
-		}
-
-		/**
-   * Disposes of this instance's object references.
-   * @override
-   */
-
-	}, {
-		key: 'disposeInternal',
-		value: function disposeInternal() {
-			this.eventHandles_ = null;
-		}
-
-		/**
-   * Removes all listeners that have been added through the `add` method.
-   */
-
-	}, {
-		key: 'removeAllListeners',
-		value: function removeAllListeners() {
-			for (var i = 0; i < this.eventHandles_.length; i++) {
-				this.eventHandles_[i].removeListener();
-			}
-
-			this.eventHandles_ = [];
-		}
-	}]);
-	return EventHandler;
-}(Disposable);
-
-/**
- * This is a special EventHandle, that is responsible for dom delegated events
- * (only the ones that receive a target element, not a selector string).
- * @extends {EventHandle}
- */
-
-var DomDelegatedEventHandle = function (_EventHandle) {
-	inherits(DomDelegatedEventHandle, _EventHandle);
-
-	/**
-  * The constructor for `DomDelegatedEventHandle`.
-  * @param {!Event} emitter Element the event was subscribed to.
-  * @param {string} event The name of the event that was subscribed to.
-  * @param {!Function} listener The listener subscribed to the event.
-  * @param {string=} opt_selector An optional selector used when delegating
-  *     the event.
-  * @constructor
-  */
-	function DomDelegatedEventHandle(emitter, event, listener, opt_selector) {
-		classCallCheck(this, DomDelegatedEventHandle);
-
-		var _this = possibleConstructorReturn(this, (DomDelegatedEventHandle.__proto__ || Object.getPrototypeOf(DomDelegatedEventHandle)).call(this, emitter, event, listener));
-
-		_this.selector_ = opt_selector;
-		return _this;
-	}
-
-	/**
-  * @inheritDoc
-  */
-
-
-	createClass(DomDelegatedEventHandle, [{
-		key: 'removeListener',
-		value: function removeListener() {
-			var delegating = domData.get(this.emitter_, 'delegating', {});
-			var listeners = domData.get(this.emitter_, 'listeners', {});
-			var selector = this.selector_;
-			var arr = isString(selector) ? delegating[this.event_].selectors : listeners;
-			var key = isString(selector) ? selector : this.event_;
-
-			array.remove(arr[key] || [], this.listener_);
-			if (arr[key] && arr[key].length === 0) {
-				delete arr[key];
-			}
-		}
-	}]);
-	return DomDelegatedEventHandle;
-}(EventHandle);
-
-/**
- * This is a special EventHandle, that is responsible for dom events, instead
- * of EventEmitter events.
- * @extends {EventHandle}
- */
-
-var DomEventHandle = function (_EventHandle) {
-	inherits(DomEventHandle, _EventHandle);
-
-	/**
-  * The constructor for `DomEventHandle`.
-  * @param {!EventEmitter} emitter Emitter the event was subscribed to.
-  * @param {string} event The name of the event that was subscribed to.
-  * @param {!Function} listener The listener subscribed to the event.
-  * @param {boolean} opt_capture Flag indicating if listener should be triggered
-  *   during capture phase, instead of during the bubbling phase. Defaults to false.
-  * @constructor
-  */
-	function DomEventHandle(emitter, event, listener, opt_capture) {
-		classCallCheck(this, DomEventHandle);
-
-		var _this = possibleConstructorReturn(this, (DomEventHandle.__proto__ || Object.getPrototypeOf(DomEventHandle)).call(this, emitter, event, listener));
-
-		_this.capture_ = opt_capture;
-		return _this;
-	}
-
-	/**
-  * @inheritDoc
-  */
-
-
-	createClass(DomEventHandle, [{
-		key: 'removeListener',
-		value: function removeListener() {
-			this.emitter_.removeEventListener(this.event_, this.listener_, this.capture_);
-		}
-	}]);
-	return DomEventHandle;
-}(EventHandle);
-
-var elementsByTag_ = {};
-var supportCache_ = {};
-var customEvents = {};
-
-var LAST_CONTAINER = '__metal_last_container__';
-var USE_CAPTURE = {
-	blur: true,
-	error: true,
-	focus: true,
-	invalid: true,
-	load: true,
-	scroll: true
-};
-
-/**
- * Adds the requested CSS classes to an element.
- * @param {!Element|!Nodelist} elements The element or elements to add CSS classes to.
- * @param {string} classes CSS classes to add.
- */
-function addClasses(elements, classes) {
-	if (!isObject(elements) || !isString(classes)) {
-		return;
-	}
-
-	if (!elements.length) {
-		elements = [elements];
-	}
-
-	for (var i = 0; i < elements.length; i++) {
-		if ('classList' in elements[i]) {
-			addClassesWithNative_(elements[i], classes);
-		} else {
-			addClassesWithoutNative_(elements[i], classes);
-		}
-	}
-}
-
-/**
- * Adds the requested CSS classes to an element using classList.
- * @param {!Element} element The element to add CSS classes to.
- * @param {string} classes CSS classes to add.
- * @private
- */
-function addClassesWithNative_(element, classes) {
-	classes.split(' ').forEach(function (className) {
-		if (className) {
-			element.classList.add(className);
-		}
-	});
-}
-
-/**
- * Adds the requested CSS classes to an element without using classList.
- * @param {!Element} element The element to add CSS classes to.
- * @param {string} classes CSS classes to add.
- * @private
- */
-function addClassesWithoutNative_(element, classes) {
-	var elementClassName = ' ' + element.className + ' ';
-	var classesToAppend = '';
-
-	classes = classes.split(' ');
-
-	for (var i = 0; i < classes.length; i++) {
-		var className = classes[i];
-
-		if (elementClassName.indexOf(' ' + className + ' ') === -1) {
-			classesToAppend += ' ' + className;
-		}
-	}
-
-	if (classesToAppend) {
-		element.className = element.className + classesToAppend;
-	}
-}
-
-/**
- * Adds an event listener to the given element, to be triggered via delegate.
- * @param {!Element} element
- * @param {string} eventName
- * @param {!function()} listener
- * @private
- */
-function addElementListener_(element, eventName, listener) {
-	addToArr_(domData.get(element, 'listeners', {}), eventName, listener);
-}
-
-/**
- * Adds an event listener to the given element, to be triggered via delegate
- * selectors.
- * @param {!Element} element
- * @param {string} eventName
- * @param {string} selector
- * @param {!function()} listener
- * @private
- */
-function addSelectorListener_(element, eventName, selector, listener) {
-	var delegatingData = domData.get(element, 'delegating', {});
-	addToArr_(delegatingData[eventName].selectors, selector, listener);
-}
-
-/**
- * Adds a value to an array inside an object, creating it first if it doesn't
- * yet exist.
- * @param {!Array} arr
- * @param {string} key
- * @param {*} value
- * @private
- */
-function addToArr_(arr, key, value) {
-	if (!arr[key]) {
-		arr[key] = [];
-	}
-	arr[key].push(value);
-}
-
-/**
- * Attaches a delegate listener, unless there's already one attached.
- * @param {!Element} element
- * @param {string} eventName
- * @private
- */
-function attachDelegateEvent_(element, eventName) {
-	var delegatingData = domData.get(element, 'delegating', {});
-	if (!delegatingData[eventName]) {
-		delegatingData[eventName] = {
-			handle: on(element, eventName, handleDelegateEvent_, !!USE_CAPTURE[eventName]),
-			selectors: {}
-		};
-	}
-}
-
-/**
- * Gets the closest element up the tree from the given element (including
- * itself) that matches the specified selector, or null if none match.
- * @param {Element} element
- * @param {string} selector
- * @return {Element}
- */
-function closest(element, selector) {
-	while (element && !match(element, selector)) {
-		element = element.parentNode;
-	}
-	return element;
-}
-
-/**
- * Appends a child node with text or other nodes to a parent node. If
- * child is a HTML string it will be automatically converted to a document
- * fragment before appending it to the parent.
- * @param {!Element} parent The node to append nodes to.
- * @param {!(Element|NodeList|string)} child The thing to append to the parent.
- * @return {!Element} The appended child.
- */
-function append(parent, child) {
-	if (isString(child)) {
-		child = buildFragment(child);
-	}
-	if (child instanceof NodeList) {
-		var childArr = Array.prototype.slice.call(child);
-		for (var i = 0; i < childArr.length; i++) {
-			parent.appendChild(childArr[i]);
-		}
-	} else {
-		parent.appendChild(child);
-	}
-	return child;
-}
-
-/**
- * Helper for converting a HTML string into a document fragment.
- * @param {string} htmlString The HTML string to convert.
- * @return {!Element} The resulting document fragment.
- */
-function buildFragment(htmlString) {
-	var tempDiv = document.createElement('div');
-	tempDiv.innerHTML = '<br>' + htmlString;
-	tempDiv.removeChild(tempDiv.firstChild);
-
-	var fragment = document.createDocumentFragment();
-	while (tempDiv.firstChild) {
-		fragment.appendChild(tempDiv.firstChild);
-	}
-	return fragment;
-}
-
-/**
- * Checks if the first element contains the second one.
- * @param {!Element} element1
- * @param {!Element} element2
- * @return {boolean}
- */
-function contains(element1, element2) {
-	if (isDocument(element1)) {
-		// document.contains is not defined on IE9, so call it on documentElement instead.
-		return element1.documentElement.contains(element2);
-	} else {
-		return element1.contains(element2);
-	}
-}
-
-/**
- * Listens to the specified event on the given DOM element, but only calls the
- * given callback listener when it's triggered by elements that match the
- * given selector or target element.
- * @param {!Element} element The DOM element the event should be listened on.
- * @param {string} eventName The name of the event to listen to.
- * @param {!Element|string} selectorOrTarget Either an element or css selector
- *     that should match the event for the listener to be triggered.
- * @param {!function(!Object)} callback Function to be called when the event
- *     is triggered. It will receive the normalized event object.
- * @param {boolean=} opt_default Optional flag indicating if this is a default
- *     listener. That means that it would only be executed after all non
- *     default listeners, and only if the event isn't prevented via
- *     `preventDefault`.
- * @return {!EventHandle} Can be used to remove the listener.
- */
-function delegate(element, eventName, selectorOrTarget, callback, opt_default) {
-	var customConfig = customEvents[eventName];
-	if (customConfig && customConfig.delegate) {
-		eventName = customConfig.originalEvent;
-		callback = customConfig.handler.bind(customConfig, callback);
-	}
-
-	if (opt_default) {
-		// Wrap callback so we don't set property directly on it.
-		callback = callback.bind();
-		callback.defaultListener_ = true;
-	}
-
-	attachDelegateEvent_(element, eventName);
-	if (isString(selectorOrTarget)) {
-		addSelectorListener_(element, eventName, selectorOrTarget, callback);
-	} else {
-		addElementListener_(selectorOrTarget, eventName, callback);
-	}
-
-	return new DomDelegatedEventHandle(isString(selectorOrTarget) ? element : selectorOrTarget, eventName, callback, isString(selectorOrTarget) ? selectorOrTarget : null);
-}
-
-/**
- * Verifies if the element is able to trigger the Click event,
- * simulating browsers behaviour, avoiding event listeners to be called by triggerEvent method.
- * @param {Element} node Element to be checked.
- * @param {string} eventName The event name.
- * @private
- */
-function isAbleToInteractWith_(node, eventName, opt_eventObj) {
-	if (opt_eventObj && eventName === 'click' && opt_eventObj.button === 2) {
-		// Firefox triggers "click" events on the document for right clicks. This
-		// causes our delegate logic to trigger it for regular elements too, which
-		// shouldn't happen. Ignoring them here.
-		return false;
-	}
-
-	var matchesSelector = ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'FIELDSET'];
-	if (eventName === 'click' && matchesSelector.indexOf(node.tagName) > -1) {
-		return !(node.disabled || parent(node, 'fieldset[disabled]'));
-	}
-	return true;
-}
-
-/**
- * Inserts node in document as last element.
- * @param {Element} node Element to remove children from.
- */
-
-
-/**
- * Removes node from document.
- * @param {Element} node Element to remove children from.
- */
-function exitDocument(node) {
-	if (node && node.parentNode) {
-		node.parentNode.removeChild(node);
-	}
-}
-
-/**
- * This is called when an event is triggered by a delegate listener. All
- * matching listeners of this event type from `target` to `currentTarget` will
- * be triggered.
- * @param {!Event} event The event payload.
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function handleDelegateEvent_(event) {
-	normalizeDelegateEvent_(event);
-	var ret = true;
-	var container = event.currentTarget;
-	var defFns = [];
-
-	ret &= triggerDelegatedListeners_(container, event, defFns);
-	ret &= triggerDefaultDelegatedListeners_(defFns, event);
-
-	event.delegateTarget = null;
-	event[LAST_CONTAINER] = container;
-	return ret;
-}
-
-/**
- * Checks if the given element has the requested css class.
- * @param {!Element} element
- * @param {string} className
- * @return {boolean}
- */
-
-
-/**
- * Checks if the given element is empty or not.
- * @param {!Element} element
- * @return {boolean}
- */
-
-
-/**
- * Check if an element matches a given selector.
- * @param {Element} element
- * @param {string} selector
- * @return {boolean}
- */
-function match(element, selector) {
-	if (!element || element.nodeType !== 1) {
-		return false;
-	}
-
-	var p = Element.prototype;
-	var m = p.matches || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || p.oMatchesSelector;
-	if (m) {
-		return m.call(element, selector);
-	}
-
-	return matchFallback_(element, selector);
-}
-
-/**
- * Check if an element matches a given selector, using an internal implementation
- * instead of calling existing javascript functions.
- * @param {Element} element
- * @param {string} selector
- * @return {boolean}
- * @private
- */
-function matchFallback_(element, selector) {
-	var nodes = document.querySelectorAll(selector, element.parentNode);
-	for (var i = 0; i < nodes.length; ++i) {
-		if (nodes[i] === element) {
-			return true;
-		}
-	}
-	return false;
-}
-
-/**
- * Returns the next sibling of the given element that matches the specified
- * selector, or null if there is none.
- * @param {!Element} element
- * @param {?string} selector
- */
-
-
-/**
- * Normalizes the event payload for delegate listeners.
- * @param {!Event} event
- * @private
- */
-function normalizeDelegateEvent_(event) {
-	event.stopPropagation = stopPropagation_;
-	event.stopImmediatePropagation = stopImmediatePropagation_;
-}
-
-/**
- * Listens to the specified event on the given DOM element. This function normalizes
- * DOM event payloads and functions so they'll work the same way on all supported
- * browsers.
- * @param {!Element|string} element The DOM element to listen to the event on, or
- *   a selector that should be delegated on the entire document.
- * @param {string} eventName The name of the event to listen to.
- * @param {!function(!Object)} callback Function to be called when the event is
- *   triggered. It will receive the normalized event object.
- * @param {boolean} opt_capture Flag indicating if listener should be triggered
- *   during capture phase, instead of during the bubbling phase. Defaults to false.
- * @return {!DomEventHandle} Can be used to remove the listener.
- */
-function on(element, eventName, callback, opt_capture) {
-	if (isString(element)) {
-		return delegate(document, eventName, element, callback);
-	}
-	var customConfig = customEvents[eventName];
-	if (customConfig && customConfig.event) {
-		eventName = customConfig.originalEvent;
-		callback = customConfig.handler.bind(customConfig, callback);
-	}
-	element.addEventListener(eventName, callback, opt_capture);
-	return new DomEventHandle(element, eventName, callback, opt_capture);
-}
-
-/**
- * Listens to the specified event on the given DOM element once. This
- * function normalizes DOM event payloads and functions so they'll work the
- * same way on all supported browsers.
- * @param {!Element} element The DOM element to listen to the event on.
- * @param {string} eventName The name of the event to listen to.
- * @param {!function(!Object)} callback Function to be called when the event
- *   is triggered. It will receive the normalized event object.
- * @return {!DomEventHandle} Can be used to remove the listener.
- */
-function once(element, eventName, callback) {
-	var domEventHandle = on(element, eventName, function () {
-		domEventHandle.removeListener();
-		return callback.apply(this, arguments);
-	});
-	return domEventHandle;
-}
-
-/**
- * Gets the first parent from the given element that matches the specified
- * selector, or null if none match.
- * @param {!Element} element
- * @param {string} selector
- * @return {Element}
- */
-function parent(element, selector) {
-	return closest(element.parentNode, selector);
-}
-
-/**
- * Registers a custom event.
- * @param {string} eventName The name of the custom event.
- * @param {!Object} customConfig An object with information about how the event
- *   should be handled.
- */
-function registerCustomEvent(eventName, customConfig) {
-	customEvents[eventName] = customConfig;
-}
-
-/**
- * Removes all the child nodes on a DOM node.
- * @param {Element} node Element to remove children from.
- */
-function removeChildren(node) {
-	var child = void 0;
-	while (child = node.firstChild) {
-		node.removeChild(child);
-	}
-}
-
-/**
- * Removes the requested CSS classes from an element.
- * @param {!Element|!NodeList} elements The element or elements to remove CSS classes from.
- * @param {string} classes CSS classes to remove.
- */
-function removeClasses(elements, classes) {
-	if (!isObject(elements) || !isString(classes)) {
-		return;
-	}
-
-	if (!elements.length) {
-		elements = [elements];
-	}
-
-	for (var i = 0; i < elements.length; i++) {
-		if ('classList' in elements[i]) {
-			removeClassesWithNative_(elements[i], classes);
-		} else {
-			removeClassesWithoutNative_(elements[i], classes);
-		}
-	}
-}
-
-/**
- * Removes the requested CSS classes from an element using classList.
- * @param {!Element} element The element to remove CSS classes from.
- * @param {string} classes CSS classes to remove.
- * @private
- */
-function removeClassesWithNative_(element, classes) {
-	classes.split(' ').forEach(function (className) {
-		if (className) {
-			element.classList.remove(className);
-		}
-	});
-}
-
-/**
- * Removes the requested CSS classes from an element without using classList.
- * @param {!Element} element The element to remove CSS classes from.
- * @param {string} classes CSS classes to remove.
- * @private
- */
-function removeClassesWithoutNative_(element, classes) {
-	var elementClassName = ' ' + element.className + ' ';
-
-	classes = classes.split(' ');
-
-	for (var i = 0; i < classes.length; i++) {
-		elementClassName = elementClassName.replace(' ' + classes[i] + ' ', ' ');
-	}
-
-	element.className = elementClassName.trim();
-}
-
-/**
- * Replaces the first element with the second.
- * @param {Element} element1
- * @param {Element} element2
- */
-
-
-/**
- * The function that replaces `stopImmediatePropagation_` for events.
- * @private
- */
-function stopImmediatePropagation_() {
-	var event = this; // eslint-disable-line
-	event.stopped = true;
-	event.stoppedImmediate = true;
-	Event.prototype.stopImmediatePropagation.call(event);
-}
-
-/**
- * The function that replaces `stopPropagation` for events.
- * @private
- */
-function stopPropagation_() {
-	var event = this; // eslint-disable-line
-	event.stopped = true;
-	Event.prototype.stopPropagation.call(event);
-}
-
-/**
- * Checks if the given element supports the given event type.
- * @param {!Element|string} element The DOM element or element tag name to check.
- * @param {string} eventName The name of the event to check.
- * @return {boolean}
- */
-function supportsEvent(element, eventName) {
-	if (customEvents[eventName]) {
-		return true;
-	}
-
-	if (isString(element)) {
-		if (!elementsByTag_[element]) {
-			elementsByTag_[element] = document.createElement(element);
-		}
-		element = elementsByTag_[element];
-	}
-
-	var tag = element.tagName;
-	if (!supportCache_[tag] || !supportCache_[tag].hasOwnProperty(eventName)) {
-		supportCache_[tag] = supportCache_[tag] || {};
-		supportCache_[tag][eventName] = 'on' + eventName in element;
-	}
-	return supportCache_[tag][eventName];
-}
-
-/**
- * This triggers all default matched delegated listeners of a given event type.
- * @param {!Array} defaultFns Array to collect default listeners in, instead
- * @param {!Event} event
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function triggerDefaultDelegatedListeners_(defFns, event) {
-	var ret = true;
-
-	for (var i = 0; i < defFns.length && !event.defaultPrevented; i++) {
-		event.delegateTarget = defFns[i].element;
-		ret &= defFns[i].fn(event);
-	}
-
-	return ret;
-}
-
-/**
- * This triggers all matched delegated listeners of a given event type when its
- * delegated target is able to interact.
- * @param {!Element} container
- * @param {!Event} event
- * @param {!Array} defaultFns Array to collect default listeners in, instead
- *     of running them.
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function triggerDelegatedListeners_(container, event, defaultFns) {
-	var ret = true;
-	var currElement = event.target;
-	var limit = container.parentNode;
-
-	while (currElement && currElement !== limit && !event.stopped) {
-		if (isAbleToInteractWith_(currElement, event.type, event)) {
-			event.delegateTarget = currElement;
-			ret &= triggerElementListeners_(currElement, event, defaultFns);
-			ret &= triggerSelectorListeners_(container, currElement, event, defaultFns);
-		}
-		currElement = currElement.parentNode;
-	}
-
-	return ret;
-}
-
-/**
- * Converts the given argument to a DOM element. Strings are assumed to
- * be selectors, and so a matched element will be returned. If the arg
- * is already a DOM element it will be the return value.
- * @param {string|Element|Document} selectorOrElement
- * @return {Element} The converted element, or null if none was found.
- */
-
-
-/**
- * Adds or removes one or more classes from an element. If any of the classes
- * is present, it will be removed from the element, or added otherwise.
- * @param {!Element} element The element which classes will be toggled.
- * @param {string} classes The classes which have to added or removed from the element.
- */
-
-
-/**
- * Triggers all listeners for the given event type that are stored in the
- * specified element.
- * @param {!Element} element
- * @param {!Event} event
- * @param {!Array} defaultFns Array to collect default listeners in, instead
- *     of running them.
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function triggerElementListeners_(element, event, defaultFns) {
-	var lastContainer = event[LAST_CONTAINER];
-	if (!isDef(lastContainer) || !contains(lastContainer, element)) {
-		var listeners = domData.get(element, 'listeners', {})[event.type];
-		return triggerListeners_(listeners, event, element, defaultFns);
-	}
-	return true;
-}
-
-/**
- * Triggers the specified event on the given element.
- * NOTE: This should mostly be used for testing, not on real code.
- * @param {!Element} element The node that should trigger the event.
- * @param {string} eventName The name of the event to be triggred.
- * @param {Object=} opt_eventObj An object with data that should be on the
- *   triggered event's payload.
- */
-
-
-/**
- * Triggers the given listeners array.
- * @param {Array<!function()>} listeners
- * @param {!Event} event
- * @param {!Element} element
- * @param {!Array} defaultFns Array to collect default listeners in, instead
- *     of running them.
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function triggerListeners_(listeners, event, element, defaultFns) {
-	var ret = true;
-	listeners = listeners || [];
-	for (var i = 0; i < listeners.length && !event.stoppedImmediate; i++) {
-		if (listeners[i].defaultListener_) {
-			defaultFns.push({
-				element: element,
-				fn: listeners[i]
-			});
-		} else {
-			ret &= listeners[i](event);
-		}
-	}
-	return ret;
-}
-
-/**
- * Triggers all selector listeners for the given event.
- * @param {!Element} container
- * @param {!Element} element
- * @param {!Event} event
- * @param {!Array} defaultFns Array to collect default listeners in, instead
- *     of running them.
- * @return {boolean} False if at least one of the triggered callbacks returns
- *     false, or true otherwise.
- * @private
- */
-function triggerSelectorListeners_(container, element, event, defaultFns) {
-	var ret = true;
-	var data = domData.get(container, 'delegating', {});
-	var map = data[event.type].selectors;
-	var selectors = Object.keys(map);
-	for (var i = 0; i < selectors.length && !event.stoppedImmediate; i++) {
-		if (match(element, selectors[i])) {
-			var listeners = map[selectors[i]];
-			ret &= triggerListeners_(listeners, event, element, defaultFns);
-		}
-	}
-	return ret;
-}
-
-// This file exists just for backwards compatibility, making sure that old
-// default imports for this file still work. It's best to use the named exports
-// for each function instead though, since that allows bundlers like Rollup to
-// reduce the bundle size by removing unused code.
-
-/**
- * DomEventEmitterProxy utility. It extends `EventEmitterProxy` to also accept
- * dom elements as origin emitters.
- * @extends {EventEmitterProxy}
- */
-
-var DomEventEmitterProxy = function (_EventEmitterProxy) {
-	inherits(DomEventEmitterProxy, _EventEmitterProxy);
-
-	function DomEventEmitterProxy() {
-		classCallCheck(this, DomEventEmitterProxy);
-		return possibleConstructorReturn(this, (DomEventEmitterProxy.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy)).apply(this, arguments));
-	}
-
-	createClass(DomEventEmitterProxy, [{
-		key: 'addListener_',
-
-		/**
-   * Adds the given listener for the given event.
-   * @param {string} event
-   * @param {!function()} listener
-   * @return {!EventHandle} The listened event's handle.
-   * @protected
-   * @override
-   */
-		value: function addListener_(event, listener) {
-			if (this.originEmitter_.addEventListener) {
-				if (this.isDelegateEvent_(event)) {
-					var index = event.indexOf(':', 9);
-					var eventName = event.substring(9, index);
-					var selector = event.substring(index + 1);
-					return delegate(this.originEmitter_, eventName, selector, listener);
-				} else {
-					return on(this.originEmitter_, event, listener);
-				}
-			} else {
-				return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'addListener_', this).call(this, event, listener);
-			}
-		}
-
-		/**
-   * Checks if the given event is of the delegate type.
-   * @param {string} event
-   * @return {boolean}
-   * @protected
-   */
-
-	}, {
-		key: 'isDelegateEvent_',
-		value: function isDelegateEvent_(event) {
-			return event.substr(0, 9) === 'delegate:';
-		}
-
-		/**
-   * Checks if the given event is supported by the origin element.
-   * @param {string} event
-   * @protected
-   */
-
-	}, {
-		key: 'isSupportedDomEvent_',
-		value: function isSupportedDomEvent_(event) {
-			if (!this.originEmitter_ || !this.originEmitter_.addEventListener) {
-				return true;
-			}
-			return this.isDelegateEvent_(event) && event.indexOf(':', 9) !== -1 || supportsEvent(this.originEmitter_, event);
-		}
-
-		/**
-   * Checks if the given event should be proxied.
-   * @param {string} event
-   * @return {boolean}
-   * @protected
-   * @override
-   */
-
-	}, {
-		key: 'shouldProxyEvent_',
-		value: function shouldProxyEvent_(event) {
-			return get(DomEventEmitterProxy.prototype.__proto__ || Object.getPrototypeOf(DomEventEmitterProxy.prototype), 'shouldProxyEvent_', this).call(this, event) && this.isSupportedDomEvent_(event);
-		}
-	}]);
-	return DomEventEmitterProxy;
-}(EventEmitterProxy);
-
-/**
- * Class with static methods responsible for doing browser feature checks.
- */
-
-var features = function () {
-	function features() {
-		classCallCheck(this, features);
-	}
-
-	createClass(features, null, [{
-		key: 'checkAnimationEventName',
-
-		/**
-   * Some browsers still supports prefixed animation events. This method can
-   * be used to retrieve the current browser event name for both, animation
-   * and transition.
-   * @return {object}
-   */
-		value: function checkAnimationEventName() {
-			if (features.animationEventName_ === undefined) {
-				features.animationEventName_ = {
-					animation: features.checkAnimationEventName_('animation'),
-					transition: features.checkAnimationEventName_('transition')
-				};
-			}
-			return features.animationEventName_;
-		}
-
-		/**
-   * @protected
-   * @param {string} type Type to test: animation, transition.
-   * @return {string} Browser event name.
-   */
-
-	}, {
-		key: 'checkAnimationEventName_',
-		value: function checkAnimationEventName_(type) {
-			var prefixes = ['Webkit', 'MS', 'O', ''];
-			var typeTitleCase = string.replaceInterval(type, 0, 1, type.substring(0, 1).toUpperCase());
-			var suffixes = [typeTitleCase + 'End', typeTitleCase + 'End', typeTitleCase + 'End', type + 'end'];
-			for (var i = 0; i < prefixes.length; i++) {
-				if (features.animationElement_.style[prefixes[i] + typeTitleCase] !== undefined) {
-					return prefixes[i].toLowerCase() + suffixes[i];
-				}
-			}
-			return type + 'end';
-		}
-
-		/**
-   * Some browsers (like IE9) change the order of element attributes, when html
-   * is rendered. This method can be used to check if this behavior happens on
-   * the current browser.
-   * @return {boolean}
-   */
-
-	}, {
-		key: 'checkAttrOrderChange',
-		value: function checkAttrOrderChange() {
-			if (features.attrOrderChange_ === undefined) {
-				var originalContent = '<div data-component="" data-ref=""></div>';
-				var element = document.createElement('div');
-				append(element, originalContent);
-				features.attrOrderChange_ = originalContent !== element.innerHTML;
-			}
-			return features.attrOrderChange_;
-		}
-	}]);
-	return features;
-}();
-
-features.animationElement_ = document.createElement('div');
-features.animationEventName_ = undefined;
-features.attrOrderChange_ = undefined;
-
-/**
- * Utility functions for running javascript code in the global scope.
- */
-
-var globalEval = function () {
-	function globalEval() {
-		classCallCheck(this, globalEval);
-	}
-
-	createClass(globalEval, null, [{
-		key: 'run',
-
-		/**
-   * Evaluates the given string in the global scope.
-   * @param {string} text
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   * @return {Element} script
-   */
-		value: function run(text, opt_appendFn) {
-			var script = document.createElement('script');
-			script.text = text;
-			if (opt_appendFn) {
-				opt_appendFn(script);
-			} else {
-				document.head.appendChild(script);
-			}
-			exitDocument(script);
-			return script;
-		}
-
-		/**
-   * Evaluates the given javascript file in the global scope.
-   * @param {string} src The file's path.
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   * @return {Element} script
-   */
-
-	}, {
-		key: 'runFile',
-		value: function runFile(src, opt_callback, opt_appendFn) {
-			var script = document.createElement('script');
-			script.src = src;
-
-			var callback = function callback() {
-				exitDocument(script);
-				opt_callback && opt_callback();
-			};
-			once(script, 'load', callback);
-			once(script, 'error', callback);
-
-			if (opt_appendFn) {
-				opt_appendFn(script);
-			} else {
-				document.head.appendChild(script);
-			}
-
-			return script;
-		}
-
-		/**
-   * Evaluates the code referenced by the given script element.
-   * @param {!Element} script
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   * @return {Element} script
-   */
-
-	}, {
-		key: 'runScript',
-		value: function runScript(script, opt_callback, opt_appendFn) {
-			var callback = function callback() {
-				opt_callback && opt_callback();
-			};
-			if (script.type && script.type !== 'text/javascript') {
-				async.nextTick(callback);
-				return;
-			}
-			exitDocument(script);
-			if (script.src) {
-				return globalEval.runFile(script.src, opt_callback, opt_appendFn);
-			} else {
-				async.nextTick(callback);
-				return globalEval.run(script.text, opt_appendFn);
-			}
-		}
-
-		/**
-   * Evaluates any script tags present in the given element.
-   * @param {!Element} element
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   */
-
-	}, {
-		key: 'runScriptsInElement',
-		value: function runScriptsInElement(element, opt_callback, opt_appendFn) {
-			var scripts = element.querySelectorAll('script');
-			if (scripts.length) {
-				globalEval.runScriptsInOrder(scripts, 0, opt_callback, opt_appendFn);
-			} else if (opt_callback) {
-				async.nextTick(opt_callback);
-			}
-		}
-
-		/**
-   * Runs the given scripts elements in the order that they appear.
-   * @param {!NodeList} scripts
-   * @param {number} index
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   */
-
-	}, {
-		key: 'runScriptsInOrder',
-		value: function runScriptsInOrder(scripts, index, opt_callback, opt_appendFn) {
-			globalEval.runScript(scripts.item(index), function () {
-				if (index < scripts.length - 1) {
-					globalEval.runScriptsInOrder(scripts, index + 1, opt_callback, opt_appendFn);
-				} else if (opt_callback) {
-					async.nextTick(opt_callback);
-				}
-			}, opt_appendFn);
-		}
-	}]);
-	return globalEval;
-}();
-
-/**
- * Utility functions for running styles.
- */
-
-var globalEvalStyles = function () {
-	function globalEvalStyles() {
-		classCallCheck(this, globalEvalStyles);
-	}
-
-	createClass(globalEvalStyles, null, [{
-		key: 'run',
-
-		/**
-   * Evaluates the given style.
-   * @param {string} text
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   * @return {Element} style
-   */
-		value: function run(text, opt_appendFn) {
-			var style = document.createElement('style');
-			style.innerHTML = text;
-			if (opt_appendFn) {
-				opt_appendFn(style);
-			} else {
-				document.head.appendChild(style);
-			}
-			return style;
-		}
-
-		/**
-   * Evaluates the given style file.
-   * @param {string} href The file's path.
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the styles has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   * @return {Element} style
-   */
-
-	}, {
-		key: 'runFile',
-		value: function runFile(href, opt_callback, opt_appendFn) {
-			var link = document.createElement('link');
-			link.rel = 'stylesheet';
-			link.href = href;
-			globalEvalStyles.runStyle(link, opt_callback, opt_appendFn);
-			return link;
-		}
-
-		/**
-   * Evaluates the code referenced by the given style/link element.
-   * @param {!Element} style
-   * @param {function()=} opt_callback Optional function to be called
-   *   when the script has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   *  @return {Element} style
-   */
-
-	}, {
-		key: 'runStyle',
-		value: function runStyle(style, opt_callback, opt_appendFn) {
-			var callback = function callback() {
-				opt_callback && opt_callback();
-			};
-			if (style.rel && style.rel !== 'stylesheet') {
-				async.nextTick(callback);
-				return;
-			}
-
-			if (style.tagName === 'STYLE') {
-				async.nextTick(callback);
-			} else {
-				once(style, 'load', callback);
-				once(style, 'error', callback);
-			}
-
-			if (opt_appendFn) {
-				opt_appendFn(style);
-			} else {
-				document.head.appendChild(style);
-			}
-
-			return style;
-		}
-
-		/**
-   * Evaluates any style present in the given element.
-   * @param {!Element} element
-   * @param {function()=} opt_callback Optional function to be called when the
-   *   style has been run.
-   * @param {function()=} opt_appendFn Optional function to append the node
-   *   into document.
-   */
-
-	}, {
-		key: 'runStylesInElement',
-		value: function runStylesInElement(element, opt_callback, opt_appendFn) {
-			var styles = element.querySelectorAll('style,link');
-			if (styles.length === 0 && opt_callback) {
-				async.nextTick(opt_callback);
-				return;
-			}
-
-			var loadCount = 0;
-			var callback = function callback() {
-				if (opt_callback && ++loadCount === styles.length) {
-					async.nextTick(opt_callback);
-				}
-			};
-			for (var i = 0; i < styles.length; i++) {
-				globalEvalStyles.runStyle(styles[i], callback, opt_appendFn);
-			}
-		}
-	}]);
-	return globalEvalStyles;
-}();
-
-var mouseEventMap = {
-	mouseenter: 'mouseover',
-	mouseleave: 'mouseout',
-	pointerenter: 'pointerover',
-	pointerleave: 'pointerout'
-};
-Object.keys(mouseEventMap).forEach(function (eventName) {
-	registerCustomEvent(eventName, {
-		delegate: true,
-		handler: function handler(callback, event) {
-			var related = event.relatedTarget;
-			var target = event.delegateTarget;
-			if (!related || related !== target && !contains(target, related)) {
-				event.customType = eventName;
-				return callback(event);
-			}
-		},
-		originalEvent: mouseEventMap[eventName]
-	});
-});
-
-var animationEventMap = {
-	animation: 'animationend',
-	transition: 'transitionend'
-};
-Object.keys(animationEventMap).forEach(function (eventType) {
-	var eventName = animationEventMap[eventType];
-	registerCustomEvent(eventName, {
-		event: true,
-		delegate: true,
-		handler: function handler(callback, event) {
-			event.customType = eventName;
-			return callback(event);
-		},
-		originalEvent: features.checkAnimationEventName()[eventType]
-	});
-});
 
 /*!
  * Promises polyfill from Google's Closure Library.
@@ -5585,7 +5746,7 @@ function encloseNonCapturingGroup(pattern) {
  * @return {string}
  */
 function escape(str) {
-	return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1');
+	return str.replace(/([.+*?=^!:()[\]|\/\\])/g, '\\$1');
 }
 
 /**
@@ -5960,7 +6121,7 @@ var Screen = function (_Cacheable) {
 	createClass(Screen, [{
 		key: 'activate',
 		value: function activate() {
-			console.log('Screen [' + this + '] activate');
+			void 0;
 		}
 
 		/**
@@ -5974,7 +6135,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'beforeActivate',
 		value: function beforeActivate() {
-			console.log('Screen [' + this + '] beforeActivate');
+			void 0;
 		}
 
 		/**
@@ -5989,7 +6150,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'beforeDeactivate',
 		value: function beforeDeactivate() {
-			console.log('Screen [' + this + '] beforeDeactivate');
+			void 0;
 		}
 
 		/**
@@ -6025,7 +6186,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'deactivate',
 		value: function deactivate() {
-			console.log('Screen [' + this + '] deactivate');
+			void 0;
 		}
 
 		/**
@@ -6038,7 +6199,7 @@ var Screen = function (_Cacheable) {
 		key: 'disposeInternal',
 		value: function disposeInternal() {
 			get(Screen.prototype.__proto__ || Object.getPrototypeOf(Screen.prototype), 'disposeInternal', this).call(this);
-			console.log('Screen [' + this + '] dispose');
+			void 0;
 		}
 
 		/**
@@ -6087,7 +6248,7 @@ var Screen = function (_Cacheable) {
 		value: function flip(surfaces) {
 			var _this2 = this;
 
-			console.log('Screen [' + this + '] flip');
+			void 0;
 
 			var transitions = [];
 
@@ -6125,7 +6286,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'getSurfaceContent',
 		value: function getSurfaceContent() {
-			console.log('Screen [' + this + '] getSurfaceContent');
+			void 0;
 		}
 
 		/**
@@ -6152,7 +6313,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'load',
 		value: function load() {
-			console.log('Screen [' + this + '] load');
+			void 0;
 			return CancellablePromise.resolve();
 		}
 
@@ -6562,6 +6723,11 @@ Surface.defaultTransition = function (from, to) {
 	}
 };
 
+var NavigationStrategy = {
+	IMMEDIATE: 'immediate',
+	SCHEDULE_LAST: 'scheduleLast'
+};
+
 var App$1 = function (_EventEmitter) {
 	inherits(App, _EventEmitter);
 
@@ -6677,6 +6843,17 @@ var App$1 = function (_EventEmitter) {
 		_this.nativeScrollRestorationSupported = 'scrollRestoration' in globals.window.history;
 
 		/**
+   * When set to NavigationStrategy.SCHEDULE_LAST means that the current navigation
+   * cannot be Cancelled to start another and will be queued in
+   * scheduledNavigationQueue. When NavigationStrategy.IMMEDIATE means that all
+   * navigation will be cancelled to start another.
+   * @type {!string}
+   * @default immediate
+   * @protected
+   */
+		_this.navigationStrategy = NavigationStrategy.IMMEDIATE;
+
+		/**
    * When set to true there is a pendingNavigate that has not yet been
    * resolved or rejected.
    * @type {boolean}
@@ -6725,6 +6902,14 @@ var App$1 = function (_EventEmitter) {
    * @protected
    */
 		_this.routes = [];
+
+		/**
+   * Holds a queue that stores every DOM event that can initiate a navigation.
+   * @type {!Event}
+   * @default []
+   * @protected
+   */
+		_this.scheduledNavigationQueue = [];
 
 		/**
    * Maps the screen instances by the url containing the parameters.
@@ -6860,11 +7045,11 @@ var App$1 = function (_EventEmitter) {
 			var path = utils.getUrlPath(url);
 
 			if (!this.isLinkSameOrigin_(uri.getHost())) {
-				console.log('Offsite link clicked');
+				void 0;
 				return false;
 			}
 			if (!this.isSameBasePath_(path)) {
-				console.log('Link clicked outside app\'s base path');
+				void 0;
 				return false;
 			}
 			// Prevents navigation if it's a hash change on the same url.
@@ -6872,7 +7057,7 @@ var App$1 = function (_EventEmitter) {
 				return false;
 			}
 			if (!this.findRoute(path)) {
-				console.log('No route for ' + path);
+				void 0;
 				return false;
 			}
 
@@ -6892,7 +7077,7 @@ var App$1 = function (_EventEmitter) {
 			Object.keys(this.screens).forEach(function (path) {
 				if (path === _this4.activePath) {
 					_this4.activeScreen.clearCache();
-				} else {
+				} else if (!(_this4.isNavigationPending && _this4.pendingNavigate.path === path)) {
 					_this4.removeScreen(path);
 				}
 			});
@@ -6908,7 +7093,7 @@ var App$1 = function (_EventEmitter) {
 		key: 'createScreenInstance',
 		value: function createScreenInstance(path, route) {
 			if (!this.pendingNavigate && path === this.activePath) {
-				console.log('Already at destination, refresh navigation');
+				void 0;
 				return this.activeScreen;
 			}
 			/* jshint newcap: false */
@@ -6920,7 +7105,7 @@ var App$1 = function (_EventEmitter) {
 				} else {
 					screen = handler(route) || new Screen();
 				}
-				console.log('Create screen for [' + path + '] [' + screen + ']');
+				void 0;
 			}
 			return screen;
 		}
@@ -6972,7 +7157,7 @@ var App$1 = function (_EventEmitter) {
 				return this.pendingNavigate;
 			}
 
-			console.log('Navigate to [' + path + ']');
+			void 0;
 
 			this.stopPendingNavigate_();
 			this.isNavigationPending = true;
@@ -6984,6 +7169,10 @@ var App$1 = function (_EventEmitter) {
 			}).then(function () {
 				return nextScreen.load(path);
 			}).then(function () {
+				// At this point we cannot stop navigation and all received
+				// navigate candidates will be queued at scheduledNavigationQueue.
+				_this5.navigationStrategy = NavigationStrategy.SCHEDULE_LAST;
+
 				if (_this5.activeScreen) {
 					_this5.activeScreen.deactivate();
 				}
@@ -7007,6 +7196,13 @@ var App$1 = function (_EventEmitter) {
 				_this5.isNavigationPending = false;
 				_this5.handleNavigateError_(path, nextScreen, reason);
 				throw reason;
+			}).thenAlways(function () {
+				_this5.navigationStrategy = NavigationStrategy.IMMEDIATE;
+
+				if (_this5.scheduledNavigationQueue.length) {
+					var scheduledNavigation = _this5.scheduledNavigationQueue.shift();
+					_this5.maybeNavigate_(scheduledNavigation.href, scheduledNavigation);
+				}
 			});
 		}
 
@@ -7049,7 +7245,7 @@ var App$1 = function (_EventEmitter) {
 			this.pendingNavigate = null;
 			globals.capturedFormElement = null;
 			globals.capturedFormButtonElement = null;
-			console.log('Navigation done');
+			void 0;
 		}
 
 		/**
@@ -7195,7 +7391,7 @@ var App$1 = function (_EventEmitter) {
 		value: function handleNavigateError_(path, nextScreen, error) {
 			var _this6 = this;
 
-			console.log('Navigation error for [' + nextScreen + '] (' + error + ')');
+			void 0;
 			this.emit('navigationError', {
 				error: error,
 				nextScreen: nextScreen,
@@ -7234,7 +7430,10 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'isLinkSameOrigin_',
 		value: function isLinkSameOrigin_(host) {
-			return host === globals.window.location.host;
+			var hostUri = new Uri(host);
+			var locationHostUri = new Uri(globals.window.location.host);
+
+			return hostUri.getPort() === locationHostUri.getPort() && hostUri.getHostname() === locationHostUri.getHostname();
 		}
 
 		/**
@@ -7299,6 +7498,26 @@ var App$1 = function (_EventEmitter) {
 		}
 
 		/**
+   * This method is used to evaluate if is possible to queue received
+   *  dom event to scheduleNavigationQueue and enqueue it.
+   * @param {string} href Information about the link's href.
+   * @param {Event} event Dom event that initiated the navigation.
+   */
+
+	}, {
+		key: 'maybeScheduleNavigation_',
+		value: function maybeScheduleNavigation_(href, event) {
+			if (this.isNavigationPending && this.navigationStrategy === NavigationStrategy.SCHEDULE_LAST) {
+				this.scheduledNavigationQueue = [object.mixin({
+					href: href,
+					isScheduledNavigation: true
+				}, event)];
+				return true;
+			}
+			return false;
+		}
+
+		/**
    * Maybe navigate to a path.
    * @param {string} href Information about the link's href.
    * @param {Event} event Dom event that initiated the navigation.
@@ -7311,8 +7530,12 @@ var App$1 = function (_EventEmitter) {
 				return;
 			}
 
-			globals.capturedFormElement = event.capturedFormElement;
-			globals.capturedFormButtonElement = event.capturedFormButtonElement;
+			var isNavigationScheduled = this.maybeScheduleNavigation_(href, event);
+
+			if (isNavigationScheduled) {
+				event.preventDefault();
+				return;
+			}
 
 			var navigateFailed = false;
 			try {
@@ -7322,7 +7545,7 @@ var App$1 = function (_EventEmitter) {
 				navigateFailed = true;
 			}
 
-			if (!navigateFailed) {
+			if (!navigateFailed && !event.isScheduledNavigation) {
 				event.preventDefault();
 			}
 		}
@@ -7486,6 +7709,11 @@ var App$1 = function (_EventEmitter) {
 				throw new Error('HTML5 History is not supported. Senna will not intercept navigation.');
 			}
 
+			if (opt_event) {
+				globals.capturedFormElement = opt_event.capturedFormElement;
+				globals.capturedFormButtonElement = opt_event.capturedFormButtonElement;
+			}
+
 			// When reloading the same path do replaceState instead of pushState to
 			// avoid polluting history with states with the same path.
 			if (path === this.activePath) {
@@ -7527,8 +7755,8 @@ var App$1 = function (_EventEmitter) {
 		key: 'onBeforeNavigateDefault_',
 		value: function onBeforeNavigateDefault_(event) {
 			if (this.pendingNavigate) {
-				if (this.pendingNavigate.path === event.path) {
-					console.log('Waiting...');
+				if (this.pendingNavigate.path === event.path || this.navigationStrategy === NavigationStrategy.SCHEDULE_LAST) {
+					void 0;
 					return;
 				}
 			}
@@ -7569,7 +7797,7 @@ var App$1 = function (_EventEmitter) {
 		key: 'onDocClickDelegate_',
 		value: function onDocClickDelegate_(event) {
 			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.button) {
-				console.log('Navigate aborted, invalid mouse button or modifier key pressed.');
+				void 0;
 				return;
 			}
 			this.maybeNavigate_(event.delegateTarget.href, event);
@@ -7587,7 +7815,7 @@ var App$1 = function (_EventEmitter) {
 		value: function onDocSubmitDelegate_(event) {
 			var form = event.delegateTarget;
 			if (form.method === 'get') {
-				console.log('GET method not supported');
+				void 0;
 				return;
 			}
 			event.capturedFormElement = form;
@@ -7666,7 +7894,7 @@ var App$1 = function (_EventEmitter) {
 			}
 
 			if (state.senna) {
-				console.log('History navigation to [' + state.path + ']');
+				void 0;
 				this.popstateScrollTop = state.scrollTop;
 				this.popstateScrollLeft = state.scrollLeft;
 				if (!this.nativeScrollRestorationSupported) {
@@ -7677,6 +7905,13 @@ var App$1 = function (_EventEmitter) {
 						utils.setReferrer(state.referrer);
 					}
 				});
+				var uri = new Uri(state.path);
+				uri.setHostname(globals.window.location.hostname);
+				uri.setPort(globals.window.location.port);
+				var isNavigationScheduled = this.maybeScheduleNavigation_(uri.toString(), {});
+				if (isNavigationScheduled) {
+					return;
+				}
 				this.navigate(state.path, true);
 			}
 		}
@@ -7720,7 +7955,7 @@ var App$1 = function (_EventEmitter) {
 				endNavigatePayload.error = reason;
 				throw reason;
 			}).thenAlways(function () {
-				if (!_this11.pendingNavigate) {
+				if (!_this11.pendingNavigate && !_this11.scheduledNavigationQueue.length) {
 					removeClasses(globals.document.documentElement, _this11.loadingCssClass);
 					_this11.maybeRestoreNativeScrollRestoration();
 					_this11.captureScrollPositionFromScrollEvent = true;
@@ -7747,7 +7982,7 @@ var App$1 = function (_EventEmitter) {
 				return CancellablePromise.reject(new CancellablePromise.CancellationError('No route for ' + path));
 			}
 
-			console.log('Prefetching [' + path + ']');
+			void 0;
 
 			var nextScreen = this.createScreenInstance(path, route);
 
@@ -7805,7 +8040,7 @@ var App$1 = function (_EventEmitter) {
 			Object.keys(surfaces).forEach(function (id) {
 				var surfaceContent = nextScreen.getSurfaceContent(id, params);
 				surfaces[id].addContent(nextScreen.getId(), surfaceContent);
-				console.log('Screen [' + nextScreen.getId() + '] add content to surface ' + '[' + surfaces[id] + '] [' + (isDefAndNotNull(surfaceContent) ? '...' : 'empty') + ']');
+				void 0;
 			});
 		}
 
@@ -7976,8 +8211,8 @@ var App$1 = function (_EventEmitter) {
 		value: function stopPendingNavigate_() {
 			if (this.pendingNavigate) {
 				this.pendingNavigate.cancel('Cancel pending navigation');
-				this.pendingNavigate = null;
 			}
+			this.pendingNavigate = null;
 		}
 
 		/**
@@ -8240,7 +8475,7 @@ var UA = function () {
    * @static
    */
 		value: function getNativeUserAgent() {
-			var navigator = UA.globals.window.navigator;
+			var navigator = UA.globals.window && UA.globals.window.navigator;
 			if (navigator) {
 				var userAgent = navigator.userAgent;
 				if (userAgent) {
@@ -8262,7 +8497,7 @@ var UA = function () {
 	}, {
 		key: 'getNativePlatform',
 		value: function getNativePlatform() {
-			var navigator = UA.globals.window.navigator;
+			var navigator = UA.globals.window && UA.globals.window.navigator;
 			if (navigator) {
 				var platform = navigator.platform;
 				if (platform) {
@@ -8278,7 +8513,7 @@ var UA = function () {
    * @return {boolean}
    * @private
    * @static
-  */
+   */
 
 	}, {
 		key: 'matchPlatform',
@@ -8292,7 +8527,7 @@ var UA = function () {
    * @return {boolean}
    * @private
    * @static
-  */
+   */
 
 	}, {
 		key: 'matchUserAgent',
@@ -8303,6 +8538,7 @@ var UA = function () {
 		/**
    * Tests the user agent.
    * @param {string} userAgent The user agent string.
+   * @param {string} platform
    * @static
    */
 
@@ -8400,9 +8636,12 @@ var UA = function () {
  */
 
 
-UA.globals = {
-	window: window
-};
+Object.defineProperty(UA, 'globals', {
+	writable: true,
+	value: {
+		window: isServerSide() ? null : window
+	}
+});
 
 UA.testUserAgent(UA.getNativeUserAgent(), UA.getNativePlatform());
 
@@ -8639,6 +8878,7 @@ var RequestScreen = function (_Screen) {
 				return headers.add(header, _this2.httpHeaders[header]);
 			});
 			if (globals.capturedFormElement) {
+				this.addSafariXHRPolyfill();
 				body = new FormData(globals.capturedFormElement);
 				this.maybeAppendSubmitButtonValue_(body);
 				httpMethod = RequestScreen.POST;
@@ -8648,6 +8888,7 @@ var RequestScreen = function (_Screen) {
 			}
 			var requestPath = this.formatLoadPath(path);
 			return Ajax.request(requestPath, httpMethod, body, headers, null, this.timeout).then(function (xhr) {
+				_this2.removeSafariXHRPolyfill();
 				_this2.setRequest(xhr);
 				_this2.assertValidResponseStatusCode(xhr.status);
 				if (httpMethod === RequestScreen.GET && _this2.isCacheable()) {
@@ -8656,6 +8897,7 @@ var RequestScreen = function (_Screen) {
 				xhr.requestPath = requestPath;
 				return xhr.responseText;
 			}).catch(function (reason) {
+				_this2.removeSafariXHRPolyfill();
 				switch (reason.message) {
 					case errors.REQUEST_TIMEOUT:
 						reason.timeout = true;
@@ -8708,6 +8950,52 @@ var RequestScreen = function (_Screen) {
 				return responseUrl;
 			}
 			return request.getResponseHeader(RequestScreen.X_REQUEST_URL_HEADER);
+		}
+
+		/**
+   * This function set attribute data-safari-temp-disabled to 
+   * true and set disable attribute of an input type="file" tag
+   * is used as a polyfill for iOS 11.3 Safari / macOS Safari 11.1 
+   * empty <input type="file"> XHR bug.
+   * https://github.com/rails/rails/issues/32440
+   * https://bugs.webkit.org/show_bug.cgi?id=184490
+   */
+
+	}, {
+		key: 'addSafariXHRPolyfill',
+		value: function addSafariXHRPolyfill() {
+			if (globals.capturedFormElement && UA.isSafari) {
+				var inputs = globals.capturedFormElement.querySelectorAll('input[type="file"]:not([disabled])');
+				for (var index = 0; index < inputs.length; index++) {
+					var input = inputs[index];
+					if (input.files.length > 0) {
+						return;
+					}
+					input.setAttribute('data-safari-temp-disabled', 'true');
+					input.setAttribute('disabled', '');
+				}
+			}
+		}
+
+		/**
+   * This function remove attribute data-safari-temp-disabled and disable attribute
+   * of an input type="file" tag is used as a polyfill for iOS 11.3 Safari / macOS Safari 11.1
+   * empty <input type="file"> XHR bug.
+   * https://github.com/rails/rails/issues/32440
+   * https://bugs.webkit.org/show_bug.cgi?id=184490
+   */
+
+	}, {
+		key: 'removeSafariXHRPolyfill',
+		value: function removeSafariXHRPolyfill() {
+			if (globals.capturedFormElement && UA.isSafari) {
+				var inputs = globals.capturedFormElement.querySelectorAll('input[type="file"][data-safari-temp-disabled]');
+				for (var index = 0; index < inputs.length; index++) {
+					var input = inputs[index];
+					input.removeAttribute('data-safari-temp-disabled');
+					input.removeAttribute('disabled');
+				}
+			}
 		}
 
 		/**
@@ -8889,8 +9177,15 @@ var HtmlScreen = function (_RequestScreen) {
 		value: function copyNodeAttributesFromContent_(content, node) {
 			content = content.replace(/[<]\s*html/ig, '<senna');
 			content = content.replace(/\/html\s*\>/ig, '/senna>');
-			node.innerHTML = content;
-			var placeholder = node.querySelector('senna');
+			var placeholder = void 0;
+			if (UA.isIe) {
+				var tempNode = globals.document.createRange().createContextualFragment(content);
+				placeholder = tempNode.querySelector('senna');
+			} else {
+				node.innerHTML = content;
+				placeholder = node.querySelector('senna');
+			}
+
 			if (placeholder) {
 				utils.clearNodeAttributes(node);
 				utils.copyNodeAttributes(placeholder, node);
@@ -8916,9 +9211,7 @@ var HtmlScreen = function (_RequestScreen) {
 		key: 'disposePendingStyles',
 		value: function disposePendingStyles() {
 			if (this.pendingStyles) {
-				this.pendingStyles.forEach(function (style) {
-					return exitDocument(style);
-				});
+				utils.removeElementsFromDocument(this.pendingStyles);
 			}
 		}
 
@@ -8956,6 +9249,27 @@ var HtmlScreen = function (_RequestScreen) {
 		}
 
 		/**
+   * Allows a screen to evaluate the favicon style before the screen becomes visible.
+   * @return {CancellablePromise}
+   */
+
+	}, {
+		key: 'evaluateFavicon_',
+		value: function evaluateFavicon_() {
+			var _this4 = this;
+
+			var resourcesInVirtual = this.virtualQuerySelectorAll_(HtmlScreen.selectors.favicon);
+			var resourcesInDocument = this.querySelectorAll_(HtmlScreen.selectors.favicon);
+
+			return new CancellablePromise(function (resolve) {
+				utils.removeElementsFromDocument(resourcesInDocument);
+				_this4.runFaviconInElement_(resourcesInVirtual).then(function () {
+					return resolve();
+				});
+			});
+		}
+
+		/**
    * Evaluates tracked resources inside incoming fragment and remove existing
    * temporary resources.
    * @param {?function()} appendFn Function to append the node into document.
@@ -8974,7 +9288,7 @@ var HtmlScreen = function (_RequestScreen) {
 	}, {
 		key: 'evaluateTrackedResources_',
 		value: function evaluateTrackedResources_(evaluatorFn, selector, selectorTemporary, selectorPermanent, opt_appendResourceFn) {
-			var _this4 = this;
+			var _this5 = this;
 
 			var tracked = this.virtualQuerySelectorAll_(selector);
 			var temporariesInDoc = this.querySelectorAll_(selectorTemporary);
@@ -8982,7 +9296,7 @@ var HtmlScreen = function (_RequestScreen) {
 
 			// Adds permanent resources in document to cache.
 			permanentsInDoc.forEach(function (resource) {
-				var resourceKey = _this4.getResourceKey_(resource);
+				var resourceKey = _this5.getResourceKey_(resource);
 				if (resourceKey) {
 					HtmlScreen.permanentResourcesInDoc[resourceKey] = true;
 				}
@@ -8990,7 +9304,7 @@ var HtmlScreen = function (_RequestScreen) {
 
 			var frag = buildFragment();
 			tracked.forEach(function (resource) {
-				var resourceKey = _this4.getResourceKey_(resource);
+				var resourceKey = _this5.getResourceKey_(resource);
 				// Do not load permanent resources if already in document.
 				if (!HtmlScreen.permanentResourcesInDoc[resourceKey]) {
 					frag.appendChild(resource);
@@ -9003,9 +9317,7 @@ var HtmlScreen = function (_RequestScreen) {
 
 			return new CancellablePromise(function (resolve) {
 				evaluatorFn(frag, function () {
-					temporariesInDoc.forEach(function (resource) {
-						return exitDocument(resource);
-					});
+					utils.removeElementsFromDocument(temporariesInDoc);
 					resolve();
 				}, opt_appendResourceFn);
 			});
@@ -9018,11 +9330,12 @@ var HtmlScreen = function (_RequestScreen) {
 	}, {
 		key: 'flip',
 		value: function flip(surfaces) {
-			var _this5 = this;
+			var _this6 = this;
 
 			return get(HtmlScreen.prototype.__proto__ || Object.getPrototypeOf(HtmlScreen.prototype), 'flip', this).call(this, surfaces).then(function () {
-				utils.clearNodeAttributes(document.documentElement);
-				utils.copyNodeAttributes(_this5.virtualDocument, document.documentElement);
+				utils.clearNodeAttributes(globals.document.documentElement);
+				utils.copyNodeAttributes(_this6.virtualDocument, globals.document.documentElement);
+				_this6.evaluateFavicon_();
 			});
 		}
 
@@ -9074,14 +9387,14 @@ var HtmlScreen = function (_RequestScreen) {
 	}, {
 		key: 'load',
 		value: function load(path) {
-			var _this6 = this;
+			var _this7 = this;
 
 			return get(HtmlScreen.prototype.__proto__ || Object.getPrototypeOf(HtmlScreen.prototype), 'load', this).call(this, path).then(function (content) {
-				_this6.allocateVirtualDocumentForContent(content);
-				_this6.resolveTitleFromVirtualDocument();
-				_this6.assertSameBodyIdInVirtualDocument();
+				_this7.allocateVirtualDocumentForContent(content);
+				_this7.resolveTitleFromVirtualDocument();
+				_this7.assertSameBodyIdInVirtualDocument();
 				if (UA.isIe) {
-					_this6.makeTemporaryStylesHrefsUnique_();
+					_this7.makeTemporaryStylesHrefsUnique_();
 				}
 				return content;
 			});
@@ -9096,11 +9409,11 @@ var HtmlScreen = function (_RequestScreen) {
 	}, {
 		key: 'makeTemporaryStylesHrefsUnique_',
 		value: function makeTemporaryStylesHrefsUnique_() {
-			var _this7 = this;
+			var _this8 = this;
 
 			var temporariesInDoc = this.virtualQuerySelectorAll_(HtmlScreen.selectors.stylesTemporary);
 			temporariesInDoc.forEach(function (style) {
-				return _this7.replaceStyleAndMakeUnique_(style);
+				return _this8.replaceStyleAndMakeUnique_(style);
 			});
 		}
 
@@ -9119,6 +9432,24 @@ var HtmlScreen = function (_RequestScreen) {
 				style.parentNode.replaceChild(newStyle, style);
 				style.disabled = true;
 			}
+		}
+
+		/**
+   * Adds the favicon elements to the document.
+   * @param {!Array<Element>} elements
+   * @private
+   * @return {CancellablePromise}
+   */
+
+	}, {
+		key: 'runFaviconInElement_',
+		value: function runFaviconInElement_(elements) {
+			return new CancellablePromise(function (resolve) {
+				elements.forEach(function (element) {
+					return document.head.appendChild(utils.setElementWithRandomHref(element));
+				});
+				resolve();
+			});
 		}
 
 		/**
@@ -9183,20 +9514,26 @@ var HtmlScreen = function (_RequestScreen) {
 }(RequestScreen);
 
 /**
+ * Helper selector for ignore favicon when exist data-senna-track.
+ */
+
+
+var ignoreFavicon = ':not([rel="Shortcut Icon"]):not([rel="shortcut icon"]):not([rel="icon"]):not([href$="favicon.icon"])';
+
+/**
  * Helper selectors for tracking resources.
  * @type {object}
  * @protected
  * @static
  */
-
-
 HtmlScreen.selectors = {
+	favicon: 'link[rel="Shortcut Icon"],link[rel="shortcut icon"],link[rel="icon"],link[href$="favicon.icon"]',
 	scripts: 'script[data-senna-track]',
 	scriptsPermanent: 'script[data-senna-track="permanent"]',
 	scriptsTemporary: 'script[data-senna-track="temporary"]',
-	styles: 'style[data-senna-track],link[data-senna-track]',
-	stylesPermanent: 'style[data-senna-track="permanent"],link[data-senna-track="permanent"]',
-	stylesTemporary: 'style[data-senna-track="temporary"],link[data-senna-track="temporary"]'
+	styles: 'style[data-senna-track],link[data-senna-track]' + ignoreFavicon,
+	stylesPermanent: 'style[data-senna-track="permanent"],link[data-senna-track="permanent"]' + ignoreFavicon,
+	stylesTemporary: 'style[data-senna-track="temporary"],link[data-senna-track="temporary"]' + ignoreFavicon
 };
 
 /**
@@ -9250,7 +9587,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			}
 
 			if (!this.baseElement.hasAttribute(dataAttributes.senna)) {
-				console.log('Senna was not initialized from data attributes. ' + 'In order to enable its usage from data attributes try setting ' + 'in the base element, e.g. `<body data-senna>`.');
+				void 0;
 				return;
 			}
 
@@ -9258,7 +9595,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 				throw new Error('Senna app was already initialized.');
 			}
 
-			console.log('Senna initialized from data attribute.');
+			void 0;
 
 			this.app = new App$1();
 			this.maybeAddRoutes_();
@@ -9320,7 +9657,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			});
 			if (!this.app.hasRoutes()) {
 				this.app.addRoutes(new Route(/.*/, HtmlScreen));
-				console.log('Senna can\'t find route elements, adding default.');
+				void 0;
 			}
 		}
 
@@ -9363,7 +9700,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 		value: function maybeParseLinkRoute_(link) {
 			var route = new Route(this.maybeParseLinkRoutePath_(link), this.maybeParseLinkRouteHandler_(link));
 			this.app.addRoutes(route);
-			console.log('Senna scanned route ' + route.getPath());
+			void 0;
 		}
 
 		/**
@@ -9410,7 +9747,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var basePath = this.baseElement.getAttribute(dataAttributes.basePath);
 			if (isDefAndNotNull(basePath)) {
 				this.app.setBasePath(basePath);
-				console.log('Senna scanned base path ' + basePath);
+				void 0;
 			}
 		}
 
@@ -9425,7 +9762,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var linkSelector = this.baseElement.getAttribute(dataAttributes.linkSelector);
 			if (isDefAndNotNull(linkSelector)) {
 				this.app.setLinkSelector(linkSelector);
-				console.log('Senna scanned link selector ' + linkSelector);
+				void 0;
 			}
 		}
 
@@ -9440,7 +9777,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var loadingCssClass = this.baseElement.getAttribute(dataAttributes.loadingCssClass);
 			if (isDefAndNotNull(loadingCssClass)) {
 				this.app.setLoadingCssClass(loadingCssClass);
-				console.log('Senna scanned loading css class ' + loadingCssClass);
+				void 0;
 			}
 		}
 
@@ -9459,7 +9796,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 				} else {
 					this.app.setUpdateScrollPosition(true);
 				}
-				console.log('Senna scanned update scroll position ' + updateScrollPosition);
+				void 0;
 			}
 		}
 
@@ -9516,9 +9853,10 @@ globals.document.addEventListener('DOMContentLoaded', function () {
 });
 
 /**
- * @returns String current senna version
+ * @returns String containing the current senna version
  */
-var version = '<%= version %>';
+
+var version = '2.7.3';
 
 exports['default'] = App$1;
 exports.dataAttributeHandler = dataAttributeHandler;
