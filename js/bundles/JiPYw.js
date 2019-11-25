@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([3],{
+webpackJsonppageComponent([11],{
 
-/***/ 280:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_6Soy = __webpack_require__(281);
+var _step_1Soy = __webpack_require__(285);
 
-var _step_6Soy2 = _interopRequireDefault(_step_6Soy);
+var _step_1Soy2 = _interopRequireDefault(_step_1Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var XRHTe = function (_Component) {
-  _inherits(XRHTe, _Component);
+var JiPYw = function (_Component) {
+  _inherits(JiPYw, _Component);
 
-  function XRHTe() {
-    _classCallCheck(this, XRHTe);
+  function JiPYw() {
+    _classCallCheck(this, JiPYw);
 
-    return _possibleConstructorReturn(this, (XRHTe.__proto__ || Object.getPrototypeOf(XRHTe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (JiPYw.__proto__ || Object.getPrototypeOf(JiPYw)).apply(this, arguments));
   }
 
-  return XRHTe;
+  return JiPYw;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(XRHTe, _step_6Soy2.default);
+_metalSoy2.default.register(JiPYw, _step_1Soy2.default);
 
-exports.default = XRHTe;
+exports.default = JiPYw;
 
 /***/ }),
 
-/***/ 281:
+/***/ 285:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = XRHTe;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.XRHTe = undefined;
+exports.templates = exports.JiPYw = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_6.soy.
+  // This file was automatically generated from step_1.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace XRHTe.
+   * @fileoverview Templates in namespace JiPYw.
    * @public
    */
 
-  goog.module('XRHTe.incrementaldom');
+  goog.module('JiPYw.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -137,8 +137,6 @@ goog.loadModule(function (exports) {
   var itext = IncrementalDom.text;
   var iattr = IncrementalDom.attr;
 
-  var $templateAlias2 = _metalSoy2.default.getTemplate('ElectricCode.incrementaldom', 'render');
-
   var $templateAlias1 = _metalSoy2.default.getTemplate('tutorial.incrementaldom', 'render');
 
   /**
@@ -153,40 +151,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param866 = function param866() {
+    var param842 = function param842() {
       ie_open('h2');
-      var dyn38 = opt_data.page.title;
-      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
+      var dyn34 = opt_data.page.title;
+      if (typeof dyn34 == 'function') dyn34();else if (dyn34 != null) itext(dyn34);
       ie_close('h2');
       ie_open('p');
-      itext('In the previous section, we have learned to add a single condition to the query. In many cases, however, that is far from enough. So Query.apex allows calling \'addConditionXX\' multiple times, resulting in combining all the conditions with boolean \'and\' operation.');
+      itext('Include ');
+      ie_open('strong');
+      itext('Query.cls');
+      ie_close('strong');
+      itext(' and ');
+      ie_open('strong');
+      itext('QueryTest.cls');
+      ie_close('strong');
+      itext(' (optional) into your Org, and you are ready to go.');
       ie_close('p');
-      ie_open('p');
-      itext('Example:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      AND NumberOfEmployees > 0\n      AND Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Meanwhile, Query.apex provides a method \'switchToDisjunction\' to change the boolean \'and\' operator to the boolean \'or\' operator. Appending an extra \'switchToDisjunction\' method to the same example above:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'Name\', \'Sam\').\n    addConditionGt(\'NumberOfEmployees\', 0).\n    addConditionIn(\'Phone\', new Set<String>{\'+61 400 000 000\'}).\n    switchToDisjunction().\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account\n      WHERE Name = \'Sam\'\n      OR NumberOfEmployees > 0\n      OR Phone IN :new Set<String>{\'+61 400 000 000\'} ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param866 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param842 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'XRHTe.render';
+    $render.soyTemplateName = 'JiPYw.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -195,24 +185,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var XRHTe = function (_Component) {
-  _inherits(XRHTe, _Component);
+var JiPYw = function (_Component) {
+  _inherits(JiPYw, _Component);
 
-  function XRHTe() {
-    _classCallCheck(this, XRHTe);
+  function JiPYw() {
+    _classCallCheck(this, JiPYw);
 
-    return _possibleConstructorReturn(this, (XRHTe.__proto__ || Object.getPrototypeOf(XRHTe)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (JiPYw.__proto__ || Object.getPrototypeOf(JiPYw)).apply(this, arguments));
   }
 
-  return XRHTe;
+  return JiPYw;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(XRHTe, templates);
-exports.XRHTe = XRHTe;
+_metalSoy2.default.register(JiPYw, templates);
+exports.JiPYw = JiPYw;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[280]);
+},[284]);

@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([16],{
+webpackJsonppageComponent([20],{
 
-/***/ 290:
+/***/ 272:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _fieldSoy = __webpack_require__(291);
+var _constructorsSoy = __webpack_require__(273);
 
-var _fieldSoy2 = _interopRequireDefault(_fieldSoy);
+var _constructorsSoy2 = _interopRequireDefault(_constructorsSoy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var jxGIS = function (_Component) {
-  _inherits(jxGIS, _Component);
+var WHmCo = function (_Component) {
+  _inherits(WHmCo, _Component);
 
-  function jxGIS() {
-    _classCallCheck(this, jxGIS);
+  function WHmCo() {
+    _classCallCheck(this, WHmCo);
 
-    return _possibleConstructorReturn(this, (jxGIS.__proto__ || Object.getPrototypeOf(jxGIS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (WHmCo.__proto__ || Object.getPrototypeOf(WHmCo)).apply(this, arguments));
   }
 
-  return jxGIS;
+  return WHmCo;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(jxGIS, _fieldSoy2.default);
+_metalSoy2.default.register(WHmCo, _constructorsSoy2.default);
 
-exports.default = jxGIS;
+exports.default = WHmCo;
 
 /***/ }),
 
-/***/ 291:
+/***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = jxGIS;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.jxGIS = undefined;
+exports.templates = exports.WHmCo = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from field.soy.
+  // This file was automatically generated from constructors.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace jxGIS.
+   * @fileoverview Templates in namespace WHmCo.
    * @public
    */
 
-  goog.module('jxGIS.incrementaldom');
+  goog.module('WHmCo.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,84 +152,43 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param552 = function param552() {
+    var param632 = function param632() {
       ie_open('h6');
       var dyn29 = opt_data.page.description;
       if (typeof dyn29 == 'function') dyn29();else if (dyn29 != null) itext(dyn29);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
-      itext('selectField');
-      ie_close('h2');
-      ie_open('h4');
-      itext('public Query selectField(String field)');
-      ie_close('h4');
-      ie_open('p');
-      itext('Select a specific field.');
-      ie_close('p');
-      ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectField(\'Name\').\n    selectField(\'OwnerId\');', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '2');
-      ie_open('h2');
-      itext('selectFields');
+      itext('Constructor');
       ie_close('h2');
       ie_open('p');
-      itext('Select specific fields.');
+      itext('Creates a new Query instance.');
       ie_close('p');
       ie_open('h4');
-      itext('public Query selectFields(String field)');
+      itext('public Query(String objectName)');
       ie_close('h4');
       ie_open('p');
-      itext('field: Name of one field, or multiple field names separated by \',\'.');
+      itext('objectName: Name of the expected object.');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'OwnerId, CreatedById\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Query query = new Query(\'Account\');', mode: 'javascript' }, null, opt_ijData);
       ie_open('h4');
-      itext('public Query selectFields(List<String> fieldList)');
+      itext('public Query(Schema.SObjectType objectType)');
       ie_close('h4');
       ie_open('p');
-      itext('fieldList: A list of field names.');
+      itext('objectType: An schema SObject type');
       ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new List<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query selectFields(Set<String> fieldSet)');
-      ie_close('h4');
-      ie_open('p');
-      itext('fieldSet: A Set of field names.');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectFields(new Set<String>{\'OwnerId\', \'CreatedById\'});', mode: 'javascript' }, null, opt_ijData);
-      ie_close('article');
-      ie_open('article', null, null, 'id', '3');
-      ie_open('h2');
-      itext('selectAllFields');
-      ie_close('h2');
-      ie_open('h4');
-      itext('public Query selectAllFields()');
-      ie_close('h4');
-      ie_open('p');
-      itext('Select all accessible fields in the current object');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('h4');
-      itext('public Query selectAllFields(String parentField)');
-      ie_close('h4');
-      ie_open('p');
-      itext('Select all accessible fields in the parent field');
-      ie_close('p');
-      $templateAlias2({ code: '\nQuery query =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\');', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'Query query = new Query(Account.getSObjectType());', mode: 'javascript' }, null, opt_ijData);
       ie_close('article');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param552 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param632 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'jxGIS.render';
+    $render.soyTemplateName = 'WHmCo.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -238,24 +197,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var jxGIS = function (_Component) {
-  _inherits(jxGIS, _Component);
+var WHmCo = function (_Component) {
+  _inherits(WHmCo, _Component);
 
-  function jxGIS() {
-    _classCallCheck(this, jxGIS);
+  function WHmCo() {
+    _classCallCheck(this, WHmCo);
 
-    return _possibleConstructorReturn(this, (jxGIS.__proto__ || Object.getPrototypeOf(jxGIS)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (WHmCo.__proto__ || Object.getPrototypeOf(WHmCo)).apply(this, arguments));
   }
 
-  return jxGIS;
+  return WHmCo;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(jxGIS, templates);
-exports.jxGIS = jxGIS;
+_metalSoy2.default.register(WHmCo, templates);
+exports.WHmCo = WHmCo;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[290]);
+},[272]);

@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([4],{
+webpackJsonppageComponent([10],{
 
-/***/ 278:
+/***/ 286:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_5Soy = __webpack_require__(279);
+var _step_10Soy = __webpack_require__(287);
 
-var _step_5Soy2 = _interopRequireDefault(_step_5Soy);
+var _step_10Soy2 = _interopRequireDefault(_step_10Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AjsUf = function (_Component) {
-  _inherits(AjsUf, _Component);
+var xEvWH = function (_Component) {
+  _inherits(xEvWH, _Component);
 
-  function AjsUf() {
-    _classCallCheck(this, AjsUf);
+  function xEvWH() {
+    _classCallCheck(this, xEvWH);
 
-    return _possibleConstructorReturn(this, (AjsUf.__proto__ || Object.getPrototypeOf(AjsUf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (xEvWH.__proto__ || Object.getPrototypeOf(xEvWH)).apply(this, arguments));
   }
 
-  return AjsUf;
+  return xEvWH;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(AjsUf, _step_5Soy2.default);
+_metalSoy2.default.register(xEvWH, _step_10Soy2.default);
 
-exports.default = AjsUf;
+exports.default = xEvWH;
 
 /***/ }),
 
-/***/ 279:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = AjsUf;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.AjsUf = undefined;
+exports.templates = exports.xEvWH = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_5.soy.
+  // This file was automatically generated from step_10.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace AjsUf.
+   * @fileoverview Templates in namespace xEvWH.
    * @public
    */
 
-  goog.module('AjsUf.incrementaldom');
+  goog.module('xEvWH.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,48 +153,32 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param825 = function param825() {
+    var param853 = function param853() {
       ie_open('h2');
-      var dyn37 = opt_data.page.title;
-      if (typeof dyn37 == 'function') dyn37();else if (dyn37 != null) itext(dyn37);
+      var dyn35 = opt_data.page.title;
+      if (typeof dyn35 == 'function') dyn35();else if (dyn35 != null) itext(dyn35);
       ie_close('h2');
       ie_open('p');
-      itext('Most of the time, we want to make a query with conditions, typically querying a record with a specific Id or a lookup field, then we can use the \'addConditionEq\' method:');
+      itext('Aggregate functions are more useful combined with the \'groupBy\' method, so that each group can have its own aggregate result. Similar to the simple aggregate functions, the \'aggregate\' method is needed to get the aggregate results, which will return a list of \'AggregateResult\' items.');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    addConditionEq(\'Id\', \'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<AggregateResult> results =\n    new Query(\'Account\').\n    selectField(\'Rating\').\n    count(\'Name\', \'countName\').\n    max(\'NumberOfEmployees\', \'maxEmployees\').\n    groupBy(\'Rating\').\n    aggregate();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('This statement is querying an Account record with Id \'0010l00000QJN3MAAX\', equivalent to this statement:');
+      itext('This example tries to group the accounts based on their rating, and for each rating group it tries to find the maximum number of employees.');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    [ SELECT Id FROM Account WHERE Id = \'0010l00000QJN3MAAX\' ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'for (AggregateResult result : results) {\n    System.debug(\'Rating: \' + result.get(\'Rating\'));\n    System.debug(\'maxEmployees: \' + result.get(\'maxEmployees\'));\n}', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('In previous tutorials we saw another statement which has the same functionality, using the \'byId\' method:');
+      itext('Note that we can only select fields that appear in the group by method. In this example, only the \'Rating\' field appears in the group by clause, so only the \'Rating\' field can be selected.');
       ie_close('p');
-      $templateAlias2({ code: 'Account account =\n    (Account)new Query(\'Account\').\n    byId(\'0010l00000QJN3MAAX\').\n    fetch();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('Now let\'s try querying the accounts owned by the current user:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    addConditionEq(\'OwnerId\', UserInfo.getUserId()).\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('equivalent to:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id FROM Account WHERE OwnerId = :UserInfo.getUserId() ];', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('\'addConditionEq(String field, Object arg)\' is limiting the query with a field equals to the variable \'arg\', while Query.apex provides other operators for conditions, including \'addConditionNotEq\', \'addConditionIn\', \'addConditionNotIn\', \'addConditionLt\', \'addConditionLe\', \'addConditionGt\', \'addConditionGe\' and \'addConditionLike\'.');
-      ie_close('p');
-      ie_open('p');
-      itext('Examples are:');
-      ie_close('p');
-      $templateAlias2({ code: 'new Query(\'Account\').\n    addConditionNotEq(\'Name\', \'N/A\').\n    run();\n\nnew Query(\'Account\').\n    addConditionIn(\'Name\', new Set<String>{\'ABC\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionNotIn(\'Name\', new Set<String>{\'N/A\'}).\n    run();\n\nnew Query(\'Account\').\n    addConditionLt(\'NumberOfEmployees\', 15).\n    run();\n\nnew Query(\'Account\').\n    addConditionLe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionGt(\'NumberOfEmployees\', 5).\n    run();\n\nnew Query(\'Account\').\n    addConditionGe(\'NumberOfEmployees\', 10).\n    run();\n\nnew Query(\'Account\').\n    addConditionLike(\'Name\', \'%ABC%\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param825 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param853 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'AjsUf.render';
+    $render.soyTemplateName = 'xEvWH.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -203,24 +187,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var AjsUf = function (_Component) {
-  _inherits(AjsUf, _Component);
+var xEvWH = function (_Component) {
+  _inherits(xEvWH, _Component);
 
-  function AjsUf() {
-    _classCallCheck(this, AjsUf);
+  function xEvWH() {
+    _classCallCheck(this, xEvWH);
 
-    return _possibleConstructorReturn(this, (AjsUf.__proto__ || Object.getPrototypeOf(AjsUf)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (xEvWH.__proto__ || Object.getPrototypeOf(xEvWH)).apply(this, arguments));
   }
 
-  return AjsUf;
+  return xEvWH;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(AjsUf, templates);
-exports.AjsUf = AjsUf;
+_metalSoy2.default.register(xEvWH, templates);
+exports.xEvWH = xEvWH;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[278]);
+},[286]);

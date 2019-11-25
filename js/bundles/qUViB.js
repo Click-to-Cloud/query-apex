@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([5],{
+webpackJsonppageComponent([7],{
 
-/***/ 276:
+/***/ 292:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,9 +43,9 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_4Soy = __webpack_require__(277);
+var _step_3Soy = __webpack_require__(293);
 
-var _step_4Soy2 = _interopRequireDefault(_step_4Soy);
+var _step_3Soy2 = _interopRequireDefault(_step_3Soy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CdFVt = function (_Component) {
-  _inherits(CdFVt, _Component);
+var qUViB = function (_Component) {
+  _inherits(qUViB, _Component);
 
-  function CdFVt() {
-    _classCallCheck(this, CdFVt);
+  function qUViB() {
+    _classCallCheck(this, qUViB);
 
-    return _possibleConstructorReturn(this, (CdFVt.__proto__ || Object.getPrototypeOf(CdFVt)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qUViB.__proto__ || Object.getPrototypeOf(qUViB)).apply(this, arguments));
   }
 
-  return CdFVt;
+  return qUViB;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(CdFVt, _step_4Soy2.default);
+_metalSoy2.default.register(qUViB, _step_3Soy2.default);
 
-exports.default = CdFVt;
+exports.default = qUViB;
 
 /***/ }),
 
-/***/ 277:
+/***/ 293:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = CdFVt;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.CdFVt = undefined;
+exports.templates = exports.qUViB = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -106,15 +106,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var templates;
 goog.loadModule(function (exports) {
 
-  // This file was automatically generated from step_4.soy.
+  // This file was automatically generated from step_3.soy.
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace CdFVt.
+   * @fileoverview Templates in namespace qUViB.
    * @public
    */
 
-  goog.module('CdFVt.incrementaldom');
+  goog.module('qUViB.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,44 +153,56 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param789 = function param789() {
+    var param921 = function param921() {
       ie_open('h2');
-      var dyn36 = opt_data.page.title;
-      if (typeof dyn36 == 'function') dyn36();else if (dyn36 != null) itext(dyn36);
+      var dyn38 = opt_data.page.title;
+      if (typeof dyn38 == 'function') dyn38();else if (dyn38 != null) itext(dyn38);
       ie_close('h2');
       ie_open('p');
-      itext('It\'s also possible to include fields from a parent. The easiest way would be passing the parent name to the \'selectAllFields\' method:');
-      ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields(\'Owner\').\n    run();', mode: 'javascript' }, null, opt_ijData);
-      ie_open('p');
-      itext('This would select the Id field in Account object, as weel as all the user accessible fields in the Owner reference, which is a User object.');
+      itext('By default Query.apex will select only the Id field in the SObject, however we can override this if we want to select other fields.');
       ie_close('p');
       ie_open('p');
-      itext('The statement is equivalent to:');
+      itext('For example, this query will only select only the Name field from the Account object.');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Id, Owner.Name, Owner.CreatedById ... FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').selectFields(\'Name\').run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Another way would be simply passing the parent field along with the relationship to the \'selectFields\' method:');
+      itext('This is equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Owner.Name, Owner.CreatedById\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name FROM Account ];', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('equivalent to:');
+      itext('We can also call \'selectFields\' method multiple times, the result is additive:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Id, Owner.Name, Owner.CreatedById FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name\').\n    selectFields(\'Phone\').\n    selectFields(\'Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('p');
-      itext('Meanwhile, multiple layer parent relationship is supported:');
+      itext('That\'s equivalent to:');
       ie_close('p');
-      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Contact\').\n    selectFields(\'Account.Owner.Name\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      $templateAlias2({ code: 'List<Account> accounts =\n    [ SELECT Name, Phone, Website, Description FROM Account ];', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Alternatively, we can put all the fields in one \'selectFields\' method, still preserving the additivity:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectFields(\'Name, Phone, Website\').\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('Compare with:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<String> fields = new List<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('or:');
+      ie_close('p');
+      $templateAlias2({ code: 'Set<String> fields = new Set<String>{\'Name\', \'Phone\', \'Website\'};\nList<Account> accounts =\n    new Query(\'Account\').\n    selectFields(fields).\n    selectFields(\'Description\').\n    run();', mode: 'javascript' }, null, opt_ijData);
+      ie_open('p');
+      itext('To make user convenient, Query.apex provides the \'selectAllFields\' method to select all user accessible fields:');
+      ie_close('p');
+      $templateAlias2({ code: 'List<Account> accounts =\n    new Query(\'Account\').\n    selectAllFields().\n    run();', mode: 'javascript' }, null, opt_ijData);
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.page.title);
       ie_close('input');
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param789 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param921 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'CdFVt.render';
+    $render.soyTemplateName = 'qUViB.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -199,24 +211,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var CdFVt = function (_Component) {
-  _inherits(CdFVt, _Component);
+var qUViB = function (_Component) {
+  _inherits(qUViB, _Component);
 
-  function CdFVt() {
-    _classCallCheck(this, CdFVt);
+  function qUViB() {
+    _classCallCheck(this, qUViB);
 
-    return _possibleConstructorReturn(this, (CdFVt.__proto__ || Object.getPrototypeOf(CdFVt)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (qUViB.__proto__ || Object.getPrototypeOf(qUViB)).apply(this, arguments));
   }
 
-  return CdFVt;
+  return qUViB;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(CdFVt, templates);
-exports.CdFVt = CdFVt;
+_metalSoy2.default.register(qUViB, templates);
+exports.qUViB = qUViB;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[276]);
+},[292]);

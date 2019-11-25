@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([18],{
+webpackJsonppageComponent([21],{
 
-/***/ 286:
+/***/ 270:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _conditionSoy = __webpack_require__(287);
+var _conditionSoy = __webpack_require__(271);
 
 var _conditionSoy2 = _interopRequireDefault(_conditionSoy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var vUjrT = function (_Component) {
-  _inherits(vUjrT, _Component);
+var aBwlY = function (_Component) {
+  _inherits(aBwlY, _Component);
 
-  function vUjrT() {
-    _classCallCheck(this, vUjrT);
+  function aBwlY() {
+    _classCallCheck(this, aBwlY);
 
-    return _possibleConstructorReturn(this, (vUjrT.__proto__ || Object.getPrototypeOf(vUjrT)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (aBwlY.__proto__ || Object.getPrototypeOf(aBwlY)).apply(this, arguments));
   }
 
-  return vUjrT;
+  return aBwlY;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(vUjrT, _conditionSoy2.default);
+_metalSoy2.default.register(aBwlY, _conditionSoy2.default);
 
-exports.default = vUjrT;
+exports.default = aBwlY;
 
 /***/ }),
 
-/***/ 287:
+/***/ 271:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = vUjrT;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.vUjrT = undefined;
+exports.templates = exports.aBwlY = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace vUjrT.
+   * @fileoverview Templates in namespace aBwlY.
    * @public
    */
 
-  goog.module('vUjrT.incrementaldom');
+  goog.module('aBwlY.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -152,10 +152,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param315 = function param315() {
+    var param416 = function param416() {
       ie_open('h6');
-      var dyn27 = opt_data.page.description;
-      if (typeof dyn27 == 'function') dyn27();else if (dyn27 != null) itext(dyn27);
+      var dyn28 = opt_data.page.description;
+      if (typeof dyn28 == 'function') dyn28();else if (dyn28 != null) itext(dyn28);
       ie_close('h6');
       ie_open('article', null, null, 'id', '1');
       ie_open('h2');
@@ -1035,11 +1035,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param315 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param416 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'vUjrT.render';
+    $render.soyTemplateName = 'aBwlY.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -1048,24 +1048,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var vUjrT = function (_Component) {
-  _inherits(vUjrT, _Component);
+var aBwlY = function (_Component) {
+  _inherits(aBwlY, _Component);
 
-  function vUjrT() {
-    _classCallCheck(this, vUjrT);
+  function aBwlY() {
+    _classCallCheck(this, aBwlY);
 
-    return _possibleConstructorReturn(this, (vUjrT.__proto__ || Object.getPrototypeOf(vUjrT)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (aBwlY.__proto__ || Object.getPrototypeOf(aBwlY)).apply(this, arguments));
   }
 
-  return vUjrT;
+  return aBwlY;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(vUjrT, templates);
-exports.vUjrT = vUjrT;
+_metalSoy2.default.register(aBwlY, templates);
+exports.aBwlY = aBwlY;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[286]);
+},[270]);

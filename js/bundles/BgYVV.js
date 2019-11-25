@@ -1,7 +1,7 @@
 var pageComponent =
-webpackJsonppageComponent([2],{
+webpackJsonppageComponent([3],{
 
-/***/ 282:
+/***/ 300:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,7 @@ __webpack_require__(14);
 
 __webpack_require__(15);
 
-var _step_7Soy = __webpack_require__(283);
+var _step_7Soy = __webpack_require__(301);
 
 var _step_7Soy2 = _interopRequireDefault(_step_7Soy);
 
@@ -55,27 +55,27 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var amlhA = function (_Component) {
-  _inherits(amlhA, _Component);
+var BgYVV = function (_Component) {
+  _inherits(BgYVV, _Component);
 
-  function amlhA() {
-    _classCallCheck(this, amlhA);
+  function BgYVV() {
+    _classCallCheck(this, BgYVV);
 
-    return _possibleConstructorReturn(this, (amlhA.__proto__ || Object.getPrototypeOf(amlhA)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BgYVV.__proto__ || Object.getPrototypeOf(BgYVV)).apply(this, arguments));
   }
 
-  return amlhA;
+  return BgYVV;
 }(_metalComponent2.default);
 
 ;
 
-_metalSoy2.default.register(amlhA, _step_7Soy2.default);
+_metalSoy2.default.register(BgYVV, _step_7Soy2.default);
 
-exports.default = amlhA;
+exports.default = BgYVV;
 
 /***/ }),
 
-/***/ 283:
+/***/ 301:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84,7 +84,7 @@ exports.default = amlhA;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.templates = exports.amlhA = undefined;
+exports.templates = exports.BgYVV = undefined;
 
 var _metalComponent = __webpack_require__(1);
 
@@ -110,11 +110,11 @@ goog.loadModule(function (exports) {
   // Please don't edit this file by hand.
 
   /**
-   * @fileoverview Templates in namespace amlhA.
+   * @fileoverview Templates in namespace BgYVV.
    * @public
    */
 
-  goog.module('amlhA.incrementaldom');
+  goog.module('BgYVV.incrementaldom');
 
   /** @suppress {extraRequire} */
   var soy = goog.require('soy');
@@ -153,10 +153,10 @@ goog.loadModule(function (exports) {
    * @suppress {checkTypes}
    */
   function $render(opt_data, opt_ignored, opt_ijData) {
-    var param897 = function param897() {
+    var param1080 = function param1080() {
       ie_open('h2');
-      var dyn39 = opt_data.page.title;
-      if (typeof dyn39 == 'function') dyn39();else if (dyn39 != null) itext(dyn39);
+      var dyn42 = opt_data.page.title;
+      if (typeof dyn42 == 'function') dyn42();else if (dyn42 != null) itext(dyn42);
       ie_close('h2');
       ie_open('p');
       itext('We have learned to add multiple conditions in the previous section, but those conditions were very limited. What if we want to construct a condition with a combination of both boolean operators?');
@@ -222,11 +222,11 @@ goog.loadModule(function (exports) {
       ie_open('input', null, null, 'type', 'hidden', 'value', opt_data.site.title);
       ie_close('input');
     };
-    $templateAlias1(soy.$$assignDefaults({ content: param897 }, opt_data), null, opt_ijData);
+    $templateAlias1(soy.$$assignDefaults({ content: param1080 }, opt_data), null, opt_ijData);
   }
   exports.render = $render;
   if (goog.DEBUG) {
-    $render.soyTemplateName = 'amlhA.render';
+    $render.soyTemplateName = 'BgYVV.render';
   }
 
   exports.render.params = ["page", "site"];
@@ -235,24 +235,24 @@ goog.loadModule(function (exports) {
   return exports;
 });
 
-var amlhA = function (_Component) {
-  _inherits(amlhA, _Component);
+var BgYVV = function (_Component) {
+  _inherits(BgYVV, _Component);
 
-  function amlhA() {
-    _classCallCheck(this, amlhA);
+  function BgYVV() {
+    _classCallCheck(this, BgYVV);
 
-    return _possibleConstructorReturn(this, (amlhA.__proto__ || Object.getPrototypeOf(amlhA)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (BgYVV.__proto__ || Object.getPrototypeOf(BgYVV)).apply(this, arguments));
   }
 
-  return amlhA;
+  return BgYVV;
 }(_metalComponent2.default);
 
-_metalSoy2.default.register(amlhA, templates);
-exports.amlhA = amlhA;
+_metalSoy2.default.register(BgYVV, templates);
+exports.BgYVV = BgYVV;
 exports.templates = templates;
 exports.default = templates;
 /* jshint ignore:end */
 
 /***/ })
 
-},[282]);
+},[300]);
